@@ -60,4 +60,8 @@ return [
     'welcomeTo' =>    'Bienvenido a ',
     'rightReserved' =>    'Todos los derechos reservados.',
     'webContact' =>    'Contacto Web',
+    'privacy' =>    'Privacidad',
+    'policy' =>    'Políticas',
+    'pageNotFound' =>    'Página no Encontrada',
+    'pageNotFoundDesc' =>    'La página solicitada no se pudo encontrar, por favor verifique o intente mas tarde.',
 ];

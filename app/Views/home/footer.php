@@ -54,12 +54,12 @@
 							<h4 class="title"><?= lang('Doit.linksEscentials'); ?></h4>
 						</div>
 						<ul class="mt-15">
-							<li><a target="_blank" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.about_us'); ?></a></li>
-							<li><a target="_blank" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.offers'); ?></a></li>
+							<li><a target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.about_us'); ?></a></li>
+							<li><a target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.offers'); ?></a></li>
 							<?php
 							if($destinos > 0) { 
 							?>
-								<li><a target="_blank" href="<?= base_url('nuestros-destinos?utm_source=doit&utm_medium=web&utm_campaign=nuestros-destinos&utm_term=all&utm_content=');?>"><?= lang('Doit.destinations'); ?></a></li>
+								<li><a target="_self" href="<?= base_url('nuestros-destinos?utm_source=doit&utm_medium=web&utm_campaign=nuestros-destinos&utm_term=all&utm_content=');?>"><?= lang('Doit.destinations'); ?></a></li>
 							<?php 
 							}
 							?>

@@ -108,7 +108,7 @@ $(function() {
         speed: 800,
         slidesToShow: 5,
         slidesToScroll: 3,
-        arrows: true,
+        arrows: false,
         responsive: [
             {
               breakpoint: 1200,
@@ -154,7 +154,6 @@ $(function() {
     
     // Show or hide the sticky footer button
     $(window).on('scroll', function(event) {
-      console.log($(this).scrollTop())
         if($(this).scrollTop() > 600){
             $('.back-to-top').fadeIn(200)
         } else{

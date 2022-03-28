@@ -8,11 +8,13 @@ use App\Models\ContactType;
 use App\Models\Destinos;
 use App\Models\Equipo;
 use App\Models\Contactos;
+use App\Models\AditionalPages;
 use \DateTime;
 use \Exception;
 use Config\Kint;
 
 class Index extends BaseController {
+  
   public function index() {
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
@@ -74,6 +76,7 @@ class Index extends BaseController {
     ; 
     return view('index', [
       'locale' => $this->locale,
+      'menuUrl' => false,
       'experienceYears' => $difDF->y,
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
@@ -210,7 +213,6 @@ class Index extends BaseController {
             'data' => [
               'locale' => $this->locale,
               'Subtitle' => $this->request->getPost('asunto'),
-
             ],
             'template' => 'emails/notification',
           ];
@@ -237,6 +239,60 @@ class Index extends BaseController {
   }
 
   public function aboutUs() {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $aditionalPagesModel = new AditionalPages();
+    $aditionalPages = $aditionalPagesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->where('lCASE(slug)', 'sobre-nosotros')
+      ->orderBy('id', 'ASC')
+    ;
 
+    $destinosModel = new Destinos();
+    $destinos = $destinosModel->asObject()
+      ->where('status', '1')
+      ->where('destino_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->countAllResults()
+    ; 
+    return view('about-us', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'about-us',
+      'destinos' => $destinos,
+      'aditionalPages' => $aditionalPages,
+      'experienceYears' => $difDF->y,
+    ]);
+  }
+
+  public function aditionalPage($pageslug) {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $aditionalPagesModel = new AditionalPages();
+    $aditionalPages = $aditionalPagesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->where('lCASE(slug)', strtolower($pageslug))
+      ->orderBy('id', 'ASC')
+    ;
+
+    $destinosModel = new Destinos();
+    $destinos = $destinosModel->asObject()
+      ->where('status', '1')
+      ->where('destino_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->countAllResults()
+    ; 
+    return view('about-us', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'aditional-pages',
+      'destinos' => $destinos,
+      'aditionalPages' => $aditionalPages,
+      'experienceYears' => $difDF->y,
+    ]);
   }
 }

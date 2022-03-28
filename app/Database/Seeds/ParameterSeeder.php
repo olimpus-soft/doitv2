@@ -228,6 +228,12 @@ class ParameterSeeder extends Seeder {
         'parameter' => 'FB_ID_PAGE',
         'parameter_value' => '2063756457010073',
       ], [
+        'parameter' => 'FB_IDS_ADMINS',
+        'parameter_value' => '100000964416427',
+      ], [
+        'parameter' => 'APP_LANGUAGES',
+        'parameter_value' => 'es,es_CO,en,de',
+      ], [
         'parameter' => 'ABOUT_TEXT',
         'parameter_lang' => 'es',
         'parameter_value' => '<b>Somos una Agencia de viajes Mayorista</b>, especializada en el destino de <b>Cuba</b>. Contamos con contratación directa con la Embajada de Cuba para Colombia, principales operadores del destino como lo son Cubatur, Viajes Cubanacan, Havanatur, Gaviota Tour etc. Cadenas hoteleras directas como lo son Roc Hoteles, Meliá, Bluediamond, Cubanacan Hoteles, Gaviota Hoteles, Paradiso, entre otros; teniendo así la capacidad de poder manejar cualquier hotel de la isla y diferentes planes que se acomodan a todos los mercados.<br><br>
@@ -335,7 +341,13 @@ class ParameterSeeder extends Seeder {
       ], [
         'parameter' => 'SUPPORT_COUNTRY',
         'parameter_value' => 'CO',
-      ],  [
+      ], [
+        'parameter' => 'MAIN_COLOR',
+        'parameter_value' => '#ff7f00',
+      ], [
+        'parameter' => 'SECOND_COLOR',
+        'parameter_value' => '#196c5f',
+      ], [
         'parameter' => 'SUPPORT_COUNTRY_NAME',
         'parameter_value' => 'Colombia',
       ], [

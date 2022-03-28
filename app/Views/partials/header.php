@@ -43,7 +43,7 @@
     <meta name="apple-mobile-web-app-title" content="<?= TITLEAPP;?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="revisit-after" content="periode" />
-    <meta name="copyright" content="cccccccc" />
+    <meta name="copyright" content="<?= DEV_COMPANY;?>" />
     <meta name="description" content="<?= COMPANY_DESC; ?>">
 
     <meta http-equiv="cache-control" content="no-cache, no-store, no-transform, must-revalidate"/>
@@ -67,7 +67,13 @@
     <meta name="Facebot" content="all">
     <meta property="fb:admins" content="<?= FB_ADMIN_ID;?>" />
     <meta property="fb:app_id" content="<?= FB_APP_ID;?>" />
-    <meta property="fb:admins" content="100000964416427" />
+    <?php
+        $adminsFb = explode(',', FB_IDS_ADMINS);
+        foreach ($adminsFb as $fbAdminId) { ?>
+            <meta property="fb:admins" content="<?= $fbAdminId; ?>" />
+    <?php
+        }
+    ?>
     <meta property="fb:pages" content="<?= FB_ID_PAGE;?>">
     <meta property="fb:pages" content="<?= FB_ID_PAGE_SUPPORT;?>">
 
@@ -136,9 +142,9 @@
     <link rel="shortcut icon" href="<?= base_url(FAVICON);?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(FAVICON);?>">
 
-    <meta name="theme-color" content="#ff7f00">
-    <meta name="msapplication-TileColor" content="#ff7f00">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ff7f00" />  
+    <meta name="theme-color" content="<?= MAIN_COLOR;?>">
+    <meta name="msapplication-TileColor" content="<?= MAIN_COLOR;?>">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<?= MAIN_COLOR;?>" />  
 
     <link rel="manifest" href="<?= base_url('manifest.json');?>">
 

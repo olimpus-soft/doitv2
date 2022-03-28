@@ -652,7 +652,7 @@ p {
         .header-banner .banner-content .sub-title {
           font-size: 18px; } }
     .header-banner .banner-content .banner-title {
-      font-size: 60px; }
+      font-size: 60px; text-shadow: 1px 2px 3px #ff7f00;}
       .header-banner .banner-content .banner-title span {
         color: #ff7f00; }
       @media (max-width: 767px) {

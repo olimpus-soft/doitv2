@@ -22,3 +22,4 @@ Allow: /
 User-agent: Facebot
 Allow: /
 
+Sitemap: https://doitviajesyturismo.com/sitemap.xml

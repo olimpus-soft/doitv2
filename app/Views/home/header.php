@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<nav class="navbar navbar-expand-lg">
-						<a class="navbar-brand" href="#">
+						<a class="navbar-brand" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#inicio">
 							<img src="<?= base_url('assets/images/logo.png');?>" alt="Logo">
 						</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,20 +35,20 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul id="nav" class="navbar-nav ml-auto">
 								<li class="nav-item active">
-									<a class="page-scroll" hash="#inicio" href="#inicio"><?= lang('Doit.home'); ?></a>
+									<a class="page-scroll" hash="#inicio" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#inicio"><?= lang('Doit.home'); ?></a>
 								</li>
 								<li class="nav-item">
-									<a class="page-scroll" hash="#nosotoros" href="#nosotoros"><?= lang('Doit.ours'); ?></a>
+									<a class="page-scroll" hash="#nosotoros" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#nosotoros"><?= lang('Doit.ours'); ?></a>
 								</li>
 								<li class="nav-item">
-									<a class="page-scroll" hash="#objetivos" href="#objetivos"><?= lang('Doit.objectives'); ?></a>
+									<a class="page-scroll" hash="#objetivos" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#objetivos"><?= lang('Doit.objectives'); ?></a>
 								</li>
 								<li class="nav-item">
-									<a class="page-scroll" hash="#ofertas" href="#ofertas"><?= lang('Doit.offers'); ?></a>
+									<a class="page-scroll" hash="#ofertas" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#ofertas"><?= lang('Doit.offers'); ?></a>
 								</li>
 								<?php
 								if($destinos > 0) { 
-								?>
+								?> 
 									<li class="nav-item">
 										<a class="" href="<?= base_url('nuestros-destinos?utm_source=doit&utm_medium=web&utm_campaign=nuestros-destinos&utm_term=all&utm_content=');?>"><?= lang('Doit.destinations'); ?></a>
 									</li>
@@ -56,7 +56,7 @@
 								}
 								?>
 								<li class="nav-item">
-									<a class="page-scroll" hash="#contacto" href="#contacto"><?= lang('Doit.contact'); ?></a>
+									<a class="page-scroll" hash="#contacto" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#contacto"><?= lang('Doit.contact'); ?></a>
 								</li>
 							</ul> <!-- navbar nav -->
 						</div>
@@ -73,18 +73,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-8 col-lg-9 col-sm-10">
-					<div class="banner-content">
+					<div class="banner-content"> 
 						<h4 class="sub-title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s"><?= SUBTITLEAPP;?></h4>
-						<h1 class="banner-title mt-10 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2s"><span>Do It!</span> Viajes y Turismo</h1>
-						<a class="banner-contact mt-25 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2.3s" href="#contacto"><?= lang('Doit.contactus'); ?></a><br>
+						<h1 class="banner-title mt-10 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2s"><span><?= TITLEAPP_BASE; ?></span> <?= TITLEAPP_TAILS; ?></h1>
+						<a class="banner-contact mt-25 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2.3s" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#contacto"><?= lang('Doit.contactus'); ?></a><br>
 						<a class="banner-contact mt-25 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2.3s" href="<?= base_url('files/'.strrev(str_replace('=', '', base64_encode(RNT_FILE))));?>"><?= RNT_TITLE;?></a>
 					</div> <!-- banner content -->
 				</div>
 			</div> <!-- row -->
 		</div> <!-- container -->
-		<div class="banner-image bg_cover" style="background-image: url(<?= base_url('assets/images/banner/banner-image.png');?>)"></div>
+		<div class="banner-image bg_cover" style="background-image: url(<?= base_url('assets/images/banner/banner-image-'.(date('j')).'.jpg');?>)"></div>
 	</div> <!-- header banner -->
-
 </header>
 
 <!--====== HEADER PART ENDS ======-->
