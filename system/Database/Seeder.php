@@ -120,36 +120,53 @@ class Seeder
     public function call(string $class)
     {
         $class = trim($class);
-
+        $classes = [];
         if ($class === '') {
             throw new InvalidArgumentException('No seeder was specified.');
+        } else if($class == "*") {
+            helper('filesystem');
+            $classes = get_filenames($this->seedPath, false);
+            foreach ($classes as $idx => &$class) {
+                $class = str_replace('.php', '', $class);
+            }
+        } else {
+            $classes = explode(',', $class);
+            $classes = array_filter($classes);
         }
 
-        if (strpos($class, '\\') === false) {
-            $path = $this->seedPath . str_replace('.php', '', $class) . '.php';
+        foreach ($classes as $idx => $class) {
+            if (is_cli() && ! $this->silent) {
+                CLI::write("Seeded: {$class}", 'blue');
+            }
+            if (strpos($class, '\\') === false) {
+                $path = $this->seedPath . str_replace('.php', '', $class) . '.php';
 
-            if (! is_file($path)) {
-                throw new InvalidArgumentException('The specified seeder is not a valid file: ' . $path);
+                if (! is_file($path)) {
+                    throw new InvalidArgumentException('The specified seeder is not a valid file: ' . $path);
+                }
+
+                // Assume the class has the correct namespace
+                // @codeCoverageIgnoreStart
+                $class = APP_NAMESPACE . '\Database\Seeds\\' . $class;
+
+                if (! class_exists($class, false)) {
+                    require_once $path;
+                }
+                // @codeCoverageIgnoreEnd
             }
 
-            // Assume the class has the correct namespace
-            // @codeCoverageIgnoreStart
-            $class = APP_NAMESPACE . '\Database\Seeds\\' . $class;
+            /** @var Seeder $seeder */
+            $seeder = new $class($this->config);
+            $seeder->setSilent($this->silent)->run();
 
-            if (! class_exists($class, false)) {
-                require_once $path;
+            unset($seeder);
+
+            if (is_cli() && ! $this->silent) {
+                CLI::write("End Seeded: {$class}", 'green');
             }
-            // @codeCoverageIgnoreEnd
         }
-
-        /** @var Seeder $seeder */
-        $seeder = new $class($this->config);
-        $seeder->setSilent($this->silent)->run();
-
-        unset($seeder);
-
         if (is_cli() && ! $this->silent) {
-            CLI::write("Seeded: {$class}", 'green');
+            CLI::write("Done.", 'green');
         }
     }
 

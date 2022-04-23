@@ -5,6 +5,7 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 
 class ParameterSeeder extends Seeder {
+  protected $tableName = 'parameters';
   public function run() {
     $data = [
       [
@@ -442,8 +443,10 @@ class ParameterSeeder extends Seeder {
         'parameter_value' => '111921',
       ],
     ];
+    $this->db->table($this->tableName)->emptyTable();
+    $this->db->query("ALTER TABLE {$this->tableName} AUTO_INCREMENT = 1;");
     foreach ($data as $row) {
-      $this->db->table('parameters')->insert($row);
+      $this->db->table($this->tableName)->insert($row);
     }
   }
 }

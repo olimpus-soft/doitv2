@@ -5,6 +5,7 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 
 class EquipoSeeder extends Seeder {
+  protected $tableName = 'equipo';
   public function run() {
     $data = [
       //es
@@ -204,9 +205,10 @@ class EquipoSeeder extends Seeder {
         'status'            => '1',
       ],
     ];
-
+    $this->db->table($this->tableName)->emptyTable();
+    $this->db->query("ALTER TABLE {$this->tableName} AUTO_INCREMENT = 1;");
     foreach ($data as $row) {
-      $this->db->table('equipo')->insert($row);
+      $this->db->table($this->tableName)->insert($row);
     }
   }
 }

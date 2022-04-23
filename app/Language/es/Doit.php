@@ -64,4 +64,7 @@ return [
     'policy' =>    'Políticas',
     'pageNotFound' =>    'Página no Encontrada',
     'pageNotFoundDesc' =>    'La página solicitada no se pudo encontrar, por favor verifique o intente mas tarde.',
+    'mision' =>    'Misión',
+    'vision' =>    'Visión',
+    'sostenibilidad' =>    'Sostenibilidad',
 ];
