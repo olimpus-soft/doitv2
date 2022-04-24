@@ -9,10 +9,130 @@ class AditionalPagesSeeder extends Seeder {
   public function run() {
     $data = [
       //es
+      //sobre-nosotros
+      [
+        'title'        => 'Sobre Nosotros',
+        'subtitle'     => 'Más',
+        'slug'        => 'sobre-nosotros',
+        'lang'        => 'es', 
+        'status'      => '1',
+        'page_data'   => '
+          <b>__COMERCIAL_NAME__</b>, es una agencia creada para motivar a los diferentes actores de la sociedad moderna a cumplir sus sueños de viajes y a contribuir efectivamente para hacerlos realidad. Nuestro objetivo principal es ofrecer una experiencia emocional positiva al cliente que consulte nuestra agencia de viajes para cumplir un objetivo de viaje o un sueño vacacional. Garantizar un producto o servicio innovador de acuerdo con las condiciones psicobiológicas del comprador: Su vida, su trabajo, su entorno y las expectativas que tiene por cumplir.
+          <br/><br/>
+          Estar a la vanguardia en tecnología y herramientas de comunicación y distribución, para cumplir con las necesidades de las nuevas generaciones nacionales o internacionales, proporcionando todo lo relacionado con pasajes aéreos, terrestres, hoteles, servicios complementarios que van desde turismo especializado y receptivo, organización de eventos, congresos nacionales e internacionales, excursiones diseñadas para colegios y fondos de empleados, viajes culturales y temáticos, turismo estudiantil entre otros.
+          <div class="col-lg-10 offset-lg-1">
+            <h5>Otras Metas y Servicios</h5>
+            <ul>
+              <li><i class="icon-thin fa fa-circle-thin"></i>Clientes Felices</li>
+              <li><i class="icon-thin fa fa-circle-thin"></i>Vuelo Para Viajar</li>
+              <li><i class="icon-thin fa fa-circle-thin"></i>Hotel para Alojarse</li>
+              <li><i class="icon-thin fa fa-circle-thin"></i>Tours Impresionantes</li>
+              <li><i class="icon-thin fa fa-circle-thin"></i>Destinos Sorprendentes</li>
+            </ul>
+          </div>
+          <div class="col-lg-10 offset-lg-1">
+            <h5>Otros Objetivos</h5>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa fa-certificate fa-1x my-auto"></i>
+                  <div class="main-our">
+                    <p class="our-title">Garantizar</p>
+                    <p class="text">Garantizar servicio y atención a los pasajeros 7x24</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-user-shield"></i>
+                  <div class="main-our">
+                    <p class="our-title">Dar Solucón</p>
+                    <p class="text">Dar solución a los problemas que se puedan presentar de una manera amable y oportuna</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-file-circle-check fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Cumplir</p>
+                    <p class="text">Cumplir con los servicios contratados por el cliente</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-arrow-down-up-across-line"></i>
+                  <div class="main-our">
+                    <p class="our-title">Realizar</p>
+                    <p class="text">Realizar seguimiento al viaje del cliente y servicio de postventa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon flaticon-transport-10"></i>
+                  <div class="main-our">
+                    <p class="our-title">Contratar Servicios</p>
+                    <p class="text">Contratar servicios de calidad con los diferentes proveedores aerolíneas, hoteles, cruceros, transporte terrestre, tarjetas de asistencia, operadores internacionales, centros de negocios y/o convenciones, entre otros.</p>
+                  </div>
+                </div>
+              </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="our-content"><i class="our-icon flaticon-people-6"></i>
+                    <div class="main-our">
+                      <p class="our-title">Cumplir</p>
+                      <p class="text">Desarrollar el producto especializado Turismo de Salud y Bienestar, garantizando las mejores negociaciones con Clínicas de estética, Coach de Salud, Sitios de relax naturales, enfermeras, transportadores entre otros.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="our-content"><i class="our-icon flaticon-man"></i>
+                    <div class="main-our">
+                      <p class="our-title">Implementar</p>
+                      <p class="text">Implementar herramienta tecnológica de comercialización que facilita el proceso compra del cliente.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="our-content"><i class="our-icon flaticon-food"></i>
+                    <div class="main-our">
+                      <p class="our-title">Realizar Comunidad</p>
+                      <p class="text">Realizar comunidad a través de RRSS, informando más sobre destinos, tendencias de viajes y turismo de salud y bienestar.</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon flaticon-transport-10"></i>
+                  <div class="main-our">
+                    <p class="our-title">Administrar</p>
+                    <p class="text">Administrar de una manera organizada y responsable, los recursos de la empresa, llevar una correcta y sana contabilidad, tributaria y relación con proveedores</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon flaticon-people-6"></i>
+                  <div class="main-our">
+                    <p class="our-title">Realizar</p>
+                    <p class="text">Realizar buenas negociaciones con proveedores, para garantizar un producto bueno, estructurado e innovador</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon flaticon-man"></i>
+                  <div class="main-our">
+                    <p class="our-title">Tener Conocimiento</p>
+                    <p class="text">Tener pleno conocimiento de los destinos a comercializar, países, geografía, actividades recreativas, restaurantes, moneda, entre otros.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ',
+      ],
       //Mision
       [
-        'tile'        => 'Misión',
-        'subtile'     => 'Nuestra Misión',
+        'title'        => 'Misión',
+        'subtitle'     => 'Nuestra Misión',
         'slug'        => 'mision',
         'lang'        => 'es', 
         'status'      => '1',
@@ -20,17 +140,17 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Vision
       [
-        'tile'        => 'Visión',
-        'subtile'     => 'Nuestra Visión',
+        'title'        => 'Visión',
+        'subtitle'     => 'Nuestra Visión',
         'slug'        => 'vision',
         'lang'        => 'es', 
         'status'      => '1',
-        'page_data'   => '<p class="text-justify">Ser una agencia de viajes y líder en el desarrollo, promoción y comercialización en el Turismo de Salud y Bienestar, en Colombia, principalmente en ciudades como Bogotá, Cali y Medellín. Y a través de portales transaccionales en países como Estados Unidos y Europa</p>',
+        'page_data'   => '<p class="text-justify">En 5 años, ser una agencia de viajes y líder en el desarrollo, promoción y comercialización en el Turismo de Salud y Bienestar, en Colombia, principalmente en ciudades como Bogotá, Cali y Medellín. Y a través de portales transaccionales en países como Estados Unidos y Europa.</p>',
       ],
       //Sostenibilidad
       [
-        'tile'        => 'Sostenibilidad',
-        'subtile'     => 'Turismo Sostenible',
+        'title'        => 'Sostenibilidad',
+        'subtitle'     => 'Turismo Sostenible',
         'slug'        => 'sostenibilidad',
         'lang'        => 'es', 
         'status'      => '1',
@@ -99,8 +219,8 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Privacidad
       [
-        'tile'        => 'Privacidad',
-        'subtile'     => 'Nuestra Políticas',
+        'title'        => 'Privacidad',
+        'subtitle'     => 'Nuestra Políticas',
         'slug'        => 'privacidad',
         'lang'        => 'es', 
         'status'      => '1',
@@ -196,8 +316,8 @@ class AditionalPagesSeeder extends Seeder {
       //en
       //Mision
       [
-        'tile' => 'Mission',
-        'subtile' => 'Our Mission',
+        'title' => 'Mission',
+        'subtitle' => 'Our Mission',
         'slug' => 'mision',
         'lang' => 'en',
         'status' => '1',
@@ -205,8 +325,8 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Vision
       [
-        'tile' => 'Vision',
-        'subtile' => 'Our Vision',
+        'title' => 'Vision',
+        'subtitle' => 'Our Vision',
         'slug' => 'vision',
         'lang' => 'en',
         'status' => '1',
@@ -214,10 +334,10 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Sostenibilidad
       [
-        'tile' => 'Sustainability',
-        'subtile' => 'Sustainable Tourism',
+        'title' => 'Sustainability',
+        'subtitle' => 'Sustainable Tourism',
         'slug' => 'sostenibilidad',
-        'lang' => 'is',
+        'lang' => 'en',
         'status' => '1',
         'page_data' => '
           <div id="sostenibilidad-section0" class="col-lg-12 mt-5">
@@ -283,10 +403,10 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Privacidad
       [
-        'tile' => 'Privacy',
-        'subtile' => 'Our Policies',
+        'title' => 'Privacy',
+        'subtitle' => 'Our Policies',
         'slug' => 'privacidad',
-        'lang' => 'is',
+        'lang' => 'en',
         'status' => '1',
         'page_data' => '
           <div class="col-12">
@@ -380,8 +500,8 @@ class AditionalPagesSeeder extends Seeder {
       //de
       //Mision
       [
-        'tile' => 'Mission',
-        'subtile' => 'Unsere Mission',
+        'title' => 'Mission',
+        'subtitle' => 'Unsere Mission',
         'slug' => 'mision',
         'lang' => 'de',
         'status' => '1',
@@ -389,8 +509,8 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Vision
       [
-        'tile' => 'Vision',
-        'subtile' => 'Unsere Vision',
+        'title' => 'Vision',
+        'subtitle' => 'Unsere Vision',
         'slug' => 'vision',
         'lang' => 'de',
         'status' => '1',
@@ -398,8 +518,8 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Sostenibilidad
       [
-        'tile' => 'Nachhaltigkeit',
-        'subtile' => 'Nachhaltiger Tourismus',
+        'title' => 'Nachhaltigkeit',
+        'subtitle' => 'Nachhaltiger Tourismus',
         'slug' => 'sostenibilidad',
         'lang' => 'de',
         'status' => '1',
@@ -467,8 +587,8 @@ class AditionalPagesSeeder extends Seeder {
       ],
       //Privacidad
       [
-        'tile' => 'Datenschutz',
-        'subtile' => 'Unsere Richtlinien',
+        'title' => 'Datenschutz',
+        'subtitle' => 'Unsere Richtlinien',
         'slug' => 'privacidad',
         'lang' => 'de',
         'status' => '1',

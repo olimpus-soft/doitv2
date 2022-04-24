@@ -9,8 +9,10 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
+use App\Models\Destinos;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use \DateTime;
 
 /**
  * Class BaseController
@@ -33,6 +35,9 @@ class BaseController extends Controller {
   protected $basePath;
   protected $session;
   protected $encryption;
+  protected $foudDateTime;
+  protected $foudDiffDate;
+  protected $cntDestinations;
 
   /**
    * An array of helpers to be loaded automatically upon
@@ -52,7 +57,7 @@ class BaseController extends Controller {
       $this->locale = $this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
       $paramsModel = new Parameters();
-      $parameters = $paramsModel->asObject('App\Models\Parameters')
+      $parameters = $paramsModel->asObject()
           ->where("status = 1 AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
           ->orderBy('parameter', 'ASC')
           ->findAll()
@@ -60,10 +65,18 @@ class BaseController extends Controller {
       foreach ($parameters as $parameter) {
         if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
         defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
-        //echo '<pre>';
-        //echo print_r([strtoupper($parameter->parameter) => $parameter->parameter_value, 'parameter_lang' => $parameter->parameter_lang ], true);
-        //echo '</pre>';
       }
+
+      $destinosModel = new Destinos();
+      $this->cntDestinations = $destinosModel->asObject()
+        ->where('status', '1')
+        ->where('destino_lang', $this->locale)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ; 
+      $this->foudDateTime = new DateTime(FOUND_DATE);
+      $dtNow = new DateTime(date('Y-m-d'));
+      $this->foudDiffDate = $dtNow->diff($this->foudDateTime);
       $this->session = \Config\Services::session();
       $this->encryption = new \Config\Encryption();
       $this->session->start();

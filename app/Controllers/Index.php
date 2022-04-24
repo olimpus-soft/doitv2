@@ -16,9 +16,6 @@ use Config\Kint;
 class Index extends BaseController {
   
   public function index() {
-    $dtF = new DateTime(FOUND_DATE);
-    $dtNow = new DateTime(date('Y-m-d'));
-    $difDF = $dtNow->diff($dtF);
     $objetivosModel = new Objetivos();
     $objetivos = $objetivosModel->asObject('App\Models\Objetivos')
       ->where('status', '1')
@@ -67,21 +64,14 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
-    $destinosModel = new Destinos();
-    $destinos = $destinosModel->asObject()
-      ->where('status', '1')
-      ->where('destino_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->countAllResults()
-    ; 
     return view('index', [
       'locale' => $this->locale,
       'menuUrl' => false,
-      'experienceYears' => $difDF->y,
+      'experienceYears' => $this->foudDiffDate->y,
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
       'equipos' => $equipos,
-      'destinos' => $destinos,
+      'cntDestinations' => $this->cntDestinations,
       'contacTypes' => $contacTypes,
     ]);
   }
@@ -246,8 +236,9 @@ class Index extends BaseController {
     $aditionalPages = $aditionalPagesModel->asObject()
       ->where('status', '1')
       ->where('lang', $this->locale)
-      ->where('lCASE(slug)', 'sobre-nosotros')
+      ->whereIn('lCASE(slug)', ['sobre-nosotros', 'mision', 'vision'])
       ->orderBy('id', 'ASC')
+      ->findAll()
     ;
 
     $destinosModel = new Destinos();
@@ -257,14 +248,15 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->countAllResults()
     ; 
-    return view('about-us', [
+    $paramsView = [
       'locale' => $this->locale,
       'menuUrl' => true,
       'viewPart' => 'about-us',
-      'destinos' => $destinos,
+      'cntDestinations' => $this->cntDestinations,
       'aditionalPages' => $aditionalPages,
       'experienceYears' => $difDF->y,
-    ]);
+    ];
+    return view('about-us', $paramsView);
   }
 
   public function aditionalPage($pageslug) {
@@ -290,7 +282,7 @@ class Index extends BaseController {
       'locale' => $this->locale,
       'menuUrl' => true,
       'viewPart' => 'aditional-pages',
-      'destinos' => $destinos,
+      'cntDestinations' => $this->cntDestinations,
       'aditionalPages' => $aditionalPages,
       'experienceYears' => $difDF->y,
     ]);

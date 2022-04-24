@@ -128,6 +128,9 @@ class Seeder
             $classes = get_filenames($this->seedPath, false);
             foreach ($classes as $idx => &$class) {
                 $class = str_replace('.php', '', $class);
+                if (is_cli() && ! $this->silent) {
+                    CLI::write("Seeded encontrada: {$class}", 'blue');
+                }
             }
         } else {
             $classes = explode(',', $class);

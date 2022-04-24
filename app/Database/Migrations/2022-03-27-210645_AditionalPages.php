@@ -13,11 +13,11 @@ class AditionalPages extends Migration {
 				'unsigned'       => TRUE,
 				'auto_increment' => TRUE
 		  ],
-		  'tile' => [
+		  'title' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 		  ],
-		  'subtile' => [
+		  'subtitle' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '200',
 		  ],

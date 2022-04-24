@@ -9,7 +9,7 @@
 						<img src="<?= base_url('assets/images/about/about-1.png');?>" alt="About">
 					</div> <!-- single image -->
 					<div data-aos="fade-right" class="about-btn">
-						<a class="main-btn" target="_blank" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><span><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
+						<a class="main-btn" target="_self" href="#"><span><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
 					</div>
 					<div class="single-image image-tow float-right">
 						<img src="<?= base_url('assets/images/about/about-2.png');?>" alt="<?= lang('Doit.about_us'); ?>">
@@ -29,6 +29,7 @@
 			<div class="col-lg-12">
 				<div class="text-center">
           <a data-aos="fade-right" class="main-btn mx-30" target="_self" href="<?= base_url('p/privacidad');?>?utm_source=doit&utm_medium=web&utm_campaign=<?= lang('Doit.privacy'); ?>&utm_term=all&utm_content="><?= lang('Doit.privacy'); ?></a>
+          <a data-aos="fade-top" class="main-btn mx-30" target="_self" href="<?= base_url('p/sostenibilidad');?>?utm_source=doit&utm_medium=web&utm_campaign=<?= lang('Doit.sostenibilidad'); ?>&utm_term=all&utm_content="><?= lang('Doit.sostenibilidad'); ?></a>
           <a data-aos="fade-left" class="main-btn mx-30" target="_self" href="<?= base_url('p/politicas');?>?utm_source=doit&utm_medium=web&utm_campaign=<?= lang('Doit.policy'); ?>&utm_term=all&utm_content="><?= lang('Doit.policy'); ?></a>
         </div>
 		</div> <!-- row -->

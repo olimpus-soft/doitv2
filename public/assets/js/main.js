@@ -105,10 +105,18 @@ $(function() {
     $('.project-active').slick({
         dots: true,
         infinite: true,
-        speed: 800,
+        speed: 2000,
         slidesToShow: 5,
         slidesToScroll: 3,
-        arrows: false,
+        autoplay: false,        
+        autoplaySpeed: 3000,
+        mobileFirst: true,
+        draggable: true,
+        arrows: true,
+        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
+        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
+        prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
         responsive: [
             {
               breakpoint: 1200,

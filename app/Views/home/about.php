@@ -9,7 +9,7 @@
 						<img src="<?= base_url('assets/images/about/about-1.png');?>" alt="About">
 					</div> <!-- single image -->
 					<div data-aos="fade-right" class="about-btn">
-						<a class="main-btn" target="_blank" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><span><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
+						<a class="main-btn" target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><span><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
 					</div>
 					<div class="single-image image-tow float-right">
 						<img src="<?= base_url('assets/images/about/about-2.png');?>" alt="<?= lang('Doit.about_us'); ?>">
@@ -22,7 +22,7 @@
 					<h3 class="about-title mt-10">Do It! Viajes y Turismo</h3>
 					<p class="mt-25 text-justify"><?= ABOUT_TEXT; ?>
 					</p>
-					<a class="main-btn mt-25" target="_blank" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.more_about_us'); ?></a>
+					<a class="main-btn mt-25" target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.more_about_us'); ?></a>
 				</div> <!-- about content -->
 			</div>
 		</div> <!-- row -->
