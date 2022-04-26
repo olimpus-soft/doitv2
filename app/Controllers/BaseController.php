@@ -80,6 +80,7 @@ class BaseController extends Controller {
       $this->session = \Config\Services::session();
       $this->encryption = new \Config\Encryption();
       $this->session->start();
+      
       /*
       $config = (object) [
         'Subject' => 'Coreo de Pruebas',
@@ -386,5 +387,72 @@ class BaseController extends Controller {
       return $jwt;
     }
     return false;
+  }
+
+  public static function replaceViewValues() {
+    return (object) [
+      'find2Replace' => [
+        '__COMERCIAL_NAME__', 
+        '__CONTACT_EMAIL__', 
+        '__CONTACT_PHONE__', 
+        '__CONTACT_FB__', 
+        '__CONTACT_TW__',
+        '__CONTACT_IM__', 
+        '__COMPANY_ADDRESS__', 
+        '__COMPANY_LOCALITY__',
+        '__LOGO_URL__',
+        '__CONTACT_FB_SUPPORT__',
+        '__CONTACT_TW_SUPPORT__',
+        '__CONTACT_IM_SUPPORT__',
+        '__SUPPORT_ADDRESS__',
+        '__SUPPORT_LOCALITY__',
+        '__SUPPORT_NAME__',
+        '__SUPPORT_URL__',
+        '__CONTACT_PHONE_SUPPORT__',
+        '__CONTACT_EMAIL_SUPPORT__',
+        '__DEV_AUTHOR__',
+        '__DEV_COMPANY__',
+        '__DEV_EMAIL__',
+        '__DEV_URL__',
+        '__DEV_PHONE__',
+        '__DEV_TW_PROFILE__',
+        '__DEV_TW_AUTHOR__',
+        '__DEV_TW_PAGE__',
+        '__DEV_IM_PROFILE__',
+        '__DEV_IM_AUTHOR__',
+        '__DEV_IM_PAGE__',
+      ],
+      'replace2Found' => [
+        COMERCIALNAME, 
+        CONTACT_EMAIL, 
+        CONTACT_PHONE, 
+        CONTACT_FB, 
+        CONTACT_TW, 
+        CONTACT_IM, 
+        COMPANY_ADDRESS, 
+        COMPANY_LOCALITY,
+        LOGO_URL,
+        CONTACT_FB_SUPPORT,
+        CONTACT_TW_SUPPORT,
+        CONTACT_IM_SUPPORT,
+        SUPPORT_ADDRESS,
+        SUPPORT_LOCALITY,
+        SUPPORT_NAME,
+        SUPPORT_URL,
+        CONTACT_PHONE_SUPPORT,
+        CONTACT_EMAIL_SUPPORT,
+        DEV_AUTHOR,
+        DEV_COMPANY,
+        DEV_EMAIL,
+        DEV_URL,
+        DEV_PHONE,
+        DEV_TW_PROFILE,
+        DEV_TW_AUTHOR,
+        DEV_TW_PAGE,
+        DEV_IM_PROFILE,
+        DEV_IM_AUTHOR,
+        DEV_IM_PAGE,
+      ]
+    ];
   }
 }

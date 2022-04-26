@@ -17,24 +17,14 @@ class AditionalPagesSeeder extends Seeder {
         'lang'        => 'es', 
         'status'      => '1',
         'page_data'   => '
-          <b>__COMERCIAL_NAME__</b>, es una agencia creada para motivar a los diferentes actores de la sociedad moderna a cumplir sus sueños de viajes y a contribuir efectivamente para hacerlos realidad. Nuestro objetivo principal es ofrecer una experiencia emocional positiva al cliente que consulte nuestra agencia de viajes para cumplir un objetivo de viaje o un sueño vacacional. Garantizar un producto o servicio innovador de acuerdo con las condiciones psicobiológicas del comprador: Su vida, su trabajo, su entorno y las expectativas que tiene por cumplir.
+          <p class="text-justify"><b>__COMERCIAL_NAME__</b>, es una agencia creada para motivar a los diferentes actores de la sociedad moderna a cumplir sus sueños de viajes y a contribuir efectivamente para hacerlos realidad. Nuestro objetivo principal es ofrecer una experiencia emocional positiva al cliente que consulte nuestra agencia de viajes para cumplir un objetivo de viaje o un sueño vacacional. Garantizar un producto o servicio innovador de acuerdo con las condiciones psicobiológicas del comprador: Su vida, su trabajo, su entorno y las expectativas que tiene por cumplir.
           <br/><br/>
-          Estar a la vanguardia en tecnología y herramientas de comunicación y distribución, para cumplir con las necesidades de las nuevas generaciones nacionales o internacionales, proporcionando todo lo relacionado con pasajes aéreos, terrestres, hoteles, servicios complementarios que van desde turismo especializado y receptivo, organización de eventos, congresos nacionales e internacionales, excursiones diseñadas para colegios y fondos de empleados, viajes culturales y temáticos, turismo estudiantil entre otros.
-          <div class="col-lg-10 offset-lg-1">
-            <h5>Otras Metas y Servicios</h5>
-            <ul>
-              <li><i class="icon-thin fa fa-circle-thin"></i>Clientes Felices</li>
-              <li><i class="icon-thin fa fa-circle-thin"></i>Vuelo Para Viajar</li>
-              <li><i class="icon-thin fa fa-circle-thin"></i>Hotel para Alojarse</li>
-              <li><i class="icon-thin fa fa-circle-thin"></i>Tours Impresionantes</li>
-              <li><i class="icon-thin fa fa-circle-thin"></i>Destinos Sorprendentes</li>
-            </ul>
-          </div>
+          Estar a la vanguardia en tecnología y herramientas de comunicación y distribución, para cumplir con las necesidades de las nuevas generaciones nacionales o internacionales, proporcionando todo lo relacionado con pasajes aéreos, terrestres, hoteles, servicios complementarios que van desde turismo especializado y receptivo, organización de eventos, congresos nacionales e internacionales, excursiones diseñadas para colegios y fondos de empleados, viajes culturales y temáticos, turismo estudiantil entre otros.</p>
           <div class="col-lg-10 offset-lg-1">
             <h5>Otros Objetivos</h5>
             <div class="row our-wrapper">
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon fa fa-certificate fa-1x my-auto"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Garantizar</p>
                     <p class="text">Garantizar servicio y atención a los pasajeros 7x24</p>
@@ -42,7 +32,7 @@ class AditionalPagesSeeder extends Seeder {
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon fa-solid fa-user-shield"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Dar Solucón</p>
                     <p class="text">Dar solución a los problemas que se puedan presentar de una manera amable y oportuna</p>
@@ -50,7 +40,7 @@ class AditionalPagesSeeder extends Seeder {
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon fa-solid fa-file-circle-check fa-2x"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Cumplir</p>
                     <p class="text">Cumplir con los servicios contratados por el cliente</p>
@@ -58,7 +48,7 @@ class AditionalPagesSeeder extends Seeder {
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon fa-solid fa-arrow-down-up-across-line"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Realizar</p>
                     <p class="text">Realizar seguimiento al viaje del cliente y servicio de postventa</p>
@@ -68,49 +58,49 @@ class AditionalPagesSeeder extends Seeder {
             </div>
             <div class="row our-wrapper">
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon flaticon-transport-10"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Tener Conocimiento</p>
+                    <p class="text">Tener pleno conocimiento de los destinos a comercializar, países, geografía, actividades recreativas, restaurantes, moneda, entre otros.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Administrar</p>
+                    <p class="text">Administrar de una manera organizada y responsable, los recursos de la empresa, llevar una correcta y sana contabilidad, tributaria y relación con proveedores</p>
+                  </div>
+                </div>
+              </div>              
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Cumplir</p>
+                    <p class="text">Desarrollar el producto especializado Turismo de Salud y Bienestar, garantizando las mejores negociaciones con Clínicas de estética, Coach de Salud, Sitios de relax naturales, enfermeras, transportadores entre otros.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Contratar Servicios</p>
                     <p class="text">Contratar servicios de calidad con los diferentes proveedores aerolíneas, hoteles, cruceros, transporte terrestre, tarjetas de asistencia, operadores internacionales, centros de negocios y/o convenciones, entre otros.</p>
                   </div>
                 </div>
               </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="our-content"><i class="our-icon flaticon-people-6"></i>
-                    <div class="main-our">
-                      <p class="our-title">Cumplir</p>
-                      <p class="text">Desarrollar el producto especializado Turismo de Salud y Bienestar, garantizando las mejores negociaciones con Clínicas de estética, Coach de Salud, Sitios de relax naturales, enfermeras, transportadores entre otros.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="our-content"><i class="our-icon flaticon-man"></i>
-                    <div class="main-our">
-                      <p class="our-title">Implementar</p>
-                      <p class="text">Implementar herramienta tecnológica de comercialización que facilita el proceso compra del cliente.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="our-content"><i class="our-icon flaticon-food"></i>
-                    <div class="main-our">
-                      <p class="our-title">Realizar Comunidad</p>
-                      <p class="text">Realizar comunidad a través de RRSS, informando más sobre destinos, tendencias de viajes y turismo de salud y bienestar.</p>
-                    </div>
-                  </div>
-                </div>
             </div>
             <div class="row our-wrapper">
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon flaticon-transport-10"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Administrar</p>
-                    <p class="text">Administrar de una manera organizada y responsable, los recursos de la empresa, llevar una correcta y sana contabilidad, tributaria y relación con proveedores</p>
+                    <p class="our-title">Implementar</p>
+                    <p class="text">Implementar herramienta tecnológica de comercialización que facilita el proceso compra del cliente.</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon flaticon-people-6"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Realizar</p>
                     <p class="text">Realizar buenas negociaciones con proveedores, para garantizar un producto bueno, estructurado e innovador</p>
@@ -118,10 +108,10 @@ class AditionalPagesSeeder extends Seeder {
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <div class="our-content"><i class="our-icon flaticon-man"></i>
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Tener Conocimiento</p>
-                    <p class="text">Tener pleno conocimiento de los destinos a comercializar, países, geografía, actividades recreativas, restaurantes, moneda, entre otros.</p>
+                    <p class="our-title">Realizar Comunidad</p>
+                    <p class="text">Realizar comunidad a través de RRSS, informando más sobre destinos, tendencias de viajes y turismo de salud y bienestar.</p>
                   </div>
                 </div>
               </div>
@@ -146,76 +136,6 @@ class AditionalPagesSeeder extends Seeder {
         'lang'        => 'es', 
         'status'      => '1',
         'page_data'   => '<p class="text-justify">En 5 años, ser una agencia de viajes y líder en el desarrollo, promoción y comercialización en el Turismo de Salud y Bienestar, en Colombia, principalmente en ciudades como Bogotá, Cali y Medellín. Y a través de portales transaccionales en países como Estados Unidos y Europa.</p>',
-      ],
-      //Sostenibilidad
-      [
-        'title'        => 'Sostenibilidad',
-        'subtitle'     => 'Turismo Sostenible',
-        'slug'        => 'sostenibilidad',
-        'lang'        => 'es', 
-        'status'      => '1',
-        'page_data'   => '
-          <div id="sostenibilidad-section0" class="col-lg-12 mt-5"> 
-            <h1 class="text-center">Turismo Sostenible</h1>
-            <p class="text-justify">
-              El turismo sostenible persigue desarrollar su actividad generando un impacto mínimo sobre el medioambiente. La clave principal es que la explotación de un recurso sea por debajo del límite de renovación del mismo. Es decir, se trata de fomentar un turismo respetuoso con el ecosistema, con mínimo impacto sobre el medioambiente y la cultura local. Además, el aspecto económico busca la generación de empleo e ingresos de la población autóctona.
-            </p>
-          </div>
-          <div id="sostenibilidad-section1" class="col-lg-12 mt-5"> 
-            <h1 class="text-center">Política de Sostenibilidad</h1>
-            <p class="text-justify">
-              La Agencia __COMERCIAL_NAME__ ubicada en Bogotá D.C., se compromete a mitigar todos los impactos negativos que afectan al entorno natural por el desarrollo de su operación y a optimizar el uso de los recursos naturales, promocionando buenas practicas de los turistas en parques y zonas naturales, y dando a conocer dichas zonas naturales en diferentes fuentes de comunicación.<br>
-
-              Así mismo se compromete a promover y conservar el patrimonio cultural de la regiones y destinos en las cuales tiene actividad comercial, divulgando de manera responsable las tradiciones y atractivos turísticos de la región, gastronomía artesanías y bienes inmuebles de importancia cultural.<br>
-
-              También se compromete a proteger y a apoyar la comunidad de los destinos implementando buenas prácticas sostenibles, respetando los derechos de todos los actores y velando por el cumplimiento de sus deberes; previniendo impactos negativos como la ESCNNA (Explotación Sexual Y Comercial De Niños, Niñas Y Adolescentes) asociada a los viajes y el turismo. Para esto contará con una base de colaboradores y proveedores locales comprometidos con la conservación del ambiente la cultura y el desarrollo social, contratados bajo una política de contratación sin discriminación.
-            </p>
-          </div>
-          <div id="sostenibilidad-section2" class="col-lg-12 mt-5"> 
-            <h1 class="text-center">Código de Conducta</h1>
-            <p class="text-justify">
-              De acuerdo a los principios de la Política de Sostenibilidad de la Agencia de Viajes, se establece el siguiente código de conducta donde se estipulan las normas mínimas y el compromiso corporativo de cumplirlas y de exigir su cumplimiento a sus colaboradores, clientes y proveedores de bienes y servicios:
-            </p><br>
-            <ol class="text-justify">
-              <li>Abstenerse de ofrecer en los programas de promoción turística y en planes turísticos, expresa o subrepticiamente, planes de explotación sexual de niños, niñas y adolescentes.</li>
-              <li>Abstenerse de dar información a los turistas, directamente o por interpuesta persona acerca de lugares donde se coordinen o donde se practique explotación sexual comercial de niños, niñas y adolescentes.</li>
-              <li>Abstenerse de conducir a los turistas, directamente o a través de terceros a establecimientos o lugares donde se practique la explotación sexual comercial de niños, niñas, así como conducir a éstos a los sitios donde se encuentran hospedados los turistas, incluso si se trata de lugares localizados en altamar, confines de explotación sexual comercial de niños, niñas y adolescentes.</li>
-              <li>Abstenerse de facilitar vehículos en rutas turísticas con fines de explotación o de abuso sexual con niños, niñas y adolescentes.</li>
-              <li>Impedir el ingreso de niños, niñas y adolescentes a los hoteles o lugares de alojamiento y hospedaje, bares, negocios similares y demás establecimientos en los que se presten servicios turísticos, con fines de explotación o de abuso sexual.</li>
-              <li>Adoptar las medidas tendientes a impedir que el personal vinculado a cualquier título con la empresa, ofrezca servicios turísticos que permitan actividad sexual con niños, niñas y adolescentes.</li>
-              <li>Proteger a los niños, niñas y adolescentes nacionales o extranjeros de toda forma de explotación y violencia sexual originada por turistas nacionales o extranjeros.</li>
-              <li>Denunciar ante el Ministerio de Comercio, Industria y Turismo, y demás autoridades competentes, los hechos de los cuales se hubiere tenido conocimiento por cualquier medio, así como la sospecha de estos, relacionados con explotación sexual de niños, niñas y adolescentes y asegurar que al interior de la empresa existan canales para denunciar ante las autoridades competentes tales hechos.</li>
-              <li>Diseñar y divulgar al interior de la empresa y con sus proveedores de bienes y servicios, una política en la que el prestador establezca medidas para prevenir y contrarrestar toda forma de explotación sexual de niños, niñas y adolescentes enviajes y turismo.</li>
-              <li>. Capacitar a todo el personal vinculado y que se vaya vinculando a la empresa, así como a los proveedores que por la naturaleza de sus actividades tengan contacto con turistas, respecto a la prevención de la explotación sexual comercial de niños, niñas y adolescentes. </li>
-              <li>. Informar a sus usuarios sobre las consecuencias legales en Colombia de la explotación y el abuso sexual de niños, niñas y adolescentes.</li>
-              <li>. Rechazar la discriminación de raza o género.</li>
-              <li>. Difundir la importancia de la conservación y aprovechamiento de manera adecuada de la riqueza natural y cultural con que Colombia cuenta.</li>
-              <li>. Proteger la fauna y flora de los sitios que se visiten producto de actividad es turísticas.</li>\n  <li>. Proteger y resaltar los valores de los atractivos naturales de Colombia.</li>
-              <li>. Divulgar los conceptos de sostenibilidad con los que trabaja la empresa a los clientes, proveedores y colaboradores.</li>
-              <li>. Exigir a nuestros proveedores la seguridad física en la prestación de los servicios que ofrecen.</li>
-            </ol>
-          </div>
-          <div id="sostenibilidad-section3" class="col-lg-12 mt-5"> 
-            <h1 class="text-center">Objetivos para el turismo sostenible</h1>
-            <p class="text-justify">
-              En 2005 la Organización Mundial del Turismo y el Programa de Naciones Unidas para el Medio Ambiente establecieron 12 objetivos que constituyen un modelo:
-            </p>
-            <ol class="text-justify">
-              <li>Riqueza cultural: respetar y mejorar el patrimonio histórico o respetar la cultura local y su carácter distintivo es fundamental.</li>
-              <li>Integridad del ecosistema: mantener y mejorar los paisajes, los núcleos urbanos o rurales. Se trata de evitar la degradación del entorno.</li>
-              <li>Diversidad biológica: apoyar la conservación de áreas naturales y minimizar su daño.</li>
-              <li>Eficiencia de los recursos: consiste en minimizar al máximo el uso de recursos escasos y no renovables.</li>
-              <li>Pureza ambiental: reducir la contaminación al máximo tanto en aire, agua y tierra como en reducir la generación de residuos.</li>
-              <li>Control local: se trata de involucrar a la población local en la toma de decisiones que conciernen a la gestión y el desarrollo futuro del turismo en su área.</li>
-              <li>Bienestar de la comunidad: mantener y mejorar la calidad de vida del lugar anfitrión. Para ello es necesario dotar a estas comunidades de los recursos necesarios y que puedan necesitar, tanto a nivel logístico en infraestructuras como servicios. Es fundamental que esto no suponga una degradación o explotación del ecosistema ni de su sociedad.</li>
-              <li><b>Económico:</b> asegurar la viabilidad económica para que haya prosperidad y beneficios a largo plazo.</li>
-              <li><b>Prosperidad local:</b> orientar y maximizar la contribución del turismo a la prosperidad económica del destino anfitrión.</li>
-              <li><b>Calidad del empleo:</b> consiste en fortalecer la calidad de los puestos de trabajo, tanto cualitativamente como numéricamente. Además de asegurar las condiciones se tiene en cuenta que no exista ningún tipo de discriminación por raza, género, discapacidad u otras formas.</li>
-              <li><b>Equidad social:</b> consiste en que haya una justa distribución de la riqueza generada por el turismo en toda la comunidad receptora.</b>
-              <li><b>Satisfacción del visitante:</b> proporcionar una experiencia segura y satisfactoria de todos los visitantes sin ningún tipo de discriminación social.</li>
-            </ol>
-          </div>
-        ',
       ],
       //Privacidad
       [
@@ -312,8 +232,188 @@ class AditionalPagesSeeder extends Seeder {
           </div>
         ',
       ],
+      //Sostenibilidad
+      [
+        'title'        => 'Sostenibilidad',
+        'subtitle'     => 'Turismo Sostenible',
+        'slug'        => 'sostenibilidad',
+        'lang'        => 'es', 
+        'status'      => '1',
+        'page_data'   => '
+          <div id="sostenibilidad-section0" class="col-lg-12 mt-5"> 
+            <h3 class="text-center">Turismo Sostenible</h3>
+            <p class="text-justify">
+              El turismo sostenible persigue desarrollar su actividad generando un impacto mínimo sobre el medioambiente. La clave principal es que la explotación de un recurso sea por debajo del límite de renovación del mismo. Es decir, se trata de fomentar un turismo respetuoso con el ecosistema, con mínimo impacto sobre el medioambiente y la cultura local. Además, el aspecto económico busca la generación de empleo e ingresos de la población autóctona.
+            </p>
+          </div>
+          <div id="sostenibilidad-section1" class="col-lg-12 mt-5"> 
+            <h3 class="text-center">Política de Sostenibilidad</h3>
+            <p class="text-justify">
+              La Agencia __COMERCIAL_NAME__ ubicada en Bogotá D.C., se compromete a mitigar todos los impactos negativos que afectan al entorno natural por el desarrollo de su operación y a optimizar el uso de los recursos naturales, promocionando buenas practicas de los turistas en parques y zonas naturales, y dando a conocer dichas zonas naturales en diferentes fuentes de comunicación.<br>
+
+              Así mismo se compromete a promover y conservar el patrimonio cultural de la regiones y destinos en las cuales tiene actividad comercial, divulgando de manera responsable las tradiciones y atractivos turísticos de la región, gastronomía artesanías y bienes inmuebles de importancia cultural.<br>
+
+              También se compromete a proteger y a apoyar la comunidad de los destinos implementando buenas prácticas sostenibles, respetando los derechos de todos los actores y velando por el cumplimiento de sus deberes; previniendo impactos negativos como la ESCNNA (Explotación Sexual Y Comercial De Niños, Niñas Y Adolescentes) asociada a los viajes y el turismo. Para esto contará con una base de colaboradores y proveedores locales comprometidos con la conservación del ambiente la cultura y el desarrollo social, contratados bajo una política de contratación sin discriminación.
+            </p>
+          </div>
+          <div id="sostenibilidad-section2" class="col-lg-12 mt-5"> 
+            <h3 class="text-center">Código de Conducta</h3>
+            <p class="text-justify">
+              De acuerdo a los principios de la Política de Sostenibilidad de la Agencia de Viajes, se establece el siguiente código de conducta donde se estipulan las normas mínimas y el compromiso corporativo de cumplirlas y de exigir su cumplimiento a sus colaboradores, clientes y proveedores de bienes y servicios:
+            </p><br>
+            <ol class="col-lg-10 offset-1 text-justify">
+              <li>Abstenerse de ofrecer en los programas de promoción turística y en planes turísticos, expresa o subrepticiamente, planes de explotación sexual de niños, niñas y adolescentes.</li>
+              <li>Abstenerse de dar información a los turistas, directamente o por interpuesta persona acerca de lugares donde se coordinen o donde se practique explotación sexual comercial de niños, niñas y adolescentes.</li>
+              <li>Abstenerse de conducir a los turistas, directamente o a través de terceros a establecimientos o lugares donde se practique la explotación sexual comercial de niños, niñas, así como conducir a éstos a los sitios donde se encuentran hospedados los turistas, incluso si se trata de lugares localizados en altamar, confines de explotación sexual comercial de niños, niñas y adolescentes.</li>
+              <li>Abstenerse de facilitar vehículos en rutas turísticas con fines de explotación o de abuso sexual con niños, niñas y adolescentes.</li>
+              <li>Impedir el ingreso de niños, niñas y adolescentes a los hoteles o lugares de alojamiento y hospedaje, bares, negocios similares y demás establecimientos en los que se presten servicios turísticos, con fines de explotación o de abuso sexual.</li>
+              <li>Adoptar las medidas tendientes a impedir que el personal vinculado a cualquier título con la empresa, ofrezca servicios turísticos que permitan actividad sexual con niños, niñas y adolescentes.</li>
+              <li>Proteger a los niños, niñas y adolescentes nacionales o extranjeros de toda forma de explotación y violencia sexual originada por turistas nacionales o extranjeros.</li>
+              <li>Denunciar ante el Ministerio de Comercio, Industria y Turismo, y demás autoridades competentes, los hechos de los cuales se hubiere tenido conocimiento por cualquier medio, así como la sospecha de estos, relacionados con explotación sexual de niños, niñas y adolescentes y asegurar que al interior de la empresa existan canales para denunciar ante las autoridades competentes tales hechos.</li>
+              <li>Diseñar y divulgar al interior de la empresa y con sus proveedores de bienes y servicios, una política en la que el prestador establezca medidas para prevenir y contrarrestar toda forma de explotación sexual de niños, niñas y adolescentes enviajes y turismo.</li>
+              <li>Capacitar a todo el personal vinculado y que se vaya vinculando a la empresa, así como a los proveedores que por la naturaleza de sus actividades tengan contacto con turistas, respecto a la prevención de la explotación sexual comercial de niños, niñas y adolescentes. </li>
+              <li>Informar a sus usuarios sobre las consecuencias legales en Colombia de la explotación y el abuso sexual de niños, niñas y adolescentes.</li>
+              <li>Rechazar la discriminación de raza o género.</li>
+              <li>Difundir la importancia de la conservación y aprovechamiento de manera adecuada de la riqueza natural y cultural con que Colombia cuenta.</li>
+              <li>Proteger la fauna y flora de los sitios que se visiten producto de actividad es turísticas.</li>
+              <li>Proteger y resaltar los valores de los atractivos naturales de Colombia.</li>
+              <li>Divulgar los conceptos de sostenibilidad con los que trabaja la empresa a los clientes, proveedores y colaboradores.</li>
+              <li>Exigir a nuestros proveedores la seguridad física en la prestación de los servicios que ofrecen.</li>
+            </ol>
+          </div>
+          <div id="sostenibilidad-section3" class="col-lg-12 mt-5"> 
+            <h3 class="text-center">Objetivos para el turismo sostenible</h3>
+            <p class="text-justify">
+              En 2005 la Organización Mundial del Turismo y el Programa de Naciones Unidas para el Medio Ambiente establecieron 12 objetivos que constituyen un modelo:
+            </p>
+            <ol class="col-lg-10 offset-lg-1 text-justify">
+              <li><b>Riqueza cultural:</b> respetar y mejorar el patrimonio histórico o respetar la cultura local y su carácter distintivo es fundamental.</li>
+              <li><b>Integridad del ecosistema:</b> mantener y mejorar los paisajes, los núcleos urbanos o rurales. Se trata de evitar la degradación del entorno.</li>
+              <li><b>Diversidad biológica:</b> apoyar la conservación de áreas naturales y minimizar su daño.</li>
+              <li><b>Eficiencia de los recursos:</b> consiste en minimizar al máximo el uso de recursos escasos y no renovables.</li>
+              <li><b>Pureza ambiental:</b> reducir la contaminación al máximo tanto en aire, agua y tierra como en reducir la generación de residuos.</li>
+              <li><b>Control local:</b> se trata de involucrar a la población local en la toma de decisiones que conciernen a la gestión y el desarrollo futuro del turismo en su área.</li>
+              <li><b>Bienestar de la comunidad:</b> mantener y mejorar la calidad de vida del lugar anfitrión. Para ello es necesario dotar a estas comunidades de los recursos necesarios y que puedan necesitar, tanto a nivel logístico en infraestructuras como servicios. Es fundamental que esto no suponga una degradación o explotación del ecosistema ni de su sociedad.</li>
+              <li><b>Económico:</b> asegurar la viabilidad económica para que haya prosperidad y beneficios a largo plazo.</li>
+              <li><b>Prosperidad local:</b> orientar y maximizar la contribución del turismo a la prosperidad económica del destino anfitrión.</li>
+              <li><b>Calidad del empleo:</b> consiste en fortalecer la calidad de los puestos de trabajo, tanto cualitativamente como numéricamente. Además de asegurar las condiciones se tiene en cuenta que no exista ningún tipo de discriminación por raza, género, discapacidad u otras formas.</li>
+              <li><b>Equidad social:</b> consiste en que haya una justa distribución de la riqueza generada por el turismo en toda la comunidad receptora.</b>
+              <li><b>Satisfacción del visitante:</b> proporcionar una experiencia segura y satisfactoria de todos los visitantes sin ningún tipo de discriminación social.</li>
+            </ol>
+          </div>
+        ',
+      ],
 
       //en
+      //sobre-nosotros
+      [
+        'title'        => 'About Us',
+        'subtitle'     => 'More',
+        'slug'        => 'sobre-nosotros',
+        'lang'        => 'en', 
+        'status'      => '1',
+        'page_data'   => '
+          <p class="text-justify"><b>__COMERCIAL_NAME__</b>, is an agency created to motivate the different actors of modern society to fulfill their travel dreams and to effectively contribute to making them come true. Our main objective is to offer a positive emotional experience to the client who consults our travel agency to fulfill a travel goal or a vacation dream. Guarantee an innovative product or service in accordance with the psychobiological conditions of the buyer: his life, his work, his environment and the expectations he has to meet.
+          <br/><br/>
+          Being at the forefront of technology and communication and distribution tools, to meet the needs of the new national or international generations, providing everything related to air and land tickets, hotels, complementary services ranging from specialized and receptive tourism, organization of events, national and international congresses, excursions designed for schools and employee funds, cultural and thematic trips, student tourism, among others.</p>
+          <div class="col-lg-10 offset-lg-1">
+            <h5>Other Objectives</h5>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Guarantee</p>
+                    <p class="text">Guarantee service and attention to passengers 7x24</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Give Solution</p>
+                    <p class="text">Provide solutions to problems that may arise in a friendly and timely manner</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Compliance</p>
+                    <p class="text">Compliance with the services contracted by the client</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Perform</p>
+                    <p class="text">Track customer journey and after-sales service</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Have Knowledge</p>
+                    <p class="text">Have full knowledge of the destinations to be marketed, countries, geography, recreational activities, restaurants, currency, among others.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Manage</p>
+                    <p class="text">Manage the company\'s resources in an organized and responsible manner, keep a correct and healthy accounting, tax and relationship with suppliers</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Compliance</p>
+                    <p class="text">Develop the specialized Health and Wellness Tourism product, guaranteeing the best negotiations with Beauty Clinics, Health Coaches, natural relaxation sites, nurses, transporters, among others.</p>
+                  </div>
+                </div>
+              </div><div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Hire Services</p>
+                    <p class="text">Contract quality services with the different suppliers: airlines, hotels, cruises, ground transportation, assistance cards, international operators, business centers and/or conventions, among others.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Implement</p>
+                    <p class="text">Implement marketing technology tool that facilitates the customer\'s purchasing process.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Perform</p>
+                    <p class="text">Carry out good negotiations with suppliers, to guarantee a good, structured and innovative product</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Create Community</p>
+                    <p class="text">Create community through RRSS, informing more about destinations, travel trends and health and wellness tourism.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ',
+      ],
       //Mision
       [
         'title' => 'Mission',
@@ -498,6 +598,116 @@ class AditionalPagesSeeder extends Seeder {
       ],
 
       //de
+      //sobre-nosotros
+      [
+        'title'        => 'über uns',
+        'subtitle'     => 'Mehr',
+        'slug'        => 'sobre-nosotros',
+        'lang'        => 'de', 
+        'status'      => '1',
+        'page_data'   => '
+          <p class="text-justify"><b>__COMERCIAL_NAME__</b>, ist eine Agentur, die gegründet wurde, um die verschiedenen Akteure der modernen Gesellschaft zu motivieren, ihre Reiseträume zu erfüllen und effektiv dazu beizutragen, dass sie wahr werden. Unser Hauptziel ist es, dem Kunden, der sich an unser Reisebüro wendet, um ein Reiseziel oder einen Urlaubstraum zu erfüllen, ein positives emotionales Erlebnis zu bieten. Garantieren Sie ein innovatives Produkt oder eine innovative Dienstleistung in Übereinstimmung mit den psychobiologischen Bedingungen des Käufers: seinem Leben, seiner Arbeit, seinem Umfeld und den Erwartungen, die er erfüllen muss.
+          <br/><br/>
+          An der Spitze von Technologie und Kommunikations- und Vertriebsinstrumenten stehen, um den Bedürfnissen der neuen nationalen oder internationalen Generationen gerecht zu werden, alles rund um Flug- und Landtickets, Hotels, ergänzende Dienstleistungen von spezialisiertem und rezeptivem Tourismus, Organisation von Veranstaltungen, national und Internationale Kongresse, Exkursionen für Schulen und Mitarbeiterkassen, Kultur- und Themenreisen, Studententourismus, ua.</p>
+          <div class="col-lg-10 offset-lg-1">
+            <h5>Andere Ziele</h5>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Garantie</p>
+                    <p class="text">Garantieservice und Aufmerksamkeit für Passagiere rund um die Uhr</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Lösung geben</p>
+                    <p class="text">Stellen Sie Lösungen für auftretende Probleme freundlich und zeitnah bereit</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Konformität</p>
+                    <p class="text">Einhaltung der vom Auftraggeber beauftragten Leistungen</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Aufführen</p>
+                    <p class="text">Verfolgen Sie die Kundenreise und den Kundendienst</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Wissen haben</p>
+                    <p class="text">Umfassendes Wissen über die zu vermarktenden Reiseziele, Länder, Geografie, Freizeitaktivitäten, Restaurants, Währungen usw. haben.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Verwalten</p>
+                    <p class="text">Verwalten Sie die Ressourcen des Unternehmens auf organisierte und verantwortungsvolle Weise, führen Sie eine korrekte und gesunde Buchhaltung, Steuern und Beziehungen zu Lieferanten</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Konformität</p>
+                    <p class="text">Entwicklung des spezialisierten Gesundheits- und Wellnesstourismusprodukts, das die besten Verhandlungen mit Schönheitskliniken, Gesundheitscoaches, natürlichen Entspannungsorten, Krankenschwestern, Transportunternehmen und anderen garantiert.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Mietdienste</p>
+                    <p class="text">Schließen Sie hochwertige Dienstleistungen mit den verschiedenen Anbietern ab: unter anderem Fluggesellschaften, Hotels, Kreuzfahrten, Bodentransport, Assistance-Karten, internationale Betreiber, Geschäftszentren und/oder Kongresse.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row our-wrapper">
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Implementieren</p>
+                    <p class="text">Implementieren Sie ein Marketing-Technologie-Tool, das den Kaufprozess des Kunden erleichtert.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Aufführen</p>
+                    <p class="text">Führen Sie gute Verhandlungen mit Lieferanten, um ein gutes, strukturiertes und innovatives Produkt zu garantieren</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-3">
+                <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
+                  <div class="main-our">
+                    <p class="our-title">Community erstellen</p>
+                    <p class="text">Schaffen Sie eine Community durch RRSS, die mehr über Reiseziele, Reisetrends und Gesundheits- und Wellnesstourismus informiert.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ',
+      ],
       //Mision
       [
         'title' => 'Mission',

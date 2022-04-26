@@ -37,7 +37,7 @@ $routes->get('files/(:any)', 'Index::getFile/$1');
 $routes->get('files/(:any)/(:any)', 'Index::getFile/$1/$2');
 $routes->post('saveContact', 'Index::saveContact');
 $routes->get('sobre-nosotros', 'Index::aboutUs');
-$routes->get('p/(:any)', 'Index::aditionalPage/$1)');
+$routes->get('p/(:any)', 'Index::aditionalPage/$1');
 
 /*
  * --------------------------------------------------------------------

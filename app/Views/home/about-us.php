@@ -1,5 +1,7 @@
+<?php
+$replaceViewValues = App\Controllers\BaseController::replaceViewValues();
+?>
 <!--====== ABOUT PART START ======-->
-
 <section id="nosotoros" class="about-area pt-80 pb-130">
 	<div class="container">
 		<div class="row">
@@ -20,13 +22,13 @@
 				<div class="about-content mt-45">
 					<h4 class="about-welcome"><?= lang('Doit.about_us'); ?> </h4>
 					<h3 class="about-title mt-10"><span><?= TITLEAPP_BASE; ?></span> <?= TITLEAPP_TAILS; ?></h3>
-					<p class="mt-25 text-justify"><?= ABOUT_TEXT; ?>
+					<p class="mt-25 text-justify"><?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, ABOUT_TEXT); ?>
 					</p>
 				</div> <!-- about content -->
 			</div>
 		</div> <!-- row -->
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-12 mt-5">
 				<div class="text-center">
           <a data-aos="fade-right" class="main-btn mx-30" target="_self" href="<?= base_url('p/privacidad');?>?utm_source=doit&utm_medium=web&utm_campaign=<?= lang('Doit.privacy'); ?>&utm_term=all&utm_content="><?= lang('Doit.privacy'); ?></a>
           <a data-aos="fade-top" class="main-btn mx-30" target="_self" href="<?= base_url('p/sostenibilidad');?>?utm_source=doit&utm_medium=web&utm_campaign=<?= lang('Doit.sostenibilidad'); ?>&utm_term=all&utm_content="><?= lang('Doit.sostenibilidad'); ?></a>
@@ -40,6 +42,7 @@
 <?php
 if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) {
 	$aditionalPages = $aditionalPages[0];
+	//
 ?>
 <section id="page-<?= $aditionalPages->slug; ?>" class="services-area pt-125 pb-130 gray-bg">
 	<div class="container">
@@ -53,7 +56,7 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 		</div> <!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
-				<?= $aditionalPages->page_data;?>
+				<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $aditionalPage->page_data);?>
 			</div>
 		</div>
 	</div>
@@ -72,12 +75,13 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 			</div>
 		</div> <!-- row -->
 		<div class="row justify-content-center">
-			<div class="col-lg-12">
+			<div class="col-lg-12 text-center">
 				<?= lang('Doit.pageNotFoundDesc'); ?>
 			</div>
 		</div>
 	</div>
 </section>
 <?php
+	header("HTTP/1.1 404 Not Found", true);
 }
 ?>

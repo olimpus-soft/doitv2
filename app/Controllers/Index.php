@@ -269,15 +269,9 @@ class Index extends BaseController {
       ->where('lang', $this->locale)
       ->where('lCASE(slug)', strtolower($pageslug))
       ->orderBy('id', 'ASC')
+      ->findAll()
     ;
 
-    $destinosModel = new Destinos();
-    $destinos = $destinosModel->asObject()
-      ->where('status', '1')
-      ->where('destino_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->countAllResults()
-    ; 
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,

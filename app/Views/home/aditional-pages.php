@@ -1,5 +1,6 @@
 <?php
 if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) {
+	$replaceViewValues = App\Controllers\BaseController::replaceViewValues();
 	foreach ($aditionalPages as $aditionalPage) {
 ?>
 <!--====== <?= $aditionalPage->title; ?> PART START ======-->
@@ -15,7 +16,7 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 		</div> <!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
-				<?= $aditionalPage->page_data;?>
+				<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $aditionalPage->page_data);?>
 			</div>
 		</div>
 	</div>
@@ -36,12 +37,13 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 			</div>
 		</div> <!-- row -->
 		<div class="row justify-content-center">
-			<div class="col-lg-12">
+			<div class="col-lg-12 text-center">
 				<?= lang('Doit.pageNotFoundDesc'); ?>
 			</div>
 		</div>
 	</div>
 </section>
 <?php
+	header("HTTP/1.1 404 Not Found", true);
 }
 ?>
