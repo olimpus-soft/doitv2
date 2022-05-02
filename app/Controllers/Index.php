@@ -281,4 +281,26 @@ class Index extends BaseController {
       'experienceYears' => $difDF->y,
     ]);
   }
+
+  public function allOffers() {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $ofertasModel = new Ofertas();
+    $offers = $ofertasModel->asObject()
+      ->where('status', '1')
+      ->where('oferta_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+
+    return view('about-us', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'all-offers',
+      'cntDestinations' => $this->cntDestinations,
+      'offers' => $offers,
+      'experienceYears' => $difDF->y,
+    ]);
+  }
 }

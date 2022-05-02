@@ -1435,9 +1435,11 @@ p.form-message.error,
   }
 
 
-  .services-area ol {
+  .services-area ol,
+  .services-area ul {
     list-style-type: square;
   }
-  .services-area ol li::marker {
+  .services-area ol li::marker,
+  .services-area ul li::marker {
     color: #ff7f00;
   }

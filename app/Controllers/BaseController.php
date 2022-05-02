@@ -421,6 +421,8 @@ class BaseController extends Controller {
         '__DEV_IM_PROFILE__',
         '__DEV_IM_AUTHOR__',
         '__DEV_IM_PAGE__',
+        '__BASE_URL__',
+        '__PRIVACY_DATE__',
       ],
       'replace2Found' => [
         COMERCIALNAME, 
@@ -452,6 +454,8 @@ class BaseController extends Controller {
         DEV_IM_PROFILE,
         DEV_IM_AUTHOR,
         DEV_IM_PAGE,
+        base_url(),
+        date('01/02/Y', strtotime(FOUND_DATE)),
       ]
     ];
   }
