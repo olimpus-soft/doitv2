@@ -8,41 +8,53 @@ class Ofertas extends Migration {
   public function up() {
     $this->db->disableForeignKeyChecks();
     $this->forge->addField([
-      'id' => [
+      'id'               => [
         'type'           => 'INT',
         'constraint'     => 5,
         'unsigned'       => TRUE,
         'auto_increment' => TRUE
       ],
-      'oferta_titulo'          => [
+      'oferta_titulo'    => [
         'type'           => 'VARCHAR',
         'constraint'     => '100',
         'NULL'           => FALSE,
       ],
-      'oferta_subtitulo'          => [
+      'oferta_subtitulo' => [
         'type'           => 'VARCHAR',
         'constraint'     => '100',
         'NULL'           => TRUE,
       ],
-      'oferta_lang'       => [
+      'oferta_lang'      => [
         'type'           => 'VARCHAR',
         'constraint'     => '10',
         'NULL'           => TRUE,
         'default'        => NULL,
       ],
-      'oferta_file'       => [
+      'oferta_file'      => [
         'type'           => 'VARCHAR',
         'constraint'     => '200',
         'NULL'           => TRUE,
         'default'        => NULL,
       ],
-      'oferta_image'       => [
+      'oferta_image'     => [
         'type'           => 'VARCHAR',
         'constraint'     => '200',
         'NULL'           => TRUE,
         'default'        => NULL,
       ],
-      'status' => [
+      'oferta_favorita'  => [
+        'type'           => 'SMALLINT',
+        'constraint'     => 2,
+        'unsigned'       => TRUE,
+        'default'        => '0',
+      ],
+      'oferta_orden'  => [
+        'type'           => 'INT',
+        'constraint'     => 2,
+        'unsigned'       => TRUE,
+        'default'        => '0',
+      ],
+      'status'           => [
         'type'           => 'SMALLINT',
         'constraint'     => 2,
         'unsigned'       => TRUE,

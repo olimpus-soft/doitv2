@@ -18,9 +18,27 @@ class DestinosImagenes extends Migration {
         'constraint'     => 5,
         'unsigned'       => TRUE,
       ],
-      'imagen' => [
+      'recurso' => [
         'type'           => 'VARCHAR',
-        'constraint'     => '200',
+        'constraint'     => '500',
+      ],
+      'recurso_titulo' => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '100',
+      ],
+      'recurso_descripcion' => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '300',
+      ],
+      'recurso_tipo' => [
+        'type'           => 'ENUM',
+        'constraint'     => ['image', 'video', 'pdf'],
+        'default'        => 'image',
+      ],
+      'recurso_tipo_destino' => [
+        'type'           => 'ENUM',
+        'constraint'     => ['local', 'url'],
+        'default'        => 'local',
       ],
       'status' => [
         'type'           => 'SMALLINT',

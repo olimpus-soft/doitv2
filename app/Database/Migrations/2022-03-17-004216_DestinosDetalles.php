@@ -19,8 +19,7 @@ class DestinosDetalles extends Migration {
         'unsigned'       => TRUE,
       ],
       'descripcion' => [
-        'type'           => 'VARCHAR',
-        'constraint'     => '200',
+        'type'           => 'TEXT',
       ],
       'status' => [
         'type'           => 'SMALLINT',

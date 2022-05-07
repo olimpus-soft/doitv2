@@ -24,9 +24,9 @@ class Destinos extends Migration {
         'constraint'     => '300',
         'NULL'           => TRUE,
       ],
-      'destino_descipcion'       => [
-        'type'           => 'TEXT',
-        'NULL'           => TRUE,
+      'destino_resumen'  => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '500',
         'default'        => NULL,
       ],
       'destino_lang'       => [

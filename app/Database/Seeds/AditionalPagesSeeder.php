@@ -822,7 +822,7 @@ class AditionalPagesSeeder extends Seeder {
             <span class="mt-5 text-center" style="font-size: 0.8rem !important;"><b>Updated</b>: __PRIVACY_DATE__</span>
           </div>
           <div class="col-lg-12">
-            <div id="policies-section1" class="col-lg-12 mt-5">
+            <div id="politicas-section1" class="col-lg-12 mt-5">
               <h4 class="text-center">Definitions</h4>
                 <ol type="a" class="text-justify px-5">
                   <li><b>Hotel</b>: Hotel establishment is understood as the set of goods intended by the legal person to provide non-permanent accommodation service for less than 30 days, with or without food and basic and/or complementary services. or accommodation accessories, through a hosting contract.</li>
@@ -862,7 +862,7 @@ class AditionalPagesSeeder extends Seeder {
                   <li><b>Website</b>: pages authorized by <b>__COMERCIAL_NAME__</b>, for the distribution of tourist packages.</li>
                 </ol>
             </div>
-            <div id="policies-section2" class="col-lg-12 mt-5">
+            <div id="politicas-section2" class="col-lg-12 mt-5">
               <h4 class="text-center">Responsibility Clause</h4>
               <p class="text-justify">
                 <b>__COMERCIAL_NAME__</b>. It acts as an intermediary between the users and those who provide the services included, such as Airlines, Hotels and transporters among others; <b>__COMERCIAL_NAME__</b>. It is responsible for structuring tourist packages to facilitate the client obtaining air and land quotas as well as room reservations, requesting the required services and contracting them on behalf of the user according to their availability; everything, according to the information provided by the service providers.<br>
@@ -875,7 +875,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>It is the responsibility of the user to present all their original and current documentation at the time of enjoying the services purchased. In case of loss of contracted services for this reason, <b>__COMERCIAL_NAME__</b> will not be held responsible nor will it be exonerated from the value of the penalties or the loss of the vacation plan. The services included in the purchased plan are the responsibility of each of the companies providing them. <b>__COMERCIAL_NAME__</b>, only acts as an agent or intermediary with the client.</li>
               </ol>
             </div>
-            <div id="policies-section3" class="col-lg-12 mt-5">
+            <div id="politicas-section3" class="col-lg-12 mt-5">
               <h4 class="text-center">Exceptions</h4>
               <ol type="1" class="text-justify">
                 <li><b>__COMERCIAL_NAME__</b> is not responsible for the impossibility of providing the services acquired in events of fortuitous event or force majeure.</li>
@@ -890,7 +890,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li><b>__COMERCIAL_NAME__</b>. is not responsible for the impossibility of providing the contracted services, when the cause is attributable to the user.</li>
               </ol>
             </div>
-            <div id="policies-section4" class="col-lg-12 mt-5">
+            <div id="politicas-section4" class="col-lg-12 mt-5">
               <h4 class="text-center">General Conditions</h4>
               <ol type="a" class="text-justify px-5">
                 <li>All prices and rates published on this site are subject to change, availability and validity without prior notice and to the regulation of the rate rule of hotel and air plans. However, the rate confirmed at the time of purchase of the plan does NOT vary. Taxes, fees and contributions that affect airfares, hotels and other services offered by <b>__COMERCIAL_NAME__</b>. may vary at any time by provision of the National Government or foreign entity, as the case may be, which must be assumed by the guest/client at the time of issuing the air tickets, plan or tourist package. Restrictions and conditions apply to each published rate according to its validity.</li>
@@ -904,7 +904,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>For some plans there may be terms and particular conditions that exclude the application of the specific conditions described here. In this sense, the characteristics, conditions and restrictions must be consulted before acquiring the desired plan.</li>
               </ol>
             </div>
-            <div id="policies-section5" class="col-lg-12 mt-5">
+            <div id="politicas-section5" class="col-lg-12 mt-5">
               <h4 class="text-center">Applies To All Plans</h4>
               <ul class="text-justify">
                 <li>When fewer people show up at the hotel than those reserved and registered in the voucher and in the event that any of them must be accommodated in a single room, a supplement will be charged that will be deducted from the total value of the reservation and additionally the penalties that may apply, the collection of the single room supplement is not exempt.</li>
@@ -935,7 +935,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>For changes of accommodation, the room supplement must be charged and additionally the penalties that may apply will be applied, the collection of the room supplement is not exempt.</li>
               </ul>
             </div>
-            <div id="policies-section6" class="col-lg-12 mt-5">
+            <div id="politicas-section6" class="col-lg-12 mt-5">
               <h4 class="text-center">Penalties For All Plans</h4>
               <p class="text-justify">
                 When the user of the tourist services requests modifications and/or cancellations, or fails to comply by not showing up, not paying their fees in a timely manner, or not using the services acquired, they will pay as a penalty according to the following concepts established in the terms and conditions:
@@ -977,7 +977,7 @@ class AditionalPagesSeeder extends Seeder {
                 </li>
               </ul>
             </div>
-            <div id="policies-section7" class="col-lg-12 mt-5">
+            <div id="politicas-section7" class="col-lg-12 mt-5">
               <h4 class="text-center">Required Documents for International Destinations</h4>
               <p class="text-justify">
                 This section describes the basic documents that travelers must present to international destinations. It is the responsibility of the passenger to confirm with migration and corresponding consulates according to their nationality, the mandatory requirements that they must meet to enter the country to which they are going.
@@ -994,7 +994,7 @@ class AditionalPagesSeeder extends Seeder {
                 </ul>
               </div>
             </div>
-            <div id="policies-section8" class="col-lg-12 mt-5">
+            <div id="politicas-section8" class="col-lg-12 mt-5">
               <h4 class="text-center">Against Child Pornography</h4>
               <h5>Prevention of Exploitation, Pornography and Child Sex Tourism</h5>
               <p class="text-justify">
@@ -1002,7 +1002,7 @@ class AditionalPagesSeeder extends Seeder {
                 Pursuant to the provisions of Law 679 of 2001, Law 1336 of 2009, and other concordant regulations, <b>__COMERCIAL_NAME__</b>. It warns the tourist that the exploitation and sexual abuse of minors in the country are considered crimes and therefore criminally sanctioned. By virtue of Decree 3840 of 2009, <b>__COMERCIAL_NAME__</b>. It has adopted a "Code of Conduct" model, which promotes prevention policies and prevents the sexual use and exploitation of children and adolescents in tourism.
               <p>
             </div>
-            <div id="policies-section9" class="col-lg-12 mt-5">
+            <div id="politicas-section9" class="col-lg-12 mt-5">
               <h4 class="text-center">For Plans With National and International Tickets From Colombia</h4>
               <ul class="text-justify">
                 <li><h5>WITHDRAWAL AND WITHDRAWAL OF TOURIST PLANS</h3>
@@ -1329,7 +1329,7 @@ class AditionalPagesSeeder extends Seeder {
             <span class="mt-5 text-center" style="font-size: 0.8rem !important;"><b>Aktualisiert</b>: __PRIVACY_DATE__</span>
           </div>
           <div class="col-lg-12">
-            <div id="policies-section1" class="col-lg-12 mt-5">
+            <div id="politicas-section1" class="col-lg-12 mt-5">
               <h4 class="text-center">Definitionen</h4>
                 <ol type="a" class="text-justify px-5">
                   <li><b>Hotel</b>: Unter Hotelbetrieb versteht man die Gesamtheit von Gütern, die von der juristischen Person dazu bestimmt sind, eine vorübergehende Beherbergungsleistung für weniger als 30 Tage mit oder ohne Verpflegung und Grund- und/oder Zusatzleistungen zu erbringen . oder Unterkunftszubehör, über einen Beherbergungsvertrag.</li>
@@ -1369,7 +1369,7 @@ class AditionalPagesSeeder extends Seeder {
                   <li><b>Website</b>: von <b>__COMERCIAL_NAME__</b> autorisierte Seiten für den Vertrieb von Touristenpaketen.</li>
                 </ol>
             </div>
-            <div id="policies-section2" class="col-lg-12 mt-5">
+            <div id="politicas-section2" class="col-lg-12 mt-5">
               <h4 class="text-center">Verantwortungsklausel</h4>
               <p class="text-justify">
                 <b>__COMERCIAL_NAME__</b>. Es fungiert als Vermittler zwischen den Benutzern und denjenigen, die die enthaltenen Dienstleistungen erbringen, wie unter anderem Fluggesellschaften, Hotels und Transportunternehmen; <b>__COMERCIAL_NAME__</b>. Es ist verantwortlich für die Strukturierung von Touristenpaketen, um dem Kunden zu erleichtern, Luft- und Landkontingente sowie Zimmerreservierungen zu erhalten, die erforderlichen Dienstleistungen anzufordern und sie im Namen des Benutzers gemäß ihrer Verfügbarkeit zu beauftragen; alles nach Angaben der Leistungsträger.<br>
@@ -1382,7 +1382,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>Es liegt in der Verantwortung des Benutzers, alle seine originalen und aktuellen Unterlagen zum Zeitpunkt der Inanspruchnahme der erworbenen Dienste vorzulegen. Im Falle des Ausfalls vertraglich vereinbarter Leistungen aus diesem Grund wird <b>__COMERCIAL_NAME__</b> weder haftbar gemacht noch von der Höhe der Strafen oder dem Verlust des Urlaubsplans befreit. Die im gekauften Plan enthaltenen Dienstleistungen liegen in der Verantwortung der jeweiligen Unternehmen, die sie anbieten. <b>__COMERCIAL_NAME__</b> handelt nur als Agent oder Vermittler gegenüber dem Kunden.</li>
               </ol>
             </div>
-            <div id="policies-section3" class="col-lg-12 mt-5">
+            <div id="politicas-section3" class="col-lg-12 mt-5">
               <h4 class="text-center">Ausnahmen</h4>
               <ol type="1" class="text-justify">
                 <li><b>__COMERCIAL_NAME__</b> ist nicht verantwortlich für die Unmöglichkeit der Erbringung der erworbenen Dienste aufgrund von zufälligen Ereignissen oder höherer Gewalt.</li>
@@ -1397,7 +1397,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li><b>__COMERCIAL_NAME__</b>. haftet nicht für die Unmöglichkeit der Erbringung der vertraglich vereinbarten Leistungen, wenn die Ursache vom Nutzer zu vertreten ist.</li>
               </ol>
             </div>
-            <div id="policies-section4" class="col-lg-12 mt-5">
+            <div id="politicas-section4" class="col-lg-12 mt-5">
               <h4 class="text-center">Allgemeine Geschäftsbedingungen</h4>
               <ol type="a" class="text-justify px-5">
                 <li>Alle auf dieser Website veröffentlichten Preise und Tarife unterliegen Änderungen, Verfügbarkeit und Gültigkeit ohne vorherige Ankündigung und unterliegen den Bestimmungen der Tarifregeln für Hotel- und Flugpläne. Der zum Zeitpunkt des Kaufs des Plans bestätigte Tarif ändert sich jedoch NICHT. Steuern, Gebühren und Abgaben, die sich auf Flugpreise, Hotels und andere von <b>__COMERCIAL_NAME__</b> angebotene Dienstleistungen auswirken. können jederzeit durch Bestimmungen der nationalen Regierung oder einer ausländischen Stelle variieren, was vom Gast/Kunden zum Zeitpunkt der Ausstellung der Flugtickets, des Plans oder des Touristenpakets angenommen werden muss. Einschränkungen und Bedingungen gelten für jeden veröffentlichten Tarif entsprechend seiner Gültigkeit.</li>
@@ -1411,7 +1411,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>Für einige Pläne kann es Bestimmungen und besondere Bedingungen geben, die die Anwendung der hier beschriebenen besonderen Bedingungen ausschließen. In diesem Sinne müssen die Merkmale, Bedingungen und Einschränkungen konsultiert werden, bevor der gewünschte Plan erworben wird.</li>
               </ol>
             </div>
-            <div id="policies-section5" class="col-lg-12 mt-5">
+            <div id="politicas-section5" class="col-lg-12 mt-5">
               <h4 class="text-center">Gilt für alle Pläne</h4>
               <ul class="text-justify px-5">
                 <li>Erscheinen weniger Personen im Hotel als im Voucher reserviert und eingetragen sind und für den Fall, dass eine von ihnen in einem Einzelzimmer untergebracht werden muss, wird ein Zuschlag erhoben, der vom Gesamtwert der Übernachtung abgezogen wird Reservierung und zusätzlich eventuell anfallender Strafgebühren ist der Einzug des Einzelzimmerzuschlags nicht befreit.</li>
@@ -1442,7 +1442,7 @@ class AditionalPagesSeeder extends Seeder {
                 <li>Bei einem Wechsel der Unterkunft muss der Zimmerzuschlag berechnet werden und zusätzlich werden die eventuell anfallenden Strafen angewendet, die Erhebung des Zimmerzuschlags ist nicht ausgenommen.</li>
               </ul>
             </div>
-            <div id="policies-section6" class="col-lg-12 mt-5">
+            <div id="politicas-section6" class="col-lg-12 mt-5">
               <h4 class="text-center">Strafen für alle Pläne</h4>
               <p class="text-justify">
                 Wenn der Benutzer der touristischen Dienstleistungen Änderungen und/oder Stornierungen verlangt oder dem nicht nachkommt, indem er nicht erscheint, seine Gebühren nicht rechtzeitig bezahlt oder die erworbenen Dienstleistungen nicht in Anspruch nimmt, zahlt er eine Strafe gemäß den folgenden Konzepten in den AGB festgelegt:
@@ -1484,7 +1484,7 @@ class AditionalPagesSeeder extends Seeder {
                 </li>
               </ul>
             </div>
-            <div id="policies-section7" class="col-lg-12 mt-5">
+            <div id="politicas-section7" class="col-lg-12 mt-5">
               <h4 class="text-center">Erforderliche Dokumente für internationale Ziele</h4>
               <p class="text-justify">
                 In diesem Abschnitt werden die grundlegenden Dokumente beschrieben, die Reisende bei internationalen Zielen vorlegen müssen. Es liegt in der Verantwortung des Passagiers, bei der Einwanderungsbehörde und den entsprechenden Konsulaten entsprechend seiner Nationalität die obligatorischen Anforderungen zu bestätigen, die für die Einreise in das Land, in das er reist, erfüllt sein müssen.
@@ -1501,7 +1501,7 @@ class AditionalPagesSeeder extends Seeder {
                 </ul>
               </div>
             </div>
-            <div id="policies-section8" class="col-lg-12 mt-5">
+            <div id="politicas-section8" class="col-lg-12 mt-5">
               <h4 class="text-center">Gegen Kinderpornografie</h4>
               <h5>Verhinderung von Ausbeutung, Pornografie und Kindersextourismus</h5>
               <p class="text-justify">
@@ -1509,7 +1509,7 @@ class AditionalPagesSeeder extends Seeder {
                 Gemäß den Bestimmungen von Gesetz 679 von 2001, Gesetz 1336 von 2009 und anderen übereinstimmenden Vorschriften, <b>__COMERCIAL_NAME__</b>. Es warnt den Touristen, dass die Ausbeutung und der sexuelle Missbrauch von Minderjährigen im Land als Verbrechen gelten und daher bestraft werden. Gemäß Dekret 3840 von 2009, <b>__COMERCIAL_NAME__</b>. Sie hat ein „Verhaltenskodex“-Modell verabschiedet, das Präventionsstrategien fördert und die sexuelle Ausbeutung und Ausbeutung von Kindern und Jugendlichen im Tourismus verhindert.
               <p>
             </div>
-            <div id="policies-section9" class="col-lg-12 mt-5">
+            <div id="politicas-section9" class="col-lg-12 mt-5">
               <h4 class="text-center">Für Pläne mit nationalen und internationalen Tickets aus Kolumbien</h4>
               <ul class="text-justify">
                 <li><h5>RÜCKTRITT UND RÜCKTRITT VON TOURISTISCHEN PLÄNEN</h3>

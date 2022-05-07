@@ -9,13 +9,14 @@ class OfertasSeeder extends Seeder {
   public function run() {
     $data = [
       //es
-      [
+      [ 
         'oferta_titulo'     => 'Circuito Mini Fantasia Cubana',
         'oferta_subtitulo'  => 'Disfruta de toda la fantasia Cubana',
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/CirMiniFantasia.pdf',
         'oferta_image'      => 'ofertas/CirMiniFantasia.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
       ],
       [
         'oferta_titulo'     => 'Habana - Cayo Santa Maria',
@@ -23,7 +24,8 @@ class OfertasSeeder extends Seeder {
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/HCayoSantaMaria.pdf',
         'oferta_image'      => 'ofertas/HCayoSantaMaria.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
       ],
       [
         'oferta_titulo'     => 'Habana y Varadero 4 Noches',
@@ -31,7 +33,8 @@ class OfertasSeeder extends Seeder {
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/HV4N.pdf',
         'oferta_image'      => 'ofertas/HV4N.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
       ],
       [
         'oferta_titulo'     => 'Habana y Varadero 5 Noches',
@@ -39,7 +42,8 @@ class OfertasSeeder extends Seeder {
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/HV5N.pdf',
         'oferta_image'      => 'ofertas/HV5N.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
       ],
       [
         'oferta_titulo'     => 'Habana y Varadero 6 Noches',
@@ -47,7 +51,8 @@ class OfertasSeeder extends Seeder {
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/HV6N.pdf',
         'oferta_image'      => 'ofertas/HV6N.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
       ],
       [
         'oferta_titulo'     => 'Habana y Varadero 7 Noches',
@@ -55,7 +60,35 @@ class OfertasSeeder extends Seeder {
         'oferta_lang'       => 'es',
         'oferta_file'       => 'ofertas/HV7N.pdf',
         'oferta_image'      => 'ofertas/HV7N.png',
-        'status'  => '1',      
+        'oferta_favorita'   => '1',
+        'status'            => '1',      
+      ],
+      [
+        'oferta_titulo'     => 'Oferta de Prueba 1',
+        'oferta_subtitulo'  => 'esta es una prueba',
+        'oferta_lang'       => 'es',
+        'oferta_file'       => 'ofertas/HV7N.pdf',
+        'oferta_image'      => 'ofertas/HV7N.png',
+        'oferta_favorita'   => '0',
+        'status'            => '1',      
+      ],
+      [
+        'oferta_titulo'     => 'Prueba 2 de oferta',
+        'oferta_subtitulo'  => 'oferta no favorita ',
+        'oferta_lang'       => 'es',
+        'oferta_file'       => 'ofertas/HV7N.pdf',
+        'oferta_image'      => 'ofertas/HV5N.png',
+        'oferta_favorita'   => '0',
+        'status'            => '1',      
+      ],
+      [
+        'oferta_titulo'     => 'Oferta No Principal',
+        'oferta_subtitulo'  => 'Tour de Cuba en ofertas ',
+        'oferta_lang'       => 'es',
+        'oferta_file'       => 'ofertas/HV4N.pdf',
+        'oferta_image'      => 'ofertas/HV4N.png',
+        'oferta_favorita'   => '0',
+        'status'            => '1',      
       ],
     ];
     $this->db->table($this->tableName)->emptyTable();

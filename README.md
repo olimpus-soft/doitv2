@@ -107,4 +107,9 @@ php spark migrate
 
  php spark make:model Objetivos
  php spark make:model ObjetivosDetalles
+
+
+  php spark migrate:file "app/Database/Migrations/2022-03-14-012050_Ofertas.php"
+  php spark migrate:file "app/Database/Migrations/2022-03-17-001917_Destinos.php"
+
 ```

@@ -28,6 +28,8 @@ class Index extends BaseController {
       $objetivo->details = $objetivosDetallesModel->asObject('App\Models\ObjetivosDetalles')
         ->where('status', '1')
         ->where('objetivo_id', $objetivo->id)
+        ->where('oferta_favorita', '1')
+        ->orderBy('oferta_orden', 'ASC')
         ->orderBy('id', 'ASC')
         ->findAll()
       ; 
@@ -290,10 +292,18 @@ class Index extends BaseController {
     $offers = $ofertasModel->asObject()
       ->where('status', '1')
       ->where('oferta_lang', $this->locale)
+      ->orderBy('oferta_orden', 'ASC')
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
 
+    foreach ($offers as &$offer) {
+      $ext = explode('.', $offer->oferta_file);
+      $ext = end($ext);
+      $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
+      $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
+      $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
+    }
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,

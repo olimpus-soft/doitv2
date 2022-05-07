@@ -1434,6 +1434,30 @@ p.form-message.error,
     width: 100%;
   }
 
+  .rc-anchor.rc-anchor-invisible,
+  .grecaptcha-badge,
+  .grecaptcha-logo { 
+    display: none !important;
+  }
+
+.single-project span.starred {
+  color: #ff7f00;
+  position: absolute;
+  float: left;
+  z-index: 10;
+  font-size: 2em;
+  text-shadow: 1px 1px 2px black;
+  padding: 5px;
+}
+
+#page-all-offers .oferta .single-project .project-content {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%); 
+}
 
   .services-area ol,
   .services-area ul {
@@ -1443,3 +1467,4 @@ p.form-message.error,
   .services-area ul li::marker {
     color: #ff7f00;
   }
+

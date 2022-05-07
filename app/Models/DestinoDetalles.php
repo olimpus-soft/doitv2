@@ -1,20 +1,20 @@
-<@php
+<?php
 
-namespace {namespace};
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class {class} extends Model
+class DestinoDetalles extends Model
 {
-    protected $DBGroup          = '{dbGroup}';
-    protected $table            = '{table}';
+    protected $DBGroup          = 'default';
+    protected $table            = 'destinodetalles';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = {return};
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [{fieldsList}];
+    protected $allowedFields    = [ 'id', 'destino_id', 'descripcion', 'status', 'created_at', 'updated_at' ];
 
     // Dates
     protected $useTimestamps = false;

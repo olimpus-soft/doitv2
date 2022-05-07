@@ -14,7 +14,7 @@ class Equipo extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [ 'id', 'equipo_titulo', 'equipo_subtitulo', 'equipo_lang', 'equipo_image', 'orden', 'status', 'created_at', 'updated_at' ];
 
     // Dates
     protected $useTimestamps = false;
