@@ -39,6 +39,8 @@ $routes->post('saveContact', 'Index::saveContact');
 $routes->get('sobre-nosotros', 'Index::aboutUs');
 $routes->get('p/(:any)', 'Index::aditionalPage/$1');
 $routes->get('todas-las-ofertas', 'Index::allOffers');
+$routes->get('nuestros-destinos', 'Index::allDestinations');
+$routes->get('destino/(:any)', 'Index::getDestination/$1');
 
 /*
  * --------------------------------------------------------------------

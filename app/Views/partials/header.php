@@ -169,7 +169,11 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]--> 
-    
+    <?php if(isset($destino) && isset($destino->imagenes) && is_array($destino->imagenes)  && count($destino->imagenes) > 0) { ?>
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/css/gallery.css');?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/themes/default/ug-theme-default.css');?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/skins/alexis/alexis.css');?>" rel="stylesheet">
+    <?php } ?>
 </head><!--/head-->
 
 <body id="home" class="homepage">

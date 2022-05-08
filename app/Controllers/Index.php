@@ -6,6 +6,8 @@ use App\Models\ObjetivosDetalles;
 use App\Models\Ofertas;
 use App\Models\ContactType;
 use App\Models\Destinos;
+use App\Models\DestinoDetalles;
+use App\Models\DestinosImagenes;
 use App\Models\Equipo;
 use App\Models\Contactos;
 use App\Models\AditionalPages;
@@ -28,9 +30,6 @@ class Index extends BaseController {
       $objetivo->details = $objetivosDetallesModel->asObject('App\Models\ObjetivosDetalles')
         ->where('status', '1')
         ->where('objetivo_id', $objetivo->id)
-        ->where('oferta_favorita', '1')
-        ->orderBy('oferta_orden', 'ASC')
-        ->orderBy('id', 'ASC')
         ->findAll()
       ; 
     }
@@ -78,11 +77,11 @@ class Index extends BaseController {
     ]);
   }
 
-  public function getFile($fileHash, $downloadName=null) {
+  public function getFile($fileHash, $downloadName=null, $buffer=false) {
     try {
       $fileName = base64_decode(strrev($fileHash));
       $filePath = $this->basePath.$fileName;
-     if(!file_exists($filePath)) {
+      if(!file_exists($filePath)) {
         throw new Exception(lang('Doit.fileInvalid').' '.$fileHash);
       }
       $response = $this->response->download($filePath, null);
@@ -90,6 +89,7 @@ class Index extends BaseController {
         $downloadName = base64_decode(strrev($downloadName));
         $response->setFileName($downloadName);
       }
+      $response->setHeader('Accept-Ranges', 'bytes');
       return $response;
     } catch (Exception $e) {
       return $this->response->setStatusCode(404, $e->getMessage());
@@ -310,6 +310,86 @@ class Index extends BaseController {
       'viewPart' => 'all-offers',
       'cntDestinations' => $this->cntDestinations,
       'offers' => $offers,
+      'experienceYears' => $difDF->y,
+    ]);
+  }
+
+  public function allDestinations() {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $destinosModel = new Destinos();
+    $destinos = $destinosModel->asObject()
+      ->where('status', '1')
+      ->where('destino_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+
+    foreach ($destinos as &$destino) {
+      $destino->destino_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($destino->destino_image))));
+    }
+    return view('about-us', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'all-destinos',
+      'cntDestinations' => $this->cntDestinations,
+      'destinos' => $destinos,
+      'experienceYears' => $difDF->y,
+    ]);
+  }
+
+  public function getDestination($pageslug) {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $destinosModel = new Destinos();
+    $destino = $destinosModel->asObject()
+      ->where('status', '1')
+      ->where('destino_lang', $this->locale)
+      ->where('destino_slug', $pageslug)
+      ->orderBy('id', 'ASC')
+      ->first()
+    ;
+    $contacTypes = null;
+
+    if($destino) {
+      $destino->destino_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($destino->destino_image))));
+      $detalleModel = new DestinoDetalles();
+      $imagenesModel = new DestinosImagenes();
+      $destino->detalle = $detalleModel->asObject()
+        ->where('status', '1')
+        ->where('destino_id', $destino->id)
+        ->orderBy('id', 'ASC')
+        ->first()
+      ;
+      $destino->imagenes = $imagenesModel->asObject()
+        ->where('status', '1')
+        ->where('destino_id', $destino->id)
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ;
+      foreach ($destino->imagenes as &$imagen) {
+        if($imagen->recurso_tipo_destino == 'local') {
+          $imagen->recurso = base_url('files/'.strrev(str_replace('=', '', base64_encode($imagen->recurso))));
+        }
+      }
+      $contacTypesModel = new ContactType();
+      $contacTypes = $contacTypesModel->asObject()
+        ->where('status', '1')
+        ->where('lang', $this->locale)
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ; 
+    }
+
+    return view('show-destination', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'aditional-pages',
+      'cntDestinations' => $this->cntDestinations,
+      'contacTypes' => $contacTypes,
+      'destino' => $destino,
       'experienceYears' => $difDF->y,
     ]);
   }

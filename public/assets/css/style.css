@@ -1450,13 +1450,30 @@ p.form-message.error,
   padding: 5px;
 }
 
+#page-all-destinos .destino .single-project .project-content,
 #page-all-offers .oferta .single-project .project-content {
-    opacity: 1;
-    -webkit-transform: translateY(0%);
-    -moz-transform: translateY(0%);
-    -ms-transform: translateY(0%);
-    -o-transform: translateY(0%);
-    transform: translateY(0%); 
+  opacity: 1;
+  -webkit-transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  -ms-transform: translateY(0%);
+  -o-transform: translateY(0%);
+  transform: translateY(0%); 
+}
+
+
+#page-all-destinos .destino .single-project {
+  max-width: unset !important;
+  max-height: unset !important;
+  width: 100%;
+  height: auto;
+}
+
+#page-all-destinos .destino .single-project .project-image::before {
+  opacity: 1;
+}
+
+#page-all-destinos .destino .single-project .project-subtitle a {
+  color: white;
 }
 
   .services-area ol,

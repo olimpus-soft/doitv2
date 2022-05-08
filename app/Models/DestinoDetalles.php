@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class DestinoDetalles extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'destinodetalles';
+    protected $table            = 'destinos_detalles';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

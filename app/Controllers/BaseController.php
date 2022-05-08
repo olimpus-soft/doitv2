@@ -325,7 +325,7 @@ class BaseController extends Controller {
     return $send;
   } 
 
-  public function slugify($text) {
+  public static function slugify($text) {
     // replace non letter or digits by -
     $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 

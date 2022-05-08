@@ -12,6 +12,24 @@
     <!--script src="<?= base_url('assets/js/jquery.serialize-object.min.js');?>"></script-->
     <script src="<?= base_url('assets/js/main.js');?>"></script>
 		
+    <?php if(isset($destino) && isset($destino->imagenes) && is_array($destino->imagenes)  && count($destino->imagenes) > 0) { ?>
+      <script src="<?= base_url('assets/js/gallery/js/gallery.min.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/default/ug-theme-default.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/tiles/ug-theme-tiles.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/tilesgrid/ug-theme-tilesgrid.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/grid/ug-theme-grid.js');?>"></script>
+      <script>
+        $(document).ready(function(){ 
+          var galleryApi = $("#gallery").unitegallery({
+            //gallery_skin:"alexis",       //it's the default skin
+            //slider_bullets_skin: "alexis",   //example how to change only skin for slider bullets
+            tiles_type:"nested",
+            tiles_nested_optimal_tile_width:200,
+          }); 
+          galleryApi.play();
+        }); 
+      </script>
+    <?php } ?>
 
 		<!-- WhatsHelp.io widget -->
     <script async defer type="text/javascript">

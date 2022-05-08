@@ -41,6 +41,12 @@ class Destinos extends Migration {
         'NULL'           => TRUE,
         'default'        => NULL,
       ],
+      'destino_slug'       => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '200',
+        'NULL'           => TRUE,
+        'default'        => NULL,
+      ],
       'status' => [
         'type'           => 'SMALLINT',
         'constraint'     => 2,
@@ -52,6 +58,7 @@ class Destinos extends Migration {
     ]);
     $this->forge->addPrimaryKey('id');
     $this->forge->addUniqueKey(['destino_titulo','destino_lang']);
+    $this->forge->addUniqueKey(['destino_slug','destino_lang']);
     $this->forge->createTable('destinos', true);
     //$this->db->enableForeignKeyChecks();
   }
