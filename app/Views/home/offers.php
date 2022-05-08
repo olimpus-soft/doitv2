@@ -36,7 +36,7 @@
 				?>
 			</div>
 			<div class="container col-lg-12 text-center">
-				<a class="main-btn mt-25" target="_blank" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
+				<a class="main-btn mt-25" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
 			</div>
 		</div>
 	</section>
