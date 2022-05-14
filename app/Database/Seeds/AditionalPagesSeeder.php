@@ -27,7 +27,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Garantizar</p>
-                    <p class="text">Garantizar servicio y atención a los pasajeros 7x24</p>
+                    <p class="text">el servicio y atención a los pasajeros 7x24</p>
                   </div>
                 </div>
               </div>
@@ -35,7 +35,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Dar Solucón</p>
-                    <p class="text">Dar solución a los problemas que se puedan presentar de una manera amable y oportuna</p>
+                    <p class="text">a los problemas que se puedan presentar de una manera amable y oportuna</p>
                   </div>
                 </div>
               </div>
@@ -43,7 +43,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Cumplir</p>
-                    <p class="text">Cumplir con los servicios contratados por el cliente</p>
+                    <p class="text">con los servicios contratados por el cliente</p>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Realizar</p>
-                    <p class="text">Realizar seguimiento al viaje del cliente y servicio de postventa</p>
+                    <p class="text">seguimiento al viaje del cliente y servicio de postventa</p>
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Tener Conocimiento</p>
-                    <p class="text">Tener pleno conocimiento de los destinos a comercializar, países, geografía, actividades recreativas, restaurantes, moneda, entre otros.</p>
+                    <p class="text">de los destinos a comercializar, países, geografía, actividades recreativas, restaurantes, moneda, entre otros.</p>
                   </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Administrar</p>
-                    <p class="text">Administrar de una manera organizada y responsable, los recursos de la empresa, llevar una correcta y sana contabilidad, tributaria y relación con proveedores</p>
+                    <p class="text">de una manera organizada y responsable, los recursos de la empresa, llevar una correcta y sana contabilidad, tributaria y relación con proveedores</p>
                   </div>
                 </div>
               </div>              
@@ -77,7 +77,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Cumplir</p>
-                    <p class="text">Desarrollar el producto especializado Turismo de Salud y Bienestar, garantizando las mejores negociaciones con Clínicas de estética, Coach de Salud, Sitios de relax naturales, enfermeras, transportadores entre otros.</p>
+                    <p class="text">con el desarrollo de un producto especializado, Turismo de Salud y Bienestar, garantizando las mejores negociaciones con Clínicas de estética, Coach de Salud, Sitios de relax naturales, enfermeras, transportadores entre otros.</p>
                   </div>
                 </div>
               </div>
@@ -85,7 +85,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Contratar Servicios</p>
-                    <p class="text">Contratar servicios de calidad con los diferentes proveedores aerolíneas, hoteles, cruceros, transporte terrestre, tarjetas de asistencia, operadores internacionales, centros de negocios y/o convenciones, entre otros.</p>
+                    <p class="text">de calidad con los diferentes proveedores aerolíneas, hoteles, cruceros, transporte terrestre, tarjetas de asistencia, operadores internacionales, centros de negocios y/o convenciones, entre otros.</p>
                   </div>
                 </div>
               </div>
@@ -95,7 +95,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Implementar</p>
-                    <p class="text">Implementar herramienta tecnológica de comercialización que facilita el proceso compra del cliente.</p>
+                    <p class="text">herramientas tecnológica de comercialización que facilita el proceso compra del cliente.</p>
                   </div>
                 </div>
               </div>
@@ -103,7 +103,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Realizar</p>
-                    <p class="text">Realizar buenas negociaciones con proveedores, para garantizar un producto bueno, estructurado e innovador</p>
+                    <p class="text">buenas negociaciones con proveedores, para garantizar un producto bueno, estructurado e innovador</p>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Realizar Comunidad</p>
-                    <p class="text">Realizar comunidad a través de RRSS, informando más sobre destinos, tendencias de viajes y turismo de salud y bienestar.</p>
+                    <p class="text">a través de RRSS, informando más sobre destinos, tendencias de viajes y turismo de salud y bienestar.</p>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug'        => 'mision',
         'lang'        => 'es', 
         'status'      => '1',
-        'page_data'   => '<p class="text-justify">Ser una agencia de viajes que participe con el desarrollo sostenible y responsable del turismo en Colombia, con pasión, ofreciendo producto de calidad garantizada, prestando un servicio eficiente, amable y respetuoso que garantice el cumplimento de los sueños y objetivos del cliente</p>',
+        'page_data'   => '<p class="text-justify">Ser una agencia de viajes que participe con el desarrollo sostenible y responsable del turismo, con pasión, ofreciendo producto de calidad garantizada, prestando un servicio eficiente, amable y respetuoso que garantice el cumplimento de los sueños y objetivos del cliente</p>',
       ],
       //Vision
       [
@@ -135,7 +135,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug'        => 'vision',
         'lang'        => 'es', 
         'status'      => '1',
-        'page_data'   => '<p class="text-justify">En 5 años, ser una agencia de viajes y líder en el desarrollo, promoción y comercialización en el Turismo de Salud y Bienestar, en Colombia, principalmente en ciudades como Bogotá, Cali y Medellín. Y a través de portales transaccionales en países como Estados Unidos y Europa.</p>',
+        'page_data'   => '<p class="text-justify">En 5 años, ser una agencia de viajes líder en el desarrollo, promoción y comercialización del Destino Cuba en Colombia, principalmente en ciudades como Bogotá, Cali y Medellín. Y a través de portales transaccionales en países como Estados Unidos y Europa.</p>',
       ],
       //Privacidad
       [
@@ -537,15 +537,15 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Guarantee</p>
-                    <p class="text">Guarantee service and attention to passengers 7x24</p>
+                    <p class="text">service and attention to passengers 7x24</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Give Solution</p>
-                    <p class="text">Provide solutions to problems that may arise in a friendly and timely manner</p>
+                    <p class="our-title">Provide Solution</p>
+                    <p class="text">to problems that may arise in a friendly and timely manner</p>
                   </div>
                 </div>
               </div>
@@ -553,15 +553,15 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Compliance</p>
-                    <p class="text">Compliance with the services contracted by the client</p>
+                    <p class="text">with the services contracted by the client</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Perform</p>
-                    <p class="text">Track customer journey and after-sales service</p>
+                    <p class="our-title">Track</p>
+                    <p class="text">customer journey and after-sales service</p>
                   </div>
                 </div>
               </div>
@@ -570,8 +570,8 @@ class AditionalPagesSeeder extends Seeder {
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Have Knowledge</p>
-                    <p class="text">Have full knowledge of the destinations to be marketed, countries, geography, recreational activities, restaurants, currency, among others.</p>
+                    <p class="our-title">Have full Knowledge</p>
+                    <p class="text">of the destinations to be marketed, countries, geography, recreational activities, restaurants, currency, among others.</p>
                   </div>
                 </div>
               </div>
@@ -579,22 +579,22 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Manage</p>
-                    <p class="text">Manage the company\'s resources in an organized and responsible manner, keep a correct and healthy accounting, tax and relationship with suppliers</p>
+                    <p class="text">the company\'s resources in an organized and responsible manner, keep a correct and healthy accounting, tax and relationship with suppliers</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Compliance</p>
+                    <p class="our-title">Develop</p>
                     <p class="text">Develop the specialized Health and Wellness Tourism product, guaranteeing the best negotiations with Beauty Clinics, Health Coaches, natural relaxation sites, nurses, transporters, among others.</p>
                   </div>
                 </div>
               </div><div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Hire Services</p>
-                    <p class="text">Contract quality services with the different suppliers: airlines, hotels, cruises, ground transportation, assistance cards, international operators, business centers and/or conventions, among others.</p>
+                    <p class="our-title">Contract quality services </p>
+                    <p class="text">with the different suppliers: airlines, hotels, cruises, ground transportation, assistance cards, international operators, business centers and/or conventions, among others.</p>
                   </div>
                 </div>
               </div>
@@ -604,15 +604,15 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Implement</p>
-                    <p class="text">Implement marketing technology tool that facilitates the customer\'s purchasing process.</p>
+                    <p class="text">marketing technology tool that facilitates the customer\'s purchasing process.</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Perform</p>
-                    <p class="text">Carry out good negotiations with suppliers, to guarantee a good, structured and innovative product</p>
+                    <p class="our-title">Carry out good</p>
+                    <p class="text"> negotiations with suppliers, to guarantee a good, structured and innovative product</p>
                   </div>
                 </div>
               </div>
@@ -620,7 +620,7 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Create Community</p>
-                    <p class="text">Create community through RRSS, informing more about destinations, travel trends and health and wellness tourism.</p>
+                    <p class="text">through RRSS, informing more about destinations, travel trends and health and wellness tourism.</p>
                   </div>
                 </div>
               </div>
@@ -635,7 +635,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug' => 'mision',
         'lang' => 'en',
         'status' => '1',
-        'page_data' => '<p class="text-justify">To be a travel agency that participates with the sustainable and responsible development of tourism in Colombia, with passion, offering guaranteed quality products, providing an efficient, friendly and respectful that guarantees the fulfillment of the dreams and objectives of the client</p>',
+        'page_data' => '<p class="text-justify">To be a travel agency that participates with the sustainable and responsible development of tourism, with passion, offering guaranteed quality products, providing an efficient, friendly and respectful service that guarantees the fulfillment of the client\'s dreams and objectives.</p>',
       ],
       //Vision
       [
@@ -644,7 +644,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug' => 'vision',
         'lang' => 'en',
         'status' => '1',
-        'page_data' => '<p class="text-justify">To be a travel agency and leader in the development, promotion and marketing of Health and Wellness Tourism in Colombia, mainly in cities such as Bogotá, Cali and Medellín . And through transactional portals in countries like the United States and Europe</p>',
+        'page_data' => '<p class="text-justify">In 5 years, to be a leading travel agency in the development, promotion and marketing of Destination Cuba in Colombia, mainly in cities such as Bogotá, Cali and Medellín. And through transactional portals in countries like the United States and Europe.</p>',
       ],
       //Sostenibilidad
       [
@@ -1043,22 +1043,22 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Garantie</p>
-                    <p class="text">Garantieservice und Aufmerksamkeit für Passagiere rund um die Uhr</p>
+                    <p class="text">service und Aufmerksamkeit für Passagiere rund um die Uhr</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Lösung geben</p>
-                    <p class="text">Stellen Sie Lösungen für auftretende Probleme freundlich und zeitnah bereit</p>
+                    <p class="our-title">Stellen Sie Lösungen</p>
+                    <p class="text"> für auftretende Probleme freundlich und zeitnah bereit</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Konformität</p>
+                    <p class="our-title">Einhaltung</p>
                     <p class="text">Einhaltung der vom Auftraggeber beauftragten Leistungen</p>
                   </div>
                 </div>
@@ -1066,8 +1066,8 @@ class AditionalPagesSeeder extends Seeder {
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Aufführen</p>
-                    <p class="text">Verfolgen Sie die Kundenreise und den Kundendienst</p>
+                    <p class="our-title">Verfolgen</p>
+                    <p class="text">Sie die Kundenreise und den Kundendienst</p>
                   </div>
                 </div>
               </div>
@@ -1076,8 +1076,8 @@ class AditionalPagesSeeder extends Seeder {
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Wissen haben</p>
-                    <p class="text">Umfassendes Wissen über die zu vermarktenden Reiseziele, Länder, Geografie, Freizeitaktivitäten, Restaurants, Währungen usw. haben.</p>
+                    <p class="our-title">Umfassendes Wissen über</p>
+                    <p class="text"> die zu vermarktenden Reiseziele, Länder, Geografie, Freizeitaktivitäten, Restaurants, Währungen usw. haben.</p>
                   </div>
                 </div>
               </div>
@@ -1085,23 +1085,23 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Verwalten</p>
-                    <p class="text">Verwalten Sie die Ressourcen des Unternehmens auf organisierte und verantwortungsvolle Weise, führen Sie eine korrekte und gesunde Buchhaltung, Steuern und Beziehungen zu Lieferanten</p>
+                    <p class="text">Sie die Ressourcen des Unternehmens auf organisierte und verantwortungsvolle Weise, führen Sie eine korrekte und gesunde Buchhaltung, Steuern und Beziehungen zu Lieferanten</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Konformität</p>
-                    <p class="text">Entwicklung des spezialisierten Gesundheits- und Wellnesstourismusprodukts, das die besten Verhandlungen mit Schönheitskliniken, Gesundheitscoaches, natürlichen Entspannungsorten, Krankenschwestern, Transportunternehmen und anderen garantiert.</p>
+                    <p class="our-title">Entwicklung des spezialisierten</p>
+                    <p class="text"> Gesundheits- und Wellnesstourismusprodukts, das die besten Verhandlungen mit Schönheitskliniken, Gesundheitscoaches, natürlichen Entspannungsorten, Krankenschwestern, Transportunternehmen und anderen garantiert.</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Mietdienste</p>
-                    <p class="text">Schließen Sie hochwertige Dienstleistungen mit den verschiedenen Anbietern ab: unter anderem Fluggesellschaften, Hotels, Kreuzfahrten, Bodentransport, Assistance-Karten, internationale Betreiber, Geschäftszentren und/oder Kongresse.</p>
+                    <p class="our-title">Schließen Sie hochwertige</p>
+                    <p class="text"> Dienstleistungen mit den verschiedenen Anbietern ab: unter anderem Fluggesellschaften, Hotels, Kreuzfahrten, Bodentransport, Assistance-Karten, internationale Betreiber, Geschäftszentren und/oder Kongresse.</p>
                   </div>
                 </div>
               </div>
@@ -1111,15 +1111,15 @@ class AditionalPagesSeeder extends Seeder {
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
                     <p class="our-title">Implementieren</p>
-                    <p class="text">Implementieren Sie ein Marketing-Technologie-Tool, das den Kaufprozess des Kunden erleichtert.</p>
+                    <p class="text">Sie ein Marketing-Technologie-Tool, das den Kaufprozess des Kunden erleichtert.</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-3 col-xs-3">
                 <div class="our-content"><i class="our-icon fa-solid fa-check-circle fa-2x"></i>
                   <div class="main-our">
-                    <p class="our-title">Aufführen</p>
-                    <p class="text">Führen Sie gute Verhandlungen mit Lieferanten, um ein gutes, strukturiertes und innovatives Produkt zu garantieren</p>
+                    <p class="our-title">Führen Sie gute</p>
+                    <p class="text"> Verhandlungen mit Lieferanten, um ein gutes, strukturiertes und innovatives Produkt zu garantieren</p>
                   </div>
                 </div>
               </div>
@@ -1142,7 +1142,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug' => 'mision',
         'lang' => 'de',
         'status' => '1',
-        'page_data' => '<p class="text-justify">Ein Reisebüro zu sein, das sich mit Leidenschaft an der nachhaltigen und verantwortungsvollen Entwicklung des Tourismus in Kolumbien beteiligt, garantierte Qualitätsprodukte anbietet und dabei effizient, freundlich und respektvoll ist garantiert die Erfüllung der Träume und Ziele des Kunden</p>',
+        'page_data' => '<p class="text-justify">Ein Reisebüro zu sein, das sich mit Leidenschaft an der nachhaltigen und verantwortungsvollen Entwicklung des Tourismus beteiligt, garantierte Qualitätsprodukte anbietet und einen effizienten, freundlichen und respektvollen Service bietet, der die Erfüllung der Träume und Ziele des Kunden garantiert.</p>',
       ],
       //Vision
       [
@@ -1151,7 +1151,7 @@ class AditionalPagesSeeder extends Seeder {
         'slug' => 'vision',
         'lang' => 'de',
         'status' => '1',
-        'page_data' => '<p class="text-justify">Ein Reisebüro und führend in der Entwicklung, Förderung und Vermarktung von Gesundheits- und Wellnesstourismus in Kolumbien zu sein, hauptsächlich in Städten wie Bogotá, Cali und Medellín. Und über Transaktionsportale in Ländern wie den Vereinigten Staaten und Europa</p>',
+        'page_data' => '<p class="text-justify">In 5 Jahren ein führendes Reisebüro in der Entwicklung, Förderung und Vermarktung des Reiseziels Kuba in Kolumbien, hauptsächlich in Städten wie Bogotá, Cali und Medellín. Und über Transaktionsportale in Ländern wie den Vereinigten Staaten und Europa.</p>',
       ],
       //Sostenibilidad
       [
