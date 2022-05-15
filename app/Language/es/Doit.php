@@ -11,6 +11,7 @@
 
 // Cache language settings
 return [
+    'us'   => 'Nosotros',
     'about_us'   => 'Sobre Nosotros',
     'more_about_us'   => 'Más Sobre Nosotros',
     'experienceYears'   => 'Años de Experiencia',

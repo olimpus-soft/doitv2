@@ -924,6 +924,15 @@ p {
         width: calc(100% - 30px);
         text-align: right;
       }
+
+      .single-project .project-content .project-subtitle.categoria {
+        border: 1px solid;
+        text-align: center;
+        color: #ff7f00;
+        background-color: #ffffff;
+        font-weight: bold;
+        box-shadow: 0px 0px 2px gray;
+      }
       .single-project .project-content .project-subtitle::after {
         position: absolute;
         content: '';
@@ -1441,12 +1450,12 @@ p.form-message.error,
   }
 
 .single-project span.starred {
-  color: #ff7f00;
+  color: #FFD700;
   position: absolute;
   float: left;
   z-index: 10;
   font-size: 2em;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px #ff7f00;
   padding: 5px;
 }
 

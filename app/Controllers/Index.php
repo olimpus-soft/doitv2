@@ -33,13 +33,24 @@ class Index extends BaseController {
         ->findAll()
       ; 
     }
-    $ofertasModel = new Ofertas();
-    $ofertas = $ofertasModel->asObject()
-      ->where('status', '1')
-      ->where('oferta_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ; 
+
+    $db      = \Config\Database::connect();
+    $ofertas = $db
+      ->table('ofertas AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', '1')
+      ->where('oc.status', '1')
+      ->where('ot.oferta_favorita', '1')
+      ->where('ot.oferta_lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale)
+      ->orderBy('ot.oferta_orden', 'ASC')
+      ->orderBy('ot.oferta_titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
     foreach ($ofertas as &$oferta) {
       $ext = explode('.', $oferta->oferta_file);
       $ext = end($ext);
@@ -288,13 +299,22 @@ class Index extends BaseController {
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
     $difDF = $dtNow->diff($dtF);
-    $ofertasModel = new Ofertas();
-    $offers = $ofertasModel->asObject()
-      ->where('status', '1')
-      ->where('oferta_lang', $this->locale)
-      ->orderBy('oferta_orden', 'ASC')
-      ->orderBy('id', 'ASC')
-      ->findAll()
+
+    $db      = \Config\Database::connect();
+    $offers = $db
+      ->table('ofertas AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', '1')
+      ->where('oc.status', '1')
+      ->where('ot.oferta_lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale)
+      ->orderBy('ot.oferta_orden', 'ASC')
+      ->orderBy('ot.oferta_titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
     ;
 
     foreach ($offers as &$offer) {
@@ -381,6 +401,62 @@ class Index extends BaseController {
         ->orderBy('id', 'ASC')
         ->findAll()
       ; 
+    }
+
+    return view('show-destination', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'aditional-pages',
+      'cntDestinations' => $this->cntDestinations,
+      'contacTypes' => $contacTypes,
+      'destino' => $destino,
+      'experienceYears' => $difDF->y,
+    ]);
+  }
+
+  public function getOferta($categoria=null,$oferta=null) {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+    $offers = [];
+    $results = [];
+
+    if(!empty($categoria) || !empty($oferta)) {
+      $db      = \Config\Database::connect();
+      $offers = $db
+        ->table('ofertas AS ot')
+        ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+        ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
+        ->where('ot.status', '1')
+        ->where('oc.status', '1')
+        ->where('ot.oferta_lang', $this->locale)
+        ->where('oc.categoria_lang', $this->locale)
+        ->orderBy('ot.oferta_orden', 'ASC')
+        ->orderBy('ot.oferta_titulo', 'ASC')
+        ->orderBy('ot.id', 'ASC')
+        //->getCompiledSelect()
+        ->get()
+        ->getResult()
+      ;
+
+      foreach ($offers as &$offer) {
+        $ext = explode('.', $offer->oferta_file);
+        $ext = end($ext);
+        $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
+        $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
+        $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
+      }
+    }
+
+    if(empty($categoria) && empty($oferta)) {
+      //Mostrar todas las categorias
+      return 'Mostrar todas las categorias';
+    } else if(!empty($categoria) && empty($oferta)) {
+      //Mostrar todas las ofertas de la categoria
+      return 'Mostrar todas las ofertas de la categoria';
+    } else if(!empty($categoria) && !empty($oferta)) {
+      //Mostrar as ofertas seleccionada
+      return 'Mostrar as ofertas seleccionada';
     }
 
     return view('show-destination', [

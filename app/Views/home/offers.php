@@ -24,7 +24,7 @@
 								<img src="<?= $oferta->oferta_image; ?>" alt="<?= $oferta->oferta_titulo; ?>">
 							</div>
 							<div class="project-content">
-								<a class="project-title" name="<?= $oferta->oferta_filename; ?>" target="_self" href="<?= $oferta->oferta_file; ?>">
+								<a class="project-title" target="_self" href="<?= base_url('oferta/'. $oferta->categoria_slug .'/'. $oferta->oferta_slug .'?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content='. $oferta->categoria_slug .'/'. $oferta->oferta_slug ); ?>">
 									<?= $oferta->oferta_titulo; ?>
 								</a>
 								<?= !empty($oferta->oferta_subtitulo)?'<span class="project-subtitle">'.$oferta->oferta_subtitulo.'</span>':''; ?>
