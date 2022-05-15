@@ -30,7 +30,8 @@ if($offers && is_array($offers) && count($offers) > 0 ) {
 	} ?>
 			</div>
 		</div>
-	</section><?php
+	</section>
+<?php
 } else {
 ?>
 <section id="page-not-found" class="services-area pt-125 pb-130 gray-bg">

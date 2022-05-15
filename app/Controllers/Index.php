@@ -11,6 +11,7 @@ use App\Models\DestinosImagenes;
 use App\Models\Equipo;
 use App\Models\Contactos;
 use App\Models\AditionalPages;
+use App\Models\CategoriaOfertas;
 use \DateTime;
 use \Exception;
 use Config\Kint;
@@ -421,7 +422,7 @@ class Index extends BaseController {
     $offers = [];
     $results = [];
 
-    if(!empty($categoria) || !empty($oferta)) {
+    if(!empty($categoria) && !empty($oferta)) {
       $db      = \Config\Database::connect();
       $offers = $db
         ->table('ofertas AS ot')
@@ -448,9 +449,33 @@ class Index extends BaseController {
       }
     }
 
+    $contacTypesModel = new ContactType();
+    $contacTypes = $contacTypesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+
     if(empty($categoria) && empty($oferta)) {
       //Mostrar todas las categorias
-      return 'Mostrar todas las categorias';
+      //show-offers-categories
+      $categoriaOfertasModel = new CategoriaOfertas();
+      $categories = $categoriaOfertasModel->asObject()
+        ->where('status', '1')
+        ->where('categoria_lang', $this->locale)
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ;
+      return view('show-offers-categories', [
+        'locale' => $this->locale,
+        'menuUrl' => true,
+        'viewPart' => 'aditional-pages',
+        'cntDestinations' => $this->cntDestinations,
+        'contacTypes' => $contacTypes,
+        'categories' => $categories,
+        'experienceYears' => $difDF->y,
+      ]);
     } else if(!empty($categoria) && empty($oferta)) {
       //Mostrar todas las ofertas de la categoria
       return 'Mostrar todas las ofertas de la categoria';
