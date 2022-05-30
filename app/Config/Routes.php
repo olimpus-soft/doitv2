@@ -64,6 +64,7 @@ $routes->get('/', 'Index::index');
 
 $routes->get('files/(:any)', 'Index::getFile/$1');
 $routes->get('files/(:any)/(:any)', 'Index::getFile/$1/$2');
+$routes->get('files/(:any)/(:any)/true', 'Index::getFile/$1/$2/$3');
 $routes->post('saveContact', 'Index::saveContact');
 $routes->get('sobre-nosotros', 'Index::aboutUs');
 $routes->get('p/(:any)', 'Index::aditionalPage/$1');
@@ -74,7 +75,8 @@ $routes->get('ofertas', 'Index::getOferta');
 $routes->get('oferta', 'Index::getOferta');
 $routes->get('oferta/(:any)', 'Index::getOferta/$1');
 $routes->get('oferta/(:any)/(:any)', 'Index::getOferta/$1/$2');
-
+$routes->get('disfruta-nuestro-charter', 'Index::getCharterOffer');
+$routes->get('plan-charter', 'Index::getCharterOffer');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

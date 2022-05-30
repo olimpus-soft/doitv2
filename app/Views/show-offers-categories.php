@@ -36,20 +36,22 @@ echo view('partials/header');
 	foreach ($categories as $category) {
 ?>
 				<!--====== <?= $category->categoria; ?> PART START ======-->
-				<div class="col-lg-4 justify-content-center py-4 oferta" id="oferta-id-<?= $category->id; ?>">
-					<div class="single-project">
-						<div class="project-content">
-							<a class="project-title" target="_self" href="<?= base_url('oferta/'. $category->categoria_slug . '?utm_source=doit&utm_medium=web&utm_campaign=ofertas-categories&utm_term=all&utm_content='. $category->categoria_slug ); ?>">
-								<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $category->categoria); ?>
-							</a>
-							<?= !empty($category->categoria_descripcion)?'<span class="project-subtitle">'.str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $category->categoria_descripcion).'</span>':''; ?>
-						</div>
-					</div>
-				</div>
+				<div class="col-sm-6 pb-30 pt-30">
+			    <div class="card text-center oferta" id="oferta-id-<?= $category->id; ?>">
+			      <div class="card-body">
+			        <h5 class="card-title"><?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $category->categoria); ?></h5>
+			        <p class="card-text"><?= !empty($category->categoria_descripcion)?'<span class="project-subtitle">'.str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $category->categoria_descripcion).'</span>':''; ?></p>
+			        <a target="_self" href="<?= base_url('oferta/'. $category->categoria_slug . '?utm_source=doit&utm_medium=web&utm_campaign=ofertas-categories&utm_term=all&utm_content='. $category->categoria_slug ); ?>" class="main-btn"><?= lang('Doit.seeMore'); ?></a>
+			      </div>
+			    </div>
+			  </div>
 				<!--====== <?= $category->categoria; ?> PART ENDS ======-->
 <?php
 	} ?>
 			</div>
+		</div>
+		<div class="container col-lg-12 text-center">
+			<a class="main-btn mt-25" data-aos="fade-left" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
 		</div>
 	</section>
 <?php

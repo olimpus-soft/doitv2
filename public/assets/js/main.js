@@ -77,7 +77,8 @@ $(function() {
             $('.back-to-top').fadeOut(200)
         }
         scrollLink.each(function() {
-
+          this.hash = this.hash.split('?');
+          this.hash = this.hash[0];
           var sectionOffset = $(this.hash).offset().top - 90;
 
           if ( sectionOffset <= scrollbarLocation ) {

@@ -96,13 +96,34 @@ class Index extends BaseController {
       if(!file_exists($filePath)) {
         throw new Exception(lang('Doit.fileInvalid').' '.$fileHash);
       }
-      $response = $this->response->download($filePath, null);
-      if(!empty($downloadName)) {
-        $downloadName = base64_decode(strrev($downloadName));
-        $response->setFileName($downloadName);
+      if ($buffer) {
+        header("Content-Type: ".mime_content_type($filePath));
+        header("Content-Disposition: inline; filename=" . urlencode($fileName));
+        header("Content-Description: File Transfer");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header("Content-Length: " . filesize($filePath));
+        flush(); // Not a must.
+        $fp = fopen($filePath, "r");
+        while (!feof($fp)) {
+          echo fread($fp, 65536);
+          flush(); // This is essential for large downloads
+        }
+        fclose($fp);
+      } else {
+        $response = $this->response->download($filePath, null);
+        $response->setContentType(mime_content_type($filePath));
+        if(!empty($downloadName)) {
+          $downloadName = base64_decode(strrev($downloadName));
+          $response->setFileName($downloadName);
+        }
+        $response->setHeader('Accept-Ranges', 'bytes');
+        //$response->setHeader('Transfer-Encoding', 'chunked');
+        //$response->setHeader('Content-Encoding', 'chunked');
+        //$response->setHeader('Connection', 'keep-alive');
+        return $response;
       }
-      $response->setHeader('Accept-Ranges', 'bytes');
-      return $response;
     } catch (Exception $e) {
       return $this->response->setStatusCode(404, $e->getMessage());
     }
@@ -296,6 +317,28 @@ class Index extends BaseController {
     ]);
   }
 
+  public function getCharterOffer() {
+    $dtF = new DateTime(FOUND_DATE);
+    $dtNow = new DateTime(date('Y-m-d'));
+    $difDF = $dtNow->diff($dtF);
+
+    $contacTypesModel = new ContactType();
+    $contacTypes = $contacTypesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+    return view('about-us', [
+      'locale' => $this->locale,
+      'menuUrl' => true,
+      'viewPart' => 'charter-page',
+      'cntDestinations' => $this->cntDestinations,
+      'experienceYears' => $difDF->y,
+      'contacTypes' => $contacTypes,
+    ]);
+  }
+
   public function allOffers() {
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
@@ -420,9 +463,9 @@ class Index extends BaseController {
     $dtNow = new DateTime(date('Y-m-d'));
     $difDF = $dtNow->diff($dtF);
     $offers = [];
-    $results = [];
+    $categories = [];
 
-    if(!empty($categoria) && !empty($oferta)) {
+    if(!empty($categoria) || !empty($oferta)) {
       $db      = \Config\Database::connect();
       $offers = $db
         ->table('ofertas AS ot')
@@ -431,8 +474,14 @@ class Index extends BaseController {
         ->where('ot.status', '1')
         ->where('oc.status', '1')
         ->where('ot.oferta_lang', $this->locale)
-        ->where('oc.categoria_lang', $this->locale)
-        ->orderBy('ot.oferta_orden', 'ASC')
+        ->where('oc.categoria_lang', $this->locale);
+      if(!empty($categoria)) {
+        $offers = $offers->where('oc.categoria_slug', $categoria);
+      }
+      if(!empty($oferta)) {
+        $offers = $offers->where('ot.oferta_slug', $oferta);
+      }
+      $offers = $offers->orderBy('ot.oferta_orden', 'ASC')
         ->orderBy('ot.oferta_titulo', 'ASC')
         ->orderBy('ot.id', 'ASC')
         //->getCompiledSelect()
@@ -442,11 +491,22 @@ class Index extends BaseController {
 
       foreach ($offers as &$offer) {
         $ext = explode('.', $offer->oferta_file);
+        $filePath = $this->basePath.$offer->oferta_file;
         $ext = end($ext);
         $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
+        $offer->oferta_fileextension  = $ext;
+        $offer->oferta_fileMimeType  = mime_content_type($filePath);
         $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
         $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
       }
+      $categoriaOfertasModel = new CategoriaOfertas();
+      $categories = $categoriaOfertasModel->asObject()
+        ->where('status', '1')
+        ->where('categoria_lang', $this->locale)
+        ->where('categoria_slug', $categoria)
+        ->orderBy('id', 'ASC')
+        ->first()
+      ;
     }
 
     $contacTypesModel = new ContactType();
@@ -470,18 +530,50 @@ class Index extends BaseController {
       return view('show-offers-categories', [
         'locale' => $this->locale,
         'menuUrl' => true,
-        'viewPart' => 'aditional-pages',
+        'viewPart' => 'offers-categories',
         'cntDestinations' => $this->cntDestinations,
-        'contacTypes' => $contacTypes,
         'categories' => $categories,
+        'contacTypes' => $contacTypes,
         'experienceYears' => $difDF->y,
       ]);
     } else if(!empty($categoria) && empty($oferta)) {
       //Mostrar todas las ofertas de la categoria
-      return 'Mostrar todas las ofertas de la categoria';
+      return view('show-offers-bycategories', [
+        'locale' => $this->locale,
+        'menuUrl' => true,
+        'viewPart' => 'offers-bycategories',
+        'cntDestinations' => $this->cntDestinations,
+        'contacTypes' => $contacTypes,
+        'category' => $categories,
+        'offers' => $offers,
+        'experienceYears' => $difDF->y,
+      ]);
     } else if(!empty($categoria) && !empty($oferta)) {
       //Mostrar as ofertas seleccionada
-      return 'Mostrar as ofertas seleccionada';
+      if($offers && is_array($offers) && count($offers) > 0) {
+        $offers = $offers[0];
+      }
+      $contentScripts = '';
+      if(strstr($offer->oferta_fileMimeType, 'image')) {
+        $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offer->oferta_titulo . "\" src=\"" . $offer->oferta_file . "/true\" data-image=\"" . $offer->oferta_file . "\" data-description=\"" . (!empty($offer->oferta_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_subtitulo) : '') ."\">');";
+      }
+      if(strstr($offer->oferta_fileMimeType, 'pdf')) { 
+        $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $offer->oferta_file ."/true\" type=\"" . $offer->oferta_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
+      }
+      if(strstr($offer->oferta_fileMimeType, 'video')) { 
+        $contentScripts = "$('#docpdf.docpdf').html('<video preload=\"auto\" width=\"320\" height=\"240\" controls><source src=\"" . $offer->oferta_file . "/true\" type=\"" . $offer->oferta_fileMimeType . "\"></video>');";
+      }
+      return view('show-offer-detail', [
+        'locale' => $this->locale,
+        'menuUrl' => true,
+        'viewPart' => 'offers-bycategories',
+        'cntDestinations' => $this->cntDestinations,
+        'contacTypes' => $contacTypes,
+        'category' => $categories,
+        'offer' => $offers,
+        'experienceYears' => $difDF->y,
+        'contentScripts' => $contentScripts,
+      ]);
     }
 
     return view('show-destination', [

@@ -101,6 +101,7 @@ php spark migrate
  php spark migrate:refresh
  php spark make:seeder parameterSeeder
  php spark db:seed ParameterSeeder
+ php spark db:seed "*"
 
  php spark make:seeder objetivosSeeder
  php spark db:seed ParameterSeeder

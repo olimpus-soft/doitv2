@@ -38,6 +38,9 @@
 									<a class="page-scroll" hash="#inicio" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#inicio"><?= lang('Doit.home'); ?></a>
 								</li>
 								<li class="nav-item">
+									<a class="page-scroll" data-aos="fade-up" target="_self" href="<?= base_url('disfruta-nuestro-charter?utm_source=doit&utm_medium=web&utm_campaign=disfruta-nuestro-charter&utm_term=all&utm_content=');?>"><?= lang('Doit.charter'); ?></a>
+								</li>
+								<li class="nav-item">
 									<a class="page-scroll" hash="#nosotoros" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#nosotoros"><?= lang('Doit.ours'); ?></a>
 								</li>
 								<li class="nav-item">
