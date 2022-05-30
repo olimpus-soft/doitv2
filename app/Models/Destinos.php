@@ -11,10 +11,10 @@ class Destinos extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id', 'destino_titulo', 'destino_subtitulo', 'destino_resumen', 'destino_lang', 'destino_image', 'status', 'created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = false;

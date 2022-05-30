@@ -14,7 +14,7 @@ class Contactos extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['tipo', 'empresa', 'nombre', 'telefono', 'ciudad', 'asunto', 'lang', 'mensaje', 'status'];
+    protected $allowedFields    = ['id', 'tipo', 'empresa', 'nombre', 'telefono', 'ciudad', 'asunto', 'lang', 'mensaje', 'status', 'created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = false;

@@ -22,7 +22,7 @@
 			<h1><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
 			<p>
 				<?= nl2br(esc($exception->getMessage())) ?>
-				<a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
+				<a href="https://www.google.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
 				   rel="noreferrer" target="_blank">search &rarr;</a>
 			</p>
 		</div>
@@ -392,6 +392,12 @@
 
 		</div>
 	</div>
+	<script src="<?= base_url('assets/js/vendor/jquery-1.12.4.min.js');?>"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(window).on('load', function(event) {
+	        $('.preloader').delay(200).fadeOut(200);
+	    });
+	</script>
 
 </body>
 </html>

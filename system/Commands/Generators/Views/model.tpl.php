@@ -14,7 +14,7 @@ class {class} extends Model
     protected $returnType       = {return};
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [{fieldsList}];
 
     // Dates
     protected $useTimestamps = false;

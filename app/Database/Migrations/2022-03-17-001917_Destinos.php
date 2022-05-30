@@ -24,9 +24,9 @@ class Destinos extends Migration {
         'constraint'     => '300',
         'NULL'           => TRUE,
       ],
-      'destino_descipcion'       => [
-        'type'           => 'TEXT',
-        'NULL'           => TRUE,
+      'destino_resumen'  => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '500',
         'default'        => NULL,
       ],
       'destino_lang'       => [
@@ -36,6 +36,12 @@ class Destinos extends Migration {
         'default'        => NULL,
       ],
       'destino_image'       => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '200',
+        'NULL'           => TRUE,
+        'default'        => NULL,
+      ],
+      'destino_slug'       => [
         'type'           => 'VARCHAR',
         'constraint'     => '200',
         'NULL'           => TRUE,
@@ -52,6 +58,7 @@ class Destinos extends Migration {
     ]);
     $this->forge->addPrimaryKey('id');
     $this->forge->addUniqueKey(['destino_titulo','destino_lang']);
+    $this->forge->addUniqueKey(['destino_slug','destino_lang']);
     $this->forge->createTable('destinos', true);
     //$this->db->enableForeignKeyChecks();
   }

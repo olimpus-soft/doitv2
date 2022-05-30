@@ -12,7 +12,27 @@
     <!--script src="<?= base_url('assets/js/jquery.serialize-object.min.js');?>"></script-->
     <script src="<?= base_url('assets/js/main.js');?>"></script>
 		
+    <?php if(isset($destino) && isset($destino->imagenes) && is_array($destino->imagenes)  && count($destino->imagenes) > 0) { ?>
+      <script src="<?= base_url('assets/js/gallery/js/gallery.min.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/default/ug-theme-default.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/tiles/ug-theme-tiles.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/tilesgrid/ug-theme-tilesgrid.js');?>"></script>
+      <script src="<?= base_url('assets/js/gallery/themes/grid/ug-theme-grid.js');?>"></script>
 
+      <script>
+        $(document).ready(function(){ 
+          var galleryApi = $("#gallery").unitegallery({
+            //gallery_skin:"alexis",       //it's the default skin
+            //slider_bullets_skin: "alexis",   //example how to change only skin for slider bullets
+            tiles_type:"nested",
+            tiles_nested_optimal_tile_width:200,
+          }); 
+          galleryApi.play();
+        }); 
+      </script>
+    <?php } ?>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 		<!-- WhatsHelp.io widget -->
     <script async defer type="text/javascript">
       /*(function () {
@@ -65,7 +85,7 @@
 			      cookie     : true,
 			      xfbml      : true,
 			      status      : true,
-			      version    : 'v3.3',
+			      version    : 'v14.0',
 			      autoLogAppEvents : true
 			    });
 			        
@@ -75,10 +95,14 @@
 		  	};
 		</script>
 		<!-- END: CUSTTOM JS FOR PAGE FROM ADDSCRIPTS-->
-
 		<!-- CUSTTOM JS FOR PAGES-->
-		<?= $contentScripts ?? '';  ?>
-		<!-- END: CUSTTOM JS FOR PAGES-->
+    <script>
+      $(document).ready(function() { 
+    		<?= $contentScripts ?? '';  ?>
+      }); 
+    </script>
+  		<!-- END: CUSTTOM JS FOR PAGES-->
+
 		<!--script src="//code.jivosite.com/widget.js" data-jv-id="K9FLC6LJEP" async></script-->
     </body>
 </html>

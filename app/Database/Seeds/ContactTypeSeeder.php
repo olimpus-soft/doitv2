@@ -5,6 +5,7 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 
 class ContactTypeSeeder extends Seeder {
+  protected $tableName = 'tipo_contacto';
   public function run() {
     $data = [
       //es
@@ -52,9 +53,10 @@ class ContactTypeSeeder extends Seeder {
         'status'            => '1',
       ],
     ];
-
+    $this->db->table($this->tableName)->emptyTable();
+    $this->db->query("ALTER TABLE {$this->tableName} AUTO_INCREMENT = 1;");
     foreach ($data as $row) {
-      $this->db->table('tipo_contacto')->insert($row);
+      $this->db->table($this->tableName)->insert($row);
     }
   }
 }

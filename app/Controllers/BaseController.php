@@ -9,8 +9,10 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
+use App\Models\Destinos;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use \DateTime;
 
 /**
  * Class BaseController
@@ -33,6 +35,9 @@ class BaseController extends Controller {
   protected $basePath;
   protected $session;
   protected $encryption;
+  protected $foudDateTime;
+  protected $foudDiffDate;
+  protected $cntDestinations;
 
   /**
    * An array of helpers to be loaded automatically upon
@@ -52,7 +57,7 @@ class BaseController extends Controller {
       $this->locale = $this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
       $paramsModel = new Parameters();
-      $parameters = $paramsModel->asObject('App\Models\Parameters')
+      $parameters = $paramsModel->asObject()
           ->where("status = 1 AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
           ->orderBy('parameter', 'ASC')
           ->findAll()
@@ -60,13 +65,22 @@ class BaseController extends Controller {
       foreach ($parameters as $parameter) {
         if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
         defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
-        //echo '<pre>';
-        //echo print_r([strtoupper($parameter->parameter) => $parameter->parameter_value, 'parameter_lang' => $parameter->parameter_lang ], true);
-        //echo '</pre>';
       }
+
+      $destinosModel = new Destinos();
+      $this->cntDestinations = $destinosModel->asObject()
+        ->where('status', '1')
+        ->where('destino_lang', $this->locale)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ; 
+      $this->foudDateTime = new DateTime(FOUND_DATE);
+      $dtNow = new DateTime(date('Y-m-d'));
+      $this->foudDiffDate = $dtNow->diff($this->foudDateTime);
       $this->session = \Config\Services::session();
       $this->encryption = new \Config\Encryption();
       $this->session->start();
+      
       /*
       $config = (object) [
         'Subject' => 'Coreo de Pruebas',
@@ -311,7 +325,7 @@ class BaseController extends Controller {
     return $send;
   } 
 
-  public function slugify($text) {
+  public static function slugify($text) {
     // replace non letter or digits by -
     $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
@@ -373,5 +387,76 @@ class BaseController extends Controller {
       return $jwt;
     }
     return false;
+  }
+
+  public static function replaceViewValues() {
+    return (object) [
+      'find2Replace' => [
+        '__COMERCIAL_NAME__', 
+        '__CONTACT_EMAIL__', 
+        '__CONTACT_PHONE__', 
+        '__CONTACT_FB__', 
+        '__CONTACT_TW__',
+        '__CONTACT_IM__', 
+        '__COMPANY_ADDRESS__', 
+        '__COMPANY_LOCALITY__',
+        '__LOGO_URL__',
+        '__CONTACT_FB_SUPPORT__',
+        '__CONTACT_TW_SUPPORT__',
+        '__CONTACT_IM_SUPPORT__',
+        '__SUPPORT_ADDRESS__',
+        '__SUPPORT_LOCALITY__',
+        '__SUPPORT_NAME__',
+        '__SUPPORT_URL__',
+        '__CONTACT_PHONE_SUPPORT__',
+        '__CONTACT_EMAIL_SUPPORT__',
+        '__DEV_AUTHOR__',
+        '__DEV_COMPANY__',
+        '__DEV_EMAIL__',
+        '__DEV_URL__',
+        '__DEV_PHONE__',
+        '__DEV_TW_PROFILE__',
+        '__DEV_TW_AUTHOR__',
+        '__DEV_TW_PAGE__',
+        '__DEV_IM_PROFILE__',
+        '__DEV_IM_AUTHOR__',
+        '__DEV_IM_PAGE__',
+        '__BASE_URL__',
+        '__PRIVACY_DATE__',
+      ],
+      'replace2Found' => [
+        COMERCIALNAME, 
+        CONTACT_EMAIL, 
+        CONTACT_PHONE, 
+        CONTACT_FB, 
+        CONTACT_TW, 
+        CONTACT_IM, 
+        COMPANY_ADDRESS, 
+        COMPANY_LOCALITY,
+        LOGO_URL,
+        CONTACT_FB_SUPPORT,
+        CONTACT_TW_SUPPORT,
+        CONTACT_IM_SUPPORT,
+        SUPPORT_ADDRESS,
+        SUPPORT_LOCALITY,
+        SUPPORT_NAME,
+        SUPPORT_URL,
+        CONTACT_PHONE_SUPPORT,
+        CONTACT_EMAIL_SUPPORT,
+        DEV_AUTHOR,
+        DEV_COMPANY,
+        DEV_EMAIL,
+        DEV_URL,
+        DEV_PHONE,
+        DEV_TW_PROFILE,
+        DEV_TW_AUTHOR,
+        DEV_TW_PAGE,
+        DEV_IM_PROFILE,
+        DEV_IM_AUTHOR,
+        DEV_IM_PAGE,
+        base_url(),
+        date('01/02/Y', strtotime(FOUND_DATE)),
+      ]
+    ];
   }
 }

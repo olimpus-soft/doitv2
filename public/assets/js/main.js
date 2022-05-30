@@ -5,7 +5,7 @@ $(function() {
     //===== Prealoder
     
     $(window).on('load', function(event) {
-        $('.preloader').delay(500).fadeOut(500);
+        $('.preloader').delay(200).fadeOut(300);
     });
     
     
@@ -77,7 +77,8 @@ $(function() {
             $('.back-to-top').fadeOut(200)
         }
         scrollLink.each(function() {
-
+          this.hash = this.hash.split('?');
+          this.hash = this.hash[0];
           var sectionOffset = $(this.hash).offset().top - 90;
 
           if ( sectionOffset <= scrollbarLocation ) {
@@ -105,10 +106,18 @@ $(function() {
     $('.project-active').slick({
         dots: true,
         infinite: true,
-        speed: 800,
+        speed: 2000,
         slidesToShow: 5,
         slidesToScroll: 3,
+        autoplay: false,        
+        autoplaySpeed: 3000,
+        mobileFirst: true,
+        draggable: true,
         arrows: true,
+        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
+        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
+        prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
         responsive: [
             {
               breakpoint: 1200,
@@ -154,7 +163,6 @@ $(function() {
     
     // Show or hide the sticky footer button
     $(window).on('scroll', function(event) {
-      console.log($(this).scrollTop())
         if($(this).scrollTop() > 600){
             $('.back-to-top').fadeIn(200)
         } else{

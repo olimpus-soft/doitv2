@@ -14,7 +14,7 @@ class Parameters extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id', 'parameter', 'parameter_lang', 'parameter_value', 'status'];
 
     // Dates
     protected $useTimestamps = false;

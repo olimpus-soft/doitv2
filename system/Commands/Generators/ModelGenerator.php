@@ -39,7 +39,7 @@ class ModelGenerator extends BaseCommand
     /**
      * The Command's Description
      *
-     * @var string
+     * @var string 
      */
     protected $description = 'Generates a new model file.';
 
@@ -94,6 +94,7 @@ class ModelGenerator extends BaseCommand
         $table   = $this->getOption('table');
         $dbGroup = $this->getOption('dbgroup');
         $return  = $this->getOption('return');
+        $fieldsList  = $this->getOption('fieldslist');
 
         $baseClass = class_basename($class);
 
@@ -103,8 +104,8 @@ class ModelGenerator extends BaseCommand
 
         $table   = is_string($table) ? $table : plural(strtolower($baseClass));
         $dbGroup = is_string($dbGroup) ? $dbGroup : 'default';
-        $return  = is_string($return) ? $return : 'array';
-
+        $return  = is_string($return) ? $return : 'object';
+        //$dbInstance = db_connect($dbGroup);
         if (! in_array($return, ['array', 'object', 'entity'], true)) {
             // @codeCoverageIgnoreStart
             $return = CLI::prompt(lang('CLI.generator.returnType'), ['array', 'object', 'entity'], 'required');
@@ -129,6 +130,6 @@ class ModelGenerator extends BaseCommand
             $return = "'{$return}'";
         }
 
-        return $this->parseTemplate($class, ['{table}', '{dbGroup}', '{return}'], [$table, $dbGroup, $return]);
+        return $this->parseTemplate($class, ['{table}', '{dbGroup}', '{return}', '{fieldsList}'], [$table, $dbGroup, $return, $fieldsList]);
     }
 }

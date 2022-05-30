@@ -41,4 +41,7 @@ class View extends BaseView
      * @var array
      */
     public $plugins = [];
+
+    public $find2Replace    = [];
+    public $replace2Found   = [];
 }

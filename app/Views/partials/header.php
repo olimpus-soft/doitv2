@@ -38,12 +38,12 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="author" content="<?= DEV_AUTHOR; ?>">
     <meta name="type" content="WebApp">
-    <meta name="application-name" content="<?= TITLEAPP;?>" />
+    <meta name="application-name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="<?= TITLEAPP;?>" />
+    <meta name="apple-mobile-web-app-title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="revisit-after" content="periode" />
-    <meta name="copyright" content="cccccccc" />
+    <meta name="copyright" content="<?= DEV_COMPANY;?>" />
     <meta name="description" content="<?= COMPANY_DESC; ?>">
 
     <meta http-equiv="cache-control" content="no-cache, no-store, no-transform, must-revalidate"/>
@@ -67,40 +67,46 @@
     <meta name="Facebot" content="all">
     <meta property="fb:admins" content="<?= FB_ADMIN_ID;?>" />
     <meta property="fb:app_id" content="<?= FB_APP_ID;?>" />
-    <meta property="fb:admins" content="100000964416427" />
+    <?php
+        $adminsFb = explode(',', FB_IDS_ADMINS);
+        foreach ($adminsFb as $fbAdminId) { ?>
+            <meta property="fb:admins" content="<?= $fbAdminId; ?>" />
+    <?php
+        }
+    ?>
     <meta property="fb:pages" content="<?= FB_ID_PAGE;?>">
     <meta property="fb:pages" content="<?= FB_ID_PAGE_SUPPORT;?>">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="<?= CONTACT_TW; ?>" />
-    <meta name="twitter:title" content="<?= TITLEAPP; ?>">
+    <meta name="twitter:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
     <meta name="twitter:creator" content="<?= DEV_TW_PROFILE;?>" />
     <meta name="twitter:description" content="<?= COMPANY_DESC; ?>">
-    <meta name="twitter:image:alt" content="<?= TITLEAPP; ?>">
+    <meta name="twitter:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
     <meta name="twitter:image:src" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta itemprop="name" content="<?= TITLEAPP; ?>">
+    <meta itemprop="name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
     <meta itemprop="description" content="<?= COMPANY_DESC; ?>">
     <meta itemprop="image" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta property="og:title" content="<?= TITLEAPP; ?>" />
+    <meta property="og:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
     <meta property="og:description" content="<?= COMPANY_DESC; ?>" />
     <meta property="og:url" content="<?= base_url(); ?>" />
     <meta name="og:image" content="<?= base_url(SOCIAL_IMG); ?>">
     <meta name="og:url" content="<?= base_url(); ?>">
-    <meta name="og:site_name" content="<?= TITLEAPP; ?>">
-    <meta property="og:site_name" content="<?= TITLEAPP; ?>" />
+    <meta name="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta property="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
     <meta name="og:locale" content="es-419">
 
     <meta name="og:type" content="business.business">
     <meta property="og:type" content="business.business" />
-    <meta property="og:publisher" content="<?= TITLEAPP; ?>" />
+    <meta property="og:publisher" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
 
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="<?= TITLEAPP; ?>" />
+    <meta property="og:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
     <meta property="og:locale" content="es_LA">
-    <!--meta name="og:video" content="<?= TITLEAPP; ?>"-->
+    <!--meta name="og:video" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>"-->
     <meta property="og:publisher" content="<?= DEV_COMPANY;?>" />
     <meta property="og:type" content="business.business" />
     <meta property="og:type" content="website" />
@@ -136,13 +142,13 @@
     <link rel="shortcut icon" href="<?= base_url(FAVICON);?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(FAVICON);?>">
 
-    <meta name="theme-color" content="#ff7f00">
-    <meta name="msapplication-TileColor" content="#ff7f00">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ff7f00" />  
+    <meta name="theme-color" content="<?= MAIN_COLOR;?>">
+    <meta name="msapplication-TileColor" content="<?= MAIN_COLOR;?>">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<?= MAIN_COLOR;?>" />  
 
     <link rel="manifest" href="<?= base_url('manifest.json');?>">
 
-    <title><?= TITLEAPP; ?></title>
+    <title><?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?></title>
 
 	<!-- core CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
@@ -163,7 +169,11 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]--> 
-    
+    <?php if(isset($destino) && isset($destino->imagenes) && is_array($destino->imagenes)  && count($destino->imagenes) > 0) { ?>
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/css/gallery.css');?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/themes/default/ug-theme-default.css');?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?= base_url('assets/js/gallery/skins/alexis/alexis.css');?>" rel="stylesheet">
+    <?php } ?>
 </head><!--/head-->
 
 <body id="home" class="homepage">
