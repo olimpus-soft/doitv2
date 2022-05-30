@@ -5,6 +5,7 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 
 class Ofertas extends Migration {
+  public $tableName = 'ofertas';
   public function up() {
     $this->db->disableForeignKeyChecks();
     $this->forge->addField([
@@ -19,9 +20,19 @@ class Ofertas extends Migration {
         'constraint'     => '100',
         'NULL'           => FALSE,
       ],
+      'oferta_categoria' => [
+        'type'           => 'INT',
+        'constraint'     => 5,
+        'unsigned'       => TRUE,
+      ],
       'oferta_subtitulo' => [
         'type'           => 'VARCHAR',
         'constraint'     => '100',
+        'NULL'           => TRUE,
+      ],
+      'oferta_resumen' => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '1000',
         'NULL'           => TRUE,
       ],
       'oferta_lang'      => [
@@ -31,6 +42,12 @@ class Ofertas extends Migration {
         'default'        => NULL,
       ],
       'oferta_file'      => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '200',
+        'NULL'           => TRUE,
+        'default'        => NULL,
+      ],
+      'oferta_slug'      => [
         'type'           => 'VARCHAR',
         'constraint'     => '200',
         'NULL'           => TRUE,
@@ -65,7 +82,10 @@ class Ofertas extends Migration {
     ]);
     $this->forge->addPrimaryKey('id');
     $this->forge->addUniqueKey(['oferta_titulo','oferta_lang']);
+    $this->forge->addUniqueKey(['oferta_slug','oferta_lang']);
+    $this->forge->addForeignKey(['oferta_categoria'], 'categoria_ofertas', ['id'], 'RESTRICT', 'RESTRICT');
     $this->forge->createTable('ofertas', true);
+    //$this->forge->db->query("ALTER TABLE {$this->tableName} ADD FOREIGN KEY (oferta_categoria) REFERENCES categoria_ofertas(id) ON DELETE RESTRICT ON UPDATE RESTRICT;");
     //$this->db->enableForeignKeyChecks();
   }
 

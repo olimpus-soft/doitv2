@@ -24,7 +24,7 @@
 								<img src="<?= $oferta->oferta_image; ?>" alt="<?= $oferta->oferta_titulo; ?>">
 							</div>
 							<div class="project-content">
-								<a class="project-title" name="<?= $oferta->oferta_filename; ?>" target="_self" href="<?= $oferta->oferta_file; ?>">
+								<a class="project-title" target="_self" href="<?= base_url('oferta/'. $oferta->categoria_slug .'/'. $oferta->oferta_slug .'?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content='. $oferta->categoria_slug .'/'. $oferta->oferta_slug ); ?>">
 									<?= $oferta->oferta_titulo; ?>
 								</a>
 								<?= !empty($oferta->oferta_subtitulo)?'<span class="project-subtitle">'.$oferta->oferta_subtitulo.'</span>':''; ?>
@@ -36,7 +36,9 @@
 				?>
 			</div>
 			<div class="container col-lg-12 text-center">
-				<a class="main-btn mt-25" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-right" target="_self" href="<?= base_url('ofertas?utm_source=doit&utm_medium=web&utm_campaign=ofertas-por-categoria&utm_term=all&utm_content=');?>"><?= lang('Doit.all_categories'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-up" target="_self" href="<?= base_url('disfruta-nuestro-charter?utm_source=doit&utm_medium=web&utm_campaign=disfruta-nuestro-charter&utm_term=all&utm_content=');?>"><?= lang('Doit.enjoyCharter'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-left" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
 			</div>
 		</div>
 	</section>

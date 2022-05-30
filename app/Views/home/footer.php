@@ -63,6 +63,12 @@
 							<?php 
 							}
 							?>
+							<li><div class="fb-like" data-href="https://www.facebook.com/doitviajesyturismo/" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div></li>
+							<li><div class="fb-share-button" data-href="https://www.facebook.com/doitviajesyturismo/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fdoitviajesyturismo%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div></li>
+							<li><div class="fb-share-button" data-uri="https://www.facebook.com/hashtag/doitviajesyturismo/" data-lazy="true" data-size="small"></div></li>
+							<li><a href="https://twitter.com/doitviajesytur?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-dnt="true" data-show-count="false">Follow @doitviajesytur</a></li>
+							<li><a href="https://twitter.com/intent/tweet?screen_name=doitviajesytur&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-related="olimpussoft,mmoralescoterio" data-dnt="true" data-show-count="false">Tweet to @doitviajesytur</a></li>
+							<li><a href="https://twitter.com/intent/tweet?button_hashtag=doitviajesytur&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-related="olimpussoft,mmoralescoterio" data-dnt="true" data-show-count="false">Tweet #doitviajesytur</a></li>
 						</ul>
 					</div>
 				</div>
@@ -84,7 +90,6 @@
 				<div class="col-lg-12">
 					<div class="copyright text-center">
 						<p><?= lang('Doit.designed_by'); ?> <a target="_blank" href="https://olimpussoft.com" rel="follow">olimpussoft.com</a> &copy; <?= lang('Doit.since'); ?> 2019 - <?= date('Y');?></p>
-						<p>Renderizado en {elapsed_time} segundos</p>
 					</div> <!-- copyright -->
 				</div>
 			</div> <!-- row -->

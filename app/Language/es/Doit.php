@@ -11,6 +11,7 @@
 
 // Cache language settings
 return [
+    'us'   => 'Nosotros',
     'about_us'   => 'Sobre Nosotros',
     'more_about_us'   => 'Más Sobre Nosotros',
     'experienceYears'   => 'Años de Experiencia',
@@ -67,4 +68,9 @@ return [
     'mision' =>    'Misión',
     'vision' =>    'Visión',
     'sostenibilidad' =>    'Sostenibilidad',
+    'seeMore' => 'Ver más',
+    'all_categories' => 'Todas la Categorias',
+    'noOffersInCategrory' => 'No hay Ofertas en esta categoria',
+    'enjoyCharter' => 'Disfruta Nuestro Chárter',
+    'charter' => 'Chárter',
 ];
