@@ -1,6 +1,6 @@
 <!--====== ABOUT PART START ======-->
 
-<section id="nosotoros" class="about-area pt-80 pb-130">
+<section id="nosotoros" class="about-area pt-50 pb-80">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">

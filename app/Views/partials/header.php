@@ -160,6 +160,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/js/slider/tiny-slider.css');?>" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/ie8-responsive-file-warning.js"></script>
     <![endif]-->

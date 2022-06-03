@@ -20,7 +20,7 @@ class Index extends BaseController {
   
   public function index() {
     $objetivosModel = new Objetivos();
-    $objetivos = $objetivosModel->asObject('App\Models\Objetivos')
+    $objetivos = $objetivosModel->asObject()
       ->where('status', '1')
       ->where('lang', $this->locale)
       ->orderBy('id', 'ASC')
@@ -28,7 +28,7 @@ class Index extends BaseController {
     ;
     $objetivosDetallesModel = new ObjetivosDetalles();
     foreach ($objetivos as &$objetivo) {
-      $objetivo->details = $objetivosDetallesModel->asObject('App\Models\ObjetivosDetalles')
+      $objetivo->details = $objetivosDetallesModel->asObject()
         ->where('status', '1')
         ->where('objetivo_id', $objetivo->id)
         ->findAll()
@@ -77,6 +77,27 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
+
+    $agentsModel = new Agents();
+    $agents = $agentsModel->asObject()
+      ->where('status', '1')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $agentsContactsModel = new AgentsContacts();
+    foreach ($agents as &$agent) {
+      $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
+      $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
+      $agent->contacts = $agentsContactsModel->asObject()
+        ->where('status', '1')
+        ->where('agent_id', $agent->id)
+        ->orderBy('orden', 'ASC')
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ; 
+    }
+
     return view('index', [
       'locale' => $this->locale,
       'menuUrl' => false,
@@ -84,6 +105,7 @@ class Index extends BaseController {
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
       'equipos' => $equipos,
+      'agents' => $agents,
       'cntDestinations' => $this->cntDestinations,
       'contacTypes' => $contacTypes,
     ]);

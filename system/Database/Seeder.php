@@ -126,19 +126,13 @@ class Seeder
         } else if($class == "*") {
             helper('filesystem');
             $classes = get_filenames($this->seedPath, false);
-            CLI::write("Seeded encontradas: ".print_r($classes, true), 'blue');
-            foreach ($classes as $idx => &$class) {
-                $class = str_replace('.php', '', $class);
-                if (is_cli() && ! $this->silent) {
-                    CLI::write("Seeded encontrada: {$class}", 'blue');
-                }
-            }
         } else {
             $classes = explode(',', $class);
             $classes = array_filter($classes);
         }
-
+        CLI::write("Seeded encontradas: ".print_r($classes, true), 'blue');
         foreach ($classes as $idx => $class) {
+            $class = str_replace('.php', '', $class);
             if (is_cli() && ! $this->silent) {
                 CLI::write("Seeded: {$class}", 'blue');
             }
