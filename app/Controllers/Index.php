@@ -14,6 +14,7 @@ use App\Models\AditionalPages;
 use App\Models\CategoriaOfertas;
 use App\Models\Agents;
 use App\Models\AgentsContacts;
+use App\Models\News;
 use \DateTime;
 use \Exception;
 use Config\Kint;
@@ -61,7 +62,11 @@ class Index extends BaseController {
       $oferta->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_filename))));
       $oferta->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_image))));
     }
-    $equipoModel = new Equipo();
+    /**
+     * [$equipoModel description]
+     * @var Equipo
+     */
+    /*$equipoModel = new Equipo();
     $equipos = $equipoModel->asObject()
       ->where('status', '1')
       ->where('equipo_lang', $this->locale)
@@ -72,6 +77,22 @@ class Index extends BaseController {
     foreach ($equipos as &$equipo) {
       $equipo->equipo_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($equipo->equipo_image))));
     }
+    */
+    $equipos = [];
+
+    $newsModel = new News();
+    $news = $newsModel->asObject()
+      ->where('status', '1')
+      ->where("(lang = '{$this->locale}' OR lang IS NULL)")
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    foreach ($news as &$new) {
+      $new->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($new->photo))));
+      $new->details = strlen($new->details) > 150 ? substr($new->details, 0, 147) . '...' : trim($new->details);
+    } 
+
     $contacTypesModel = new ContactType();
     $contacTypes = $contacTypesModel->asObject()
       ->where('status', '1')
@@ -106,6 +127,7 @@ class Index extends BaseController {
       'experienceYears' => $this->foudDiffDate->y,
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
+      'news' => $news,
       'equipos' => $equipos,
       'agents' => $agents,
       'cntDestinations' => $this->cntDestinations,

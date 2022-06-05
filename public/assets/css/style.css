@@ -1051,6 +1051,7 @@ p {
           background-color:  var(--primary);
           color: #fff; }
 
+.single-team .team-content.hover,
 .single-team:hover .team-content {
   background-color: #fff;
   margin-top: -60px;
@@ -1917,3 +1918,56 @@ p.form-message.error,
 .special-offer .special-offer-layout .image-wrapper {
   z-index: -9;
 }
+
+/**
+ * News
+ */
+
+.new {
+  margin: 15px;
+  text-align: center;
+  background-color: #fff;
+  z-index: 5;
+  box-shadow: 0  0 7px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+.news .image-wrapper {
+  position: relative;
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+  float: left;
+}
+
+.news .content-wrapper {
+  padding: 0px 10px 20px 15px;
+  margin-top: 30px;
+  color: var(--secondary);
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.news .content-wrapper .description {
+  margin: 15px 0 0 0;
+}
+
+.news .content-wrapper .title {
+  color: var(--primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.news .content-wrapper .details {
+  color: var(--secondary);
+}
+
+.news .link-wrapper {
+  padding: 10px 30px 30px 30px;
+  text-align: center;
+}
+/**
+ * Fin News
+ */

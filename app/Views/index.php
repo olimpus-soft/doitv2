@@ -28,10 +28,13 @@ echo view('partials/header');
 	echo view('home/about');
 	echo view('home/services');
 	echo view('home/offers');
-	echo view('home/teams');
+	//echo view('home/teams');
 
 	if(isset($agents) && is_array($agents) && count($agents)) {
 		echo view('home/agents');
+	}
+	if(isset($news) && is_array($news) && count($news)) {
+		echo view('home/news');
 	}
 	echo view('home/contact');
 

@@ -21,7 +21,7 @@
 						<div class="team-image">
 							<img src="<?= $integra->equipo_image; ?>" alt="<?= $integra->equipo_titulo; ?>">
 						</div>
-						<div class="team-content">
+						<div class="team-content hover">
 							<h4 class="team-name"><a href="#"><?= $integra->equipo_titulo; ?></a></h4>
 							<span class="sub-title"><?= $integra->equipo_subtitulo; ?></span>
 						</div>
