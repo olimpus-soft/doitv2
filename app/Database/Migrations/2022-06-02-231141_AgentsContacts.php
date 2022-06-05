@@ -24,7 +24,7 @@ class AgentsContacts extends Migration {
       ],
       'tipo' => [
         'type'           => 'ENUM',
-        'constraint'     => ['phone', 'movil', 'whatsapp', 'email', 'facebook', 'twiter', 'instagram', 'telegram', 'tiktok', 'linkedin', 'pinterest', 'tumblr', 'reddit', 'flickr', 'viber', 'line'],
+        'constraint'     => ['phone', 'movil', 'whatsapp', 'email', 'facebook', 'twiter', 'instagram', 'telegram', 'tiktok', 'linkedin', 'pinterest', 'tumblr', 'reddit', 'flickr', 'viber', 'line', 'zoom', 'skype'],
         'default'        => 'whatsapp',
       ],
       'contact_value'     => [

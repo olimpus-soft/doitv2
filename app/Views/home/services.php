@@ -17,7 +17,7 @@
 		foreach ($objetivos as &$objetivo) {
 ?>
 				<div class="col-lg-4 col-md-6 col-sm-8" id="objetivo-id-<?= $objetivo->id; ?>">
-					<div class="single-services text-center mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.4s">
+					<div class="single-services text-center mt-30 wow fadeInUp" data-aos="zoom-in-down" data-aos-duration="500" data-aos-easing="ease-in-sine" >
 						<div class="services-icon">
 							<i class="<?= $objetivo->icon; ?>"></i>
 						</div>

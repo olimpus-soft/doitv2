@@ -79,11 +79,13 @@ $(function() {
         scrollLink.each(function() {
           this.hash = this.hash.split('?');
           this.hash = this.hash[0];
-          var sectionOffset = $(this.hash).offset().top - 90;
+          if($(this.hash).length > 0) {
+            var sectionOffset = $(this.hash).offset().top - 90;
 
-          if ( sectionOffset <= scrollbarLocation ) {
-            $(this).parent().addClass('active');
-            $(this).parent().siblings().removeClass('active');
+            if ( sectionOffset <= scrollbarLocation ) {
+              $(this).parent().addClass('active');
+              $(this).parent().siblings().removeClass('active');
+            }
           }
         });
     });
@@ -97,7 +99,7 @@ $(function() {
     //===== AOS
     
      AOS.init({
-         duration: 800,
+         duration: 500,
      });
     
     
@@ -179,9 +181,85 @@ $(function() {
         }, 1500);
     });
     
+    if($('.tiny-slider .customize-toggle').length > 0) {
+      $('.tiny-slider .customize-toggle').on('click', (evt) => {
+        if($('.tiny-slider .customize-toggle').data('action') == "stop") {
+          $('.tiny-slider .customize-toggle').data('action', 'play');
+          $('.tiny-slider .customize-toggle').html('<span class="tns-visually-hidden">Iniciar Animación</span><i class="fa fa-play"></i>');
+        } else {
+          $('.tiny-slider .customize-toggle').data('action', 'stop');
+          $('.tiny-slider .customize-toggle').html('<span class="tns-visually-hidden">Detener Animación</span><i class="fa fa-stop"></i>');
+        }
+      });
+    }
     
-    
-    
+    if($('#agents .agents-slider > .agent').length > 0) {
+      let objsAgtns = $('#agents .agents-slider > .agent');
+      let minHeight = 0;
+      let auxHeight = 0;
+      for (var i = objsAgtns.length - 1; i >= 0; i--) {
+        auxHeight = $(objsAgtns[i]).height();
+        if( auxHeight > minHeight) {
+          minHeight = auxHeight; 
+        }
+        console.log(i, $(objsAgtns[i]), auxHeight, minHeight)
+      }
+      for (var i = objsAgtns.length - 1; i >= 0; i--) {
+        $(objsAgtns[i]).height(minHeight);
+      }
+
+      var agentsSlider = tns({
+        container: '#agents-slider',
+        items: 2,
+        edgePadding: 50,
+        gutter: 50,
+        slideBy: "page",
+        mouseDrag: true,
+        viewportMax:true,
+        swipeAngle: false,
+        speed: 400,
+        loop: true,
+        center: true,
+        controlsContainer: false,
+        prevButton: '#agents-control-prev',
+        nextButton: '#agents-control-next',
+        lazyload: true,
+        controls: true,
+        autoplayButton: '#agents-autoplay-toggle',
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 3500,
+        autoplayText: [
+          '<i class="fa fa-play">',
+          '<i class="fa fa-stop">'
+        ],
+        responsive: {
+          576: {
+            gutter:5,
+            items: 1,
+            viewportMax:true,
+          },
+          768: {
+            viewportMax:true,
+            items: 1
+          },
+          992: {
+            viewportMax:true,
+            items: 2
+          },
+          1200: {
+            gutter:30,
+            viewportMax:true,
+            items: 2
+          },
+          1400: {
+            gutter:30,
+            viewportMax:false,
+            items: 2
+          }
+        }
+      });
+    }
     
     
     

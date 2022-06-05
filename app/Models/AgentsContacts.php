@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class AgentsContacts extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'agentscontacts';
+    protected $table            = 'agents_contacts';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

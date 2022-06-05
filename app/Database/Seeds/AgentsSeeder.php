@@ -28,6 +28,13 @@ class AgentsSeeder extends Seeder {
           ], 
           [
             //['phone', 'movil', 'whatsapp', 'email', 'facebook', 'twiter', 'instagram', 'telegram', 'tiktok', 'linkedin', 'pinterest', 'tumblr', 'reddit', 'flickr', 'viber', 'line'],
+            'tipo'            => 'movil',
+            'contact_value'   => '+57 304 531 97 69',
+            'orden'           => '1',
+            'status'          => '1',
+          ], 
+          [
+            //['phone', 'movil', 'whatsapp', 'email', 'facebook', 'twiter', 'instagram', 'telegram', 'tiktok', 'linkedin', 'pinterest', 'tumblr', 'reddit', 'flickr', 'viber', 'line'],
             'tipo'            => 'email',
             'contact_value'   => 'lcorrea@doitviajesyturismo.com',
             'orden'           => '2',

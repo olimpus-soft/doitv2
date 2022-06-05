@@ -2,7 +2,8 @@
     <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js');?>"></script>
     <script src="<?= base_url('assets/js/vendor/jquery-1.12.4.min.js');?>"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=<?= GOOGLE_RECAPTCHA_SITEKEY; ?>" SameSite="None"  async defer type="text/javascript"></script>
-    <script src="<?= base_url('assets/js/bootstrap.min.js');?>"></script>
+    <!--script src="<?= base_url('assets/js/bootstrap.min.js');?>"></script-->
+    <script src="<?= base_url('assets/js/v5/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('assets/js/wow.min.js');?>"></script>
     <script src="<?= base_url('assets/js/slick.min.js');?>"></script>
     <script src="<?= base_url('assets/js/scrolling-nav.js');?>"></script>
