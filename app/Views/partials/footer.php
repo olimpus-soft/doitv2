@@ -1,3 +1,9 @@
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
 
     <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js');?>"></script>
     <script src="<?= base_url('assets/js/vendor/jquery-1.12.4.min.js');?>"></script>
@@ -43,6 +49,11 @@
 				echo ADDSCRIPTS;
 			}
 		?>
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "<?= FB_APP_ID;?>");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
 		<script async defer type="text/javascript">
 			(function(d){
 			  var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
@@ -56,7 +67,7 @@
 			      cookie     : true,
 			      xfbml      : true,
 			      status      : true,
-			      version    : 'v14.0',
+			      version    : 'v13.0',
 			      autoLogAppEvents : true
 			    });
 			        

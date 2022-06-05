@@ -217,7 +217,7 @@ $(function() {
         mouseDrag: true,
         viewportMax:true,
         swipeAngle: false,
-        speed: 400,
+        speed: 1000,
         loop: true,
         center: true,
         controlsContainer: false,
@@ -253,7 +253,7 @@ $(function() {
             items: 2
           },
           1400: {
-            gutter:30,
+            gutter:-30,
             viewportMax:false,
             items: 2
           }
@@ -261,7 +261,72 @@ $(function() {
       });
     }
     
-    
-    
+    if($('#news .news-slider > .news').length > 0) {
+      let objsAgtns = $('#news .news-slider > .news');
+      let minHeight = 0;
+      let auxHeight = 0;
+      for (var i = objsAgtns.length - 1; i >= 0; i--) {
+        auxHeight = $(objsAgtns[i]).height();
+        if( auxHeight > minHeight) {
+          minHeight = auxHeight; 
+        }
+        console.log(i, $(objsAgtns[i]), auxHeight, minHeight)
+      }
+      for (var i = objsAgtns.length - 1; i >= 0; i--) {
+        $(objsAgtns[i]).height(minHeight + 10);
+      }
+
+      var newsSlider = tns({
+        container: '#news-slider',
+        items: 2,
+        edgePadding: 50,
+        gutter: 50,
+        slideBy: "page",
+        mouseDrag: true,
+        viewportMax:true,
+        swipeAngle: false,
+        speed: 1000,
+        loop: true,
+        center: true,
+        controlsContainer: false,
+        prevButton: '#news-control-prev',
+        nextButton: '#news-control-next',
+        lazyload: true,
+        controls: true,
+        autoplayButton: '#news-autoplay-toggle',
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 3500,
+        autoplayText: [
+          '<i class="fa fa-play">',
+          '<i class="fa fa-stop">'
+        ],
+        responsive: {
+          576: {
+            gutter:5,
+            items: 1,
+            viewportMax:true,
+          },
+          768: {
+            viewportMax:true,
+            items: 1
+          },
+          992: {
+            viewportMax:true,
+            items: 2
+          },
+          1200: {
+            gutter:30,
+            viewportMax:true,
+            items: 2
+          },
+          1400: {
+            gutter:-30,
+            viewportMax:false,
+            items: 2
+          }
+        }
+      });
+    }
     
 });
