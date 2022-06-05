@@ -25,23 +25,16 @@ echo view('partials/header');
 
 	<?php
 	echo view('home/header');
-	?>
-	<?php
 	echo view('home/about');
-	?>
-	<?php
 	echo view('home/services');
-	?>
-	<?php
 	echo view('home/offers');
-	?>
-	<?php
 	echo view('home/teams');
-	?>
-	<?php
+
+	if(isset($agents) && is_array($agents) && count($agents)) {
+		echo view('home/agents');
+	}
 	echo view('home/contact');
-	?>
-	<?php
+
 	echo view('home/footer');
 	?>
 

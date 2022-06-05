@@ -77,6 +77,7 @@ $routes->get('oferta/(:any)', 'Index::getOferta/$1');
 $routes->get('oferta/(:any)/(:any)', 'Index::getOferta/$1/$2');
 $routes->get('disfruta-nuestro-charter', 'Index::getCharterOffer');
 $routes->get('plan-charter', 'Index::getCharterOffer');
+$routes->get('agent/getVcard/(:any)', 'Index::getAgentVcard/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

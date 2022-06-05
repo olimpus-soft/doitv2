@@ -12,6 +12,8 @@ use App\Models\Equipo;
 use App\Models\Contactos;
 use App\Models\AditionalPages;
 use App\Models\CategoriaOfertas;
+use App\Models\Agents;
+use App\Models\AgentsContacts;
 use \DateTime;
 use \Exception;
 use Config\Kint;
@@ -20,7 +22,7 @@ class Index extends BaseController {
   
   public function index() {
     $objetivosModel = new Objetivos();
-    $objetivos = $objetivosModel->asObject('App\Models\Objetivos')
+    $objetivos = $objetivosModel->asObject()
       ->where('status', '1')
       ->where('lang', $this->locale)
       ->orderBy('id', 'ASC')
@@ -28,7 +30,7 @@ class Index extends BaseController {
     ;
     $objetivosDetallesModel = new ObjetivosDetalles();
     foreach ($objetivos as &$objetivo) {
-      $objetivo->details = $objetivosDetallesModel->asObject('App\Models\ObjetivosDetalles')
+      $objetivo->details = $objetivosDetallesModel->asObject()
         ->where('status', '1')
         ->where('objetivo_id', $objetivo->id)
         ->findAll()
@@ -77,6 +79,27 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
+
+    $agentsModel = new Agents();
+    $agents = $agentsModel->asObject()
+      ->where('status', '1')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $agentsContactsModel = new AgentsContacts();
+    foreach ($agents as &$agent) {
+      $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
+      $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
+      $agent->contacts = $agentsContactsModel->asObject()
+        ->where('status', '1')
+        ->where('agent_id', $agent->id)
+        ->orderBy('orden', 'ASC')
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ; 
+    }
+
     return view('index', [
       'locale' => $this->locale,
       'menuUrl' => false,
@@ -84,6 +107,7 @@ class Index extends BaseController {
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
       'equipos' => $equipos,
+      'agents' => $agents,
       'cntDestinations' => $this->cntDestinations,
       'contacTypes' => $contacTypes,
     ]);
@@ -124,6 +148,79 @@ class Index extends BaseController {
         //$response->setHeader('Connection', 'keep-alive');
         return $response;
       }
+    } catch (Exception $e) {
+      return $this->response->setStatusCode(404, $e->getMessage());
+    }
+  }
+
+  public function getAgentVcard($agentHash) {
+    try {
+      $agentId = base64_decode(strrev($agentHash));
+      $agentsModel = new Agents();
+      $agent = $agentsModel->asObject()
+        ->where('id', $agentId)
+        ->where('status', '1')
+        ->orderBy('orden', 'ASC')
+        ->orderBy('id', 'ASC')
+        ->first()
+      ;
+      if($agent) {
+        $agentsContactsModel = new AgentsContacts();
+        $agent->contacts = $agentsContactsModel->asObject()
+          ->where('status', '1')
+          ->where('agent_id', $agent->id)
+          ->orderBy('orden', 'ASC')
+          ->orderBy('id', 'ASC')
+          ->findAll()
+        ; 
+        $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
+        $agent->basePhoto = $agent->photo;
+        $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
+        $vcard = new \JeroenDesloovere\VCard\VCard();
+        // add personal data
+        $additional = '';
+        $vcard->addName($agent->firstname, $agent->lastname, $additional, $agent->prefix, '');
+
+        // add work data
+        $vcard->addCompany(COMERCIALNAME);
+        $vcard->addJobtitle($agent->cargo);
+        $vcard->addRole($agent->cargo);
+        $vcard->addNote($agent->details);
+        $vcard->addLabel(COMPANY_LAT, 'latitude');
+        $vcard->addLabel(COMPANY_LON, 'longitude');
+        $vcard->addAddress(COMERCIALNAME, null, COMPANY_ADDRESS, COMPANY_LOCALITY, null, COMPANY_POSTAL_CODE, COMPANY_COUNTRY);
+        $vcard->addCategories(explode(',', KEYWORDS));
+        foreach ($agent->contacts as $keyCtc => $contact) {
+          if($contact->tipo == 'phone') {
+            $contact->contact_value = str_replace([' ', '.','-','(',')'], '', $contact->contact_value);
+            $vcard->addPhoneNumber($contact->contact_value, 'WORK;VOICE');
+          } else if($contact->tipo == 'movil') {
+            $contact->contact_value = str_replace([' ', '.','-','(',')'], '', $contact->contact_value);
+            $vcard->addPhoneNumber($contact->contact_value, 'PREF;CELL;MSG');
+          } else if(in_array($contact->tipo, ['zoom', 'skype', 'facebook', 'twiter', 'instagram', 'telegram', 'tiktok', 'linkedin', 'pinterest', 'tumblr', 'reddit', 'viber', 'line'])) {
+            $vcard->setProperty('socialProfile', $contact->tipo, $contact->contact_value);
+          } else if($contact->tipo == 'email') {
+            $vcard->addEmail($contact->contact_value);
+          } else if($contact->tipo == 'whatsapp') {
+            $contact->contact_value = str_replace([' ', '.','-','(',')'], '', $contact->contact_value);
+            $vcard->addPhoneNumber($contact->contact_value, 'PREF;WORK;MSG');
+          } else {
+            $vcard->addLabel($contact->contact_value, $contact->tipo);
+          }
+        }
+        $vcard->addURL(base_url());
+
+        if(file_exists(FCPATH.LOGO)) {
+          $vcard->addLogoContent(file_get_contents(FCPATH.LOGO));
+        }
+
+        if(file_exists(BASEPATH.'bucket/'.$agent->basePhoto)) {
+          $vcard->addPhotoContent(file_get_contents(BASEPATH.'bucket/'.$agent->basePhoto));
+        }
+        // return vcard as a download
+        return $vcard->download();
+      }
+      $this->response->setStatusCode(404, lang('Doit.pageNotFoundDesc'));
     } catch (Exception $e) {
       return $this->response->setStatusCode(404, $e->getMessage());
     }
@@ -264,6 +361,7 @@ class Index extends BaseController {
   }
 
   public function aboutUs() {
+    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.about_us'));
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
     $difDF = $dtNow->diff($dtF);
@@ -306,7 +404,9 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
-
+    if(count($aditionalPages) > 0) {
+      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', $aditionalPages[0]->title);
+    }
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,
@@ -329,6 +429,10 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
+    $charterTitle = 'Santa Clara, Ciudad y Playa';
+    $fileCharter = '/assets/images/project/curent_charter.jpg';
+    $rawBodyEmail = rawurlencode('Hola, <span style="color:#ff7f00;">' . COMERCIALNAME . '</span>!<br><br>Envio los documentos adjuntos y la información sobre la reserva para el charter:<br><b>'.$charterTitle.'</b><br><br>Un Saludo.<br>--<br>');
+    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', 'Charter ' . $charterTitle);
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,
@@ -368,6 +472,7 @@ class Index extends BaseController {
       $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
       $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
     }
+    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.all_offers'));    
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,
@@ -393,6 +498,7 @@ class Index extends BaseController {
     foreach ($destinos as &$destino) {
       $destino->destino_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($destino->destino_image))));
     }
+    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.all_destinations'));
     return view('about-us', [
       'locale' => $this->locale,
       'menuUrl' => true,
@@ -445,8 +551,8 @@ class Index extends BaseController {
         ->orderBy('id', 'ASC')
         ->findAll()
       ; 
+      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.destination') . ' ' . ($destino->destino_titulo ?? '404'));
     }
-
     return view('show-destination', [
       'locale' => $this->locale,
       'menuUrl' => true,
@@ -527,6 +633,8 @@ class Index extends BaseController {
         ->orderBy('id', 'ASC')
         ->findAll()
       ;
+      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offers') . ' ' . lang('Doit.all_categories'));
+      
       return view('show-offers-categories', [
         'locale' => $this->locale,
         'menuUrl' => true,
@@ -538,6 +646,7 @@ class Index extends BaseController {
       ]);
     } else if(!empty($categoria) && empty($oferta)) {
       //Mostrar todas las ofertas de la categoria
+      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offers') . ' ' . ($categories->categoria ?? '404'));
       return view('show-offers-bycategories', [
         'locale' => $this->locale,
         'menuUrl' => true,
@@ -563,6 +672,7 @@ class Index extends BaseController {
       if(strstr($offer->oferta_fileMimeType, 'video')) { 
         $contentScripts = "$('#docpdf.docpdf').html('<video preload=\"auto\" width=\"320\" height=\"240\" controls><source src=\"" . $offer->oferta_file . "/true\" type=\"" . $offer->oferta_fileMimeType . "\"></video>');";
       }
+      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offer') . ' ' . ($offers->oferta_titulo ?? '404'));
       return view('show-offer-detail', [
         'locale' => $this->locale,
         'menuUrl' => true,
@@ -587,3 +697,4 @@ class Index extends BaseController {
     ]);
   }
 }
+  

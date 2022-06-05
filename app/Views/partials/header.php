@@ -38,9 +38,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="author" content="<?= DEV_AUTHOR; ?>">
     <meta name="type" content="WebApp">
-    <meta name="application-name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
+    <meta name="application-name" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP;?>" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
+    <meta name="apple-mobile-web-app-title" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP;?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="revisit-after" content="periode" />
     <meta name="copyright" content="<?= DEV_COMPANY;?>" />
@@ -79,34 +79,34 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="<?= CONTACT_TW; ?>" />
-    <meta name="twitter:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta name="twitter:title" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>">
     <meta name="twitter:creator" content="<?= DEV_TW_PROFILE;?>" />
     <meta name="twitter:description" content="<?= COMPANY_DESC; ?>">
-    <meta name="twitter:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta name="twitter:image:alt" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>">
     <meta name="twitter:image:src" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta itemprop="name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta itemprop="name" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>">
     <meta itemprop="description" content="<?= COMPANY_DESC; ?>">
     <meta itemprop="image" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta property="og:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:title" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>" />
     <meta property="og:description" content="<?= COMPANY_DESC; ?>" />
     <meta property="og:url" content="<?= base_url(); ?>" />
     <meta name="og:image" content="<?= base_url(SOCIAL_IMG); ?>">
     <meta name="og:url" content="<?= base_url(); ?>">
-    <meta name="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
-    <meta property="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta name="og:site_name" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>">
+    <meta property="og:site_name" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>" />
     <meta name="og:locale" content="es-419">
 
     <meta name="og:type" content="business.business">
     <meta property="og:type" content="business.business" />
-    <meta property="og:publisher" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:publisher" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>" />
 
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:image:alt" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>" />
     <meta property="og:locale" content="es_LA">
-    <!--meta name="og:video" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>"-->
+    <!--meta name="og:video" content="<?= (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?>"-->
     <meta property="og:publisher" content="<?= DEV_COMPANY;?>" />
     <meta property="og:type" content="business.business" />
     <meta property="og:type" content="website" />
@@ -148,10 +148,11 @@
 
     <link rel="manifest" href="<?= base_url('manifest.json');?>">
 
-    <title><?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?></title>
+    <title><?= (isset($aditionalTitle) && !empty($aditionalTitle) ? $aditionalTitle .' - ' : '') . (defined('ADITIONAL_TITLE')?ADITIONAL_TITLE.' - ':'').TITLEAPP; ?></title>
 
 	<!-- core CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
+    <!--link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet"-->
+    <link rel="stylesheet" href="<?= base_url('assets/js/v5/css/bootstrap.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/LineIcons.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/animate.css');?>" rel="stylesheet">
@@ -160,6 +161,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/js/slider/tiny-slider.css');?>" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
