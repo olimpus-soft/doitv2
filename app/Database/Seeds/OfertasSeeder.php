@@ -15,6 +15,7 @@ class OfertasSeeder extends Seeder {
         'categoria'             => 'Planes Con Tiquetes Aereos',
         'categoria_slug'        => 'planes-con-tiquetes-aereos',
         'categoria_descripcion' => 'Planes Con Tiquetes Aereos por medio de la aerolínea Wingo',
+        'categoria_image'       => 'categories/con-tiquetes.jpg',
         'categoria_lang'        => 'es',
         'status'                => '1',
         'ofertas'               => [
@@ -57,6 +58,7 @@ class OfertasSeeder extends Seeder {
         'categoria'             => 'Planes Sin Tiquetes Aereos',        
         'categoria_slug'        => 'planes-sin-tiquetes-aereos',
         'categoria_descripcion' => 'Planes Sin Tiquetes Aereos, no se incluyen dentro de los costos de los planes',
+        'categoria_image'       => 'categories/sin-tiquetes.jpg',
         'categoria_lang'        => 'es',
         'status'                => '1',
         'ofertas'               => [
@@ -99,6 +101,7 @@ class OfertasSeeder extends Seeder {
         'categoria'             => 'Festividades y Eventos',
         'categoria_slug'        => 'festividades-y-eventos',
         'categoria_descripcion' => 'Planes para festividades y eventos, con ofertas especiales',
+        'categoria_image'       => 'categories/festividades.jpg',
         'categoria_lang'        => 'es',
         'status'                => '1',
         'ofertas'               => [
