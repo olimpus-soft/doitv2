@@ -26,22 +26,36 @@ echo view('partials/header');
 	<?php
 	echo view('home/header');
 	echo view('home/about');
-	echo view('home/services');
+	if(isset($news) && is_array($news) && count($news)) {
+		echo view('home/news');
+	}
 	if(isset($categories) && is_array($categories) && count($categories)) {
 		echo view('home/categories');
 	}
 	if(isset($ofertas) && is_array($ofertas) && count($ofertas)) {
 		echo view('home/offers');
 	}
+
+	/**
+	 * Pendiente por desarrollar destinos en principal
+	 */
+	//echo view('home/destinations');
+	
+	echo view('home/services');
+
+	echo view('home/social-section');
+
 	//echo view('home/teams');
 
 	if(isset($agents) && is_array($agents) && count($agents)) {
 		echo view('home/agents');
 	}
-	if(isset($news) && is_array($news) && count($news)) {
-		echo view('home/news');
-	}
 	echo view('home/contact');
+
+	/**
+	 * Pendiente por desarrollar realciones comerciales en principal
+	 */
+	//echo view('home/comm-relation');
 
 	echo view('home/footer');
 	?>
