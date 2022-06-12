@@ -82,4 +82,5 @@ return [
     'contactusPleasure' => 'Es un placer atenderte para',
     'ouragents' => 'Nuestros Agentes',
     'vCard' => 'Tarjeta de Contacto',
+    'socialMedia' => 'Redes Sociales',
 ];
