@@ -186,96 +186,84 @@ $(function() {
         if($('.tiny-slider .customize-toggle').data('action') == "stop") {
           $('.tiny-slider .customize-toggle').data('action', 'play');
           $('.tiny-slider .customize-toggle').html('<span class="tns-visually-hidden">Iniciar Animación</span><i class="fa fa-play"></i>');
+          $('#'+($('.tiny-slider .customize-toggle').data('slider-id'))).slick('slickPause')
         } else {
           $('.tiny-slider .customize-toggle').data('action', 'stop');
           $('.tiny-slider .customize-toggle').html('<span class="tns-visually-hidden">Detener Animación</span><i class="fa fa-stop"></i>');
+          $('#'+($('.tiny-slider .customize-toggle').data('slider-id'))).slick('slickPlay')
         }
       });
     }
-    
-    if($('#agents .agents-slider > .agent').length > 0) {
-      let objsAgtns = $('#agents .agents-slider > .agent');
-      let minHeight = 0;
-      let auxHeight = 0;
-      for (var i = objsAgtns.length - 1; i >= 0; i--) {
-        auxHeight = $(objsAgtns[i]).height();
-        if( auxHeight > minHeight) {
-          minHeight = auxHeight; 
-        }
-        console.log(i, $(objsAgtns[i]), auxHeight, minHeight)
-      }
-      for (var i = objsAgtns.length - 1; i >= 0; i--) {
-        $(objsAgtns[i]).height(minHeight);
-      }
 
-      var agentsSlider = tns({
-        container: '#agents-slider',
-        items: 2,
-        edgePadding: 50,
-        gutter: 50,
-        slideBy: "page",
-        mouseDrag: true,
-        viewportMax:true,
-        swipeAngle: false,
-        speed: 1000,
-        loop: true,
-        center: true,
-        controlsContainer: false,
-        prevButton: '#agents-control-prev',
-        nextButton: '#agents-control-next',
-        lazyload: true,
-        controls: true,
-        autoplayButton: '#agents-autoplay-toggle',
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 3500,
-        autoplayText: [
-          '<i class="fa fa-play">',
-          '<i class="fa fa-stop">'
-        ],
-        responsive: {
-          576: {
-            gutter:5,
-            items: 1,
-            viewportMax:true,
-          },
-          768: {
-            viewportMax:true,
-            items: 1
-          },
-          992: {
-            viewportMax:true,
-            items: 2
-          },
-          1200: {
-            gutter:30,
-            viewportMax:true,
-            items: 2
-          },
-          1400: {
-            gutter:-30,
-            viewportMax:false,
-            items: 2
+    $.extend({
+      sameHeight: (selector) => {
+        console.log(selector);
+        if($(selector).length > 0) {
+          let objsSelector = $(selector);
+          let minHeight = 0;
+          let auxHeight = 0;
+          console.log(selector, objsSelector);
+          for (var i = objsSelector.length - 1; i >= 0; i--) {
+            auxHeight = $(objsSelector[i]).height();
+            console.log(selector, auxHeight, minHeight, auxHeight > minHeight, $(objsSelector[i]));
+            if( auxHeight > minHeight) {
+              minHeight = auxHeight; 
+            }
           }
+
+          for (var i = objsSelector.length - 1; i >= 0; i--) {
+            $(objsSelector[i]).css('height', 'unset');
+            $(objsSelector[i]).height(minHeight);            
+          }
+          return minHeight;
         }
+        return false;
+      },
+    });
+    
+
+    if($('#agents .agents-slider > .agent').length > 0) {
+      $.sameHeight('#agents .agents-slider > .agent');
+      $('#agents-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 2000,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,        
+        autoplaySpeed: 3000,
+        mobileFirst: true,
+        draggable: true,
+        pauseOnDotsHover: true,
+        centerMode: true,
+        centerPadding: '60px',
+        arrows: true,
+        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
+        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
+        prevArrow:document.getElementById('agents-control-prev'),
+        //prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
+        nextArrow:document.getElementById('agents-control-next'),
+        //nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
+        appendDots: $('#agents-customize-controls .slick-dots'),
+        responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+              }
+            },
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 1,
+              }
+            }
+        ]
       });
     }
     
     if($('#news .news-slider > .news').length > 0) {
-      let objsAgtns = $('#news .news-slider > .news');
-      let minHeight = 0;
-      let auxHeight = 0;
-      for (var i = objsAgtns.length - 1; i >= 0; i--) {
-        auxHeight = $(objsAgtns[i]).height();
-        if( auxHeight > minHeight) {
-          minHeight = auxHeight; 
-        }
-        console.log(i, $(objsAgtns[i]), auxHeight, minHeight)
-      }
-      for (var i = objsAgtns.length - 1; i >= 0; i--) {
-        $(objsAgtns[i]).height(minHeight + 10);
-      }
-
+      $.sameHeight('#news .news-slider > .news > .new');
       var newsSlider = tns({
         container: '#news-slider',
         items: 2,
@@ -328,5 +316,46 @@ $(function() {
         }
       });
     }
+
     
+    if($('#categories .categoria-oferta > .card').length > 0) {
+      $.sameHeight('#categories .categoria-oferta > .card');
+      $('#categories .categoria-oferta-container').slick({
+        dots: true,
+        loop: true,
+        infinite: false,
+        speed: 2000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,        
+        autoplaySpeed: 3000,
+        mobileFirst: true,
+        draggable: true,
+        pauseOnDotsHover: true,
+        centerMode: true,
+        centerPadding: '60px',
+        arrows: true,
+        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
+        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
+        prevArrow:document.getElementById('categories-control-prev'),
+        //prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
+        nextArrow:document.getElementById('categories-control-next'),
+        //nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
+        appendDots: $('#categories-customize-controls .slick-dots'),
+        responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+              }
+            },
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 1,
+              }
+            }
+        ]
+      });
+    }    
 });

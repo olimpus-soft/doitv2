@@ -22,14 +22,16 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
             </li>
           </ul>
           <div class="playbutton-wrapper">
-            <button class="customize-toggle" id="agents-autoplay-toggle" data-action="stop"><span class="tns-visually-hidden">Detener Animación</span><i class="fa fa-stop"></i></button>
+            <button class="customize-toggle" id="agents-autoplay-toggle" data-action="stop" data-slider-id="agents-slider"><span class="tns-visually-hidden">Detener Animación</span><i class="fa fa-stop"></i></button>
+          </div>
+          <div class="col-lg-12 slick-dots">
           </div>
         </div>
 
         <!--button class="prev" data-action="prev" aria-label="Anterior" tabindex="0"><span class="tns-visually-hidden">Anterior</span><i class="fa fa-chevron-left"></i></button-->
         <!--button class="next" data-action="next" aria-label="Siguiente" tabindex="0"><span class="tns-visually-hidden">Siguiente</span><i class="fa fa-chevron-rigth"></i></button-->
         
-				<div class="agents-slider tiny-slider-content pb-50" id="agents-slider">
+				<div class="agents-slider tiny-slider-content pb-20" id="agents-slider">
 <?php
 	foreach ($agents as $agent) {
 ?>

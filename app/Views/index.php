@@ -27,7 +27,12 @@ echo view('partials/header');
 	echo view('home/header');
 	echo view('home/about');
 	echo view('home/services');
-	echo view('home/offers');
+	if(isset($categories) && is_array($categories) && count($categories)) {
+		echo view('home/categories');
+	}
+	if(isset($ofertas) && is_array($ofertas) && count($ofertas)) {
+		echo view('home/offers');
+	}
 	//echo view('home/teams');
 
 	if(isset($agents) && is_array($agents) && count($agents)) {

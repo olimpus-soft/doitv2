@@ -29,6 +29,11 @@ class OfertaCategoria extends Migration {
         'constraint'     => '100',
         'NULL'           => FALSE,
       ],
+      'categoria_image'   => [
+        'type'           => 'VARCHAR',
+        'constraint'     => '200',
+        'NULL'           => FALSE,
+      ],
       'categoria_lang'      => [
         'type'           => 'VARCHAR',
         'constraint'     => '10',

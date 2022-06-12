@@ -22,6 +22,7 @@ use Config\Kint;
 class Index extends BaseController {
   
   public function index() {
+    $ofertas = [];
     $objetivosModel = new Objetivos();
     $objetivos = $objetivosModel->asObject()
       ->where('status', '1')
@@ -38,7 +39,7 @@ class Index extends BaseController {
       ; 
     }
 
-    $db      = \Config\Database::connect();
+    /*$db      = \Config\Database::connect();
     $ofertas = $db
       ->table('ofertas AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
@@ -61,6 +62,23 @@ class Index extends BaseController {
       $oferta->oferta_filename  = trim($oferta->oferta_titulo).'.'.$ext;
       $oferta->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_filename))));
       $oferta->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_image))));
+    }//*/
+    $ofertasModel = new Ofertas();
+    $categoriaOfertasModel = new CategoriaOfertas();
+    $categories = $categoriaOfertasModel->asObject()
+      ->where('status', '1')
+      ->where('categoria_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    foreach ($categories as &$category) {
+      $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+      $category->cntOfertas = $ofertasModel->asObject()
+        ->where('status', '1')
+        ->where('oferta_categoria', $category->id)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ; 
     }
     /**
      * [$equipoModel description]
@@ -127,6 +145,7 @@ class Index extends BaseController {
       'experienceYears' => $this->foudDiffDate->y,
       'objetivos' => $objetivos,
       'ofertas' => $ofertas,
+      'categories' => $categories,
       'news' => $news,
       'equipos' => $equipos,
       'agents' => $agents,
@@ -623,7 +642,7 @@ class Index extends BaseController {
         $ext = end($ext);
         $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
         $offer->oferta_fileextension  = $ext;
-        $offer->oferta_fileMimeType  = mime_content_type($filePath);
+        $offer->oferta_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
         $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
         $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
       }

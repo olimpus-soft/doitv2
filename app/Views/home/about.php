@@ -9,7 +9,7 @@
 						<img src="<?= base_url('assets/images/about/about-1.png');?>" alt="About">
 					</div> <!-- single image -->
 					<div data-aos="fade-right" class="about-btn">
-						<a class="main-btn" target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><span><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
+						<a class="main-btn" target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><span  class="numscroller" data-min='1' data-max='<?= $experienceYears; ?>' data-delay='2' data-increment='1'><?= $experienceYears; ?></span> <?= lang('Doit.experienceYears'); ?></a>
 					</div>
 					<div class="single-image image-tow float-right">
 						<img src="<?= base_url('assets/images/about/about-2.png');?>" alt="<?= lang('Doit.about_us'); ?>">
@@ -20,7 +20,7 @@
 				<div class="about-content mt-45">
 					<h4 class="about-welcome"><?= lang('Doit.about_us'); ?> </h4>
 					<h3 class="about-title mt-10">Do It! Viajes y Turismo</h3>
-					<p class="mt-25 text-justify"><?= ABOUT_TEXT; ?>
+					<p class="mt-25 text-justify" style="text-align: justify;"><?= ABOUT_TEXT; ?>
 					</p>
 					<a class="main-btn mt-25" target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.more_about_us'); ?></a>
 				</div> <!-- about content -->
