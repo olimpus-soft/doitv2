@@ -18,6 +18,7 @@
     <script src="<?= base_url('assets/js/sweetalert2.all.min.js');?>"></script>
     <script src="<?= base_url('assets/js/slider/tiny-slider.js');?>"></script>
     <script src="<?= base_url('assets/js/slider/tiny-slider.helper.ie8.js');?>"></script>
+    <script src="<?= base_url('assets/js/numscroller-1.0.js');?>"></script>
     <!--script src="<?= base_url('assets/js/jquery.serialize-object.min.js');?>"></script-->
     <script src="<?= base_url('assets/js/main.js');?>"></script>
 		

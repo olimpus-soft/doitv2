@@ -63,6 +63,7 @@ class Index extends BaseController {
       $oferta->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_filename))));
       $oferta->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_image))));
     }//*/
+    $ofertasModel = new Ofertas();
     $categoriaOfertasModel = new CategoriaOfertas();
     $categories = $categoriaOfertasModel->asObject()
       ->where('status', '1')
@@ -72,6 +73,12 @@ class Index extends BaseController {
     ;
     foreach ($categories as &$category) {
       $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+      $category->cntOfertas = $ofertasModel->asObject()
+        ->where('status', '1')
+        ->where('oferta_categoria', $category->id)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ; 
     }
     /**
      * [$equipoModel description]
@@ -635,7 +642,7 @@ class Index extends BaseController {
         $ext = end($ext);
         $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
         $offer->oferta_fileextension  = $ext;
-        $offer->oferta_fileMimeType  = mime_content_type($filePath);
+        $offer->oferta_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
         $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
         $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
       }
