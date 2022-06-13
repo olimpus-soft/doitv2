@@ -15,6 +15,7 @@ use App\Models\CategoriaOfertas;
 use App\Models\Agents;
 use App\Models\AgentsContacts;
 use App\Models\News;
+use App\Models\Geleria;
 use \DateTime;
 use \Exception;
 use Config\Kint;
@@ -154,16 +155,58 @@ class Index extends BaseController {
     ]);
   }
 
+  public static function hashBucketFilemname($arg1, $arg2=null, $arg3=null, $arg4=null) {
+    $filePath = '';
+    $cleanChars = ['.'];
+    if($arg1 && !empty($arg1)) {
+      foreach ($cleanChars as $char) {
+        $arg1 = ltrim($arg1, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg1;
+    }
+    if($arg2 && !empty($arg2)) {
+      foreach ($cleanChars as $char) {
+        $arg2 = ltrim($arg2, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg2;
+    }
+    if($arg3 && !empty($arg3)) {
+      foreach ($cleanChars as $char) {
+        $arg3 = ltrim($arg3, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg3;
+    }
+    if($arg4 && !empty($arg4)) {
+      foreach ($cleanChars as $char) {
+        $arg4 = ltrim($arg4, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg4;
+    }
+    return strrev(str_replace('=', '', base64_encode($filePath)));
+  }
+
+  public function getBucketFile($arg1, $arg2=null, $arg3=null, $arg4=null) {
+    $fileHash = self::hashBucketFilemname($arg1, $arg2, $arg3, $arg4);
+    $fileName = strrev(str_replace('=', '', base64_encode(basename(base64_decode(strrev($fileHash))))));
+    return $this->getFile($fileHash, $fileName, false);
+  }
+
+  public function getBucketCFile($arg1, $arg2=null, $arg3=null, $arg4=null) {
+    $fileHash = self::hashBucketFilemname($arg1, $arg2, $arg3, $arg4);
+    $fileName = strrev(str_replace('=', '', base64_encode(basename(base64_decode(strrev($fileHash))))));
+    return $this->getFile($fileHash, $fileName, true);
+  }
+
   public function getFile($fileHash, $downloadName=null, $buffer=false) {
     try {
       $fileName = base64_decode(strrev($fileHash));
       $filePath = $this->basePath.$fileName;
-      if(!file_exists($filePath)) {
+      if(!file_exists($filePath) && is_file($filePath)) {
         throw new Exception(lang('Doit.fileInvalid').' '.$fileHash);
       }
       if ($buffer) {
         header("Content-Type: ".mime_content_type($filePath));
-        header("Content-Disposition: inline; filename=" . urlencode($fileName));
+        header("Content-Disposition: inline; filename=" . urlencode(basename($fileName)));
         header("Content-Description: File Transfer");
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
@@ -736,6 +779,54 @@ class Index extends BaseController {
       'destino' => $destino,
       'experienceYears' => $difDF->y,
     ]);
+  }
+
+  public function getHomeGalery($section='home') {
+    $result = [
+      'status' => false,
+      'message' => '',
+      'data' => [],
+    ];
+    try {
+      if(!$section || empty($section)) {
+        $section = 'home';
+      }
+      $galeriaModel = new Geleria();
+      $result['data'] = $galeriaModel->asObject()
+        ->where('status', '1')       
+        ->where('section', $section)
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ;
+      foreach ($result['data'] as &$imagen) {
+        if($imagen->recurso_tipo_destino == 'local') {
+          $imagen->recurso = base_url('bucketC/'.$imagen->recurso);
+        }
+      }
+      helper('filesystem');
+      $files = get_filenames($this->basePath.'/galeria', true);
+      foreach ($files as $file) {
+        if(file_exists($file) && is_file($file)) {
+          $mime = mime_content_type($file);
+          if(strstr($mime, 'image/')) {
+            $result['data'][] = [
+              'section'               => $section,
+              'recurso'               => base_url('bucketC/'.str_replace($this->basePath, '', $file)),
+              'recurso_titulo'        => basename($file),
+              'recurso_descripcion'   => mime_content_type($file),
+              'recurso_tipo'          => 'image',
+              'recurso_tipo_destino'  => 'local',
+            ];
+          }
+        }
+      }
+      $result['status'] = count($result['data']) > 0;
+    } catch (Exception $e) {
+      $result['status'] = false;
+      $result['message'] = $e->getMessage();
+      $result['data'] = null;
+    }
+    return $this->response->setJSON($result);
   }
 }
   

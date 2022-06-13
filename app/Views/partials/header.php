@@ -4,6 +4,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= COMPANY_ANALITYCS_KEY;?>"></script>
     <script>
+        window.baseUrl = "<?= base_url(); ?>";
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('config', '<?= COMPANY_ANALITYCS_KEY;?>');
@@ -159,9 +160,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/aos.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/slick.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/js/slideshow/prettyPhoto.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/js/slider/tiny-slider.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
