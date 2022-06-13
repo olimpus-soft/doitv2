@@ -5,7 +5,7 @@ $(function() {
     //===== Prealoder
     
     $(window).on('load', function(event) {
-        $('.preloader').delay(200).fadeOut(300);
+        $('.preloader').delay(100).fadeOut(200);
     });
     
     
@@ -99,7 +99,7 @@ $(function() {
     //===== AOS
     
      AOS.init({
-         duration: 500,
+         duration: 100,
      });
     
     
@@ -332,8 +332,8 @@ $(function() {
         mobileFirst: true,
         draggable: true,
         pauseOnDotsHover: true,
-        centerMode: true,
-        centerPadding: '60px',
+        //centerMode: true,
+        //centerPadding: '60px',
         arrows: true,
         //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
         //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
@@ -358,4 +358,50 @@ $(function() {
         ]
       });
     }    
+
+
+    setTimeout(() => {
+      $.ajax({
+        url: window.baseUrl + '/getGallery',
+        type: 'post',
+        data: {},
+        success: function (data) {
+          if(data && data.status && data.data.length > 0) {
+            var $UlGalery = '<ul class="gallery slideshow">';
+            $.each(data.data, (i, o) => {
+              if(o.recurso_tipo == 'image') {
+                //$('#gallery-home').append('<img alt="' + o.recurso_titulo + '" src="' + o.recurso + '" data-image="' + o.recurso + '" data-description="' + o.recurso_descripcion + '">');
+                $UlGalery += '<li><a href="' + o.recurso + '" rel="prettyPhoto[gallery-home]"><img src="' + o.recurso + '" width="60" height="60" alt="' + o.recurso_titulo + '" /></a></li>';
+              }
+              if(o.recurso_tipo == 'video') {
+                if(o.recurso.indexOf('youtube.com') > 0) {
+                  $UlGalery += '<li><a href="' + o.recurso + '" rel="prettyPhoto[gallery-home]" title="' + o.recurso_titulo + '"><img src="' + window.baseUrl + '/assets/images/favicon.png" width="60" alt="' + o.recurso_titulo + '" /></a></li>';
+                  //let videoId = o.recurso.substr(o.recurso.indexOf('v='));
+                  //$('#gallery-home').append('<img alt="' + o.recurso_titulo + '" data-type="youtube" data-videoid="' + videoId +'" data-image="' + o.recurso + '" data-description="' + o.recurso_descripcion + '">');                  
+                } else {
+                  $UlGalery += '<li><a href="' + o.recurso + '" rel="prettyPhoto[gallery-home]" title="' + o.recurso_titulo + '"><img src="' + window.baseUrl + '/assets/images/favicon.png" width="60" alt="' + o.recurso_titulo + '" /></a></li>';
+                  //$('#gallery-home').append('<img alt="' + o.recurso_titulo + '" src="' + window.baseUrl + 'assets/images/favicon.png" data-type="html5video"  data-image="' + window.baseUrl + 'assets/images/favicon.png" data-videoogv="' + o.recurso + '" data-videowebm="' + o.recurso + '" data-videomp4="' + o.recurso + '" data-description="' + o.recurso_descripcion + '">');
+                }
+              }
+            });
+            $UlGalery+= '</ul>';
+            $("#gallery-home").append($UlGalery );
+            $("#gallery-home a[rel^='prettyPhoto']").prettyPhoto({
+              animation_speed:'normal',
+              theme:'facebook',
+              slideshow:10000, 
+              autoplay_slideshow: false,
+              social_tools: '<div class="pp_social"><div class="twitter"><a target="_blank" href="http://twitter.com/share?text=Me encanto este sitio, perfecto para viajar&url='+window.baseUrl+'&hashtags=DoIt,Cuba,Viajes,Turismo,doitviajesyturismo" class="twitter-share-button" data-count="none">Tweet</a></div><div class="facebook"><iframe src="http://www.facebook.com/plugins/like.php?locale=es&href='+location.href+'&amp;layout=button_count&amp;show_faces=true&amp;width=500&amp;action=like&amp;font&amp;colorscheme=light&amp;height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:500px; height:23px;" allowTransparency="true"></iframe></div></div>' /* html or false to disable */
+            });
+            /*var galleryApi = $("#gallery-home").unitegallery({
+              //gallery_skin:"alexis",       //it's the default skin
+              //slider_bullets_skin: "alexis",   //example how to change only skin for slider bullets
+              tiles_type:"nested",
+              tiles_nested_optimal_tile_width:200,
+            }); 
+            galleryApi.play();*/
+          }
+        }
+      });
+    }, 5000)
 });

@@ -31,7 +31,7 @@
           </div>
         </div>
 			</div>
-			<div class="row justify-content-center categoria-oferta-container">
+			<div class="row categoria-oferta-container">
 						<?php
 						  $i = 0;
 							foreach ($categories as &$category) {

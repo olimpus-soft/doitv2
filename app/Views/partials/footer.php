@@ -19,6 +19,7 @@
     <script src="<?= base_url('assets/js/slider/tiny-slider.js');?>"></script>
     <script src="<?= base_url('assets/js/slider/tiny-slider.helper.ie8.js');?>"></script>
     <script src="<?= base_url('assets/js/numscroller-1.0.js');?>"></script>
+    <script src="<?= base_url('assets/js/slideshow/jquery.prettyPhoto.js');?>"></script>
     <!--script src="<?= base_url('assets/js/jquery.serialize-object.min.js');?>"></script-->
     <script src="<?= base_url('assets/js/main.js');?>"></script>
 		
@@ -69,13 +70,13 @@
 			      xfbml      : true,
 			      status      : true,
 			      version    : 'v13.0',
-			      autoLogAppEvents : true
+			      autoLogAppEvents : false,
 			    });
 			        
 			    FB.getLoginStatus(function(response) {
 				    console.info('statusChangeCallback', response);
 				});  
-		  	};
+		  	};//*/
 		</script>
 		<!-- END: CUSTTOM JS FOR PAGE FROM ADDSCRIPTS-->
 		<!-- CUSTTOM JS FOR PAGES-->
