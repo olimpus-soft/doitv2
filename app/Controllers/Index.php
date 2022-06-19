@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Objetivos;
 use App\Models\ObjetivosDetalles;
 use App\Models\Ofertas;
+use App\Models\Charters;
 use App\Models\ContactType;
 use App\Models\Destinos;
 use App\Models\DestinoDetalles;
@@ -65,6 +66,7 @@ class Index extends BaseController {
       $oferta->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_image))));
     }//*/
     $ofertasModel = new Ofertas();
+    $chartersModel = new Charters();
     $categoriaOfertasModel = new CategoriaOfertas();
     $categories = $categoriaOfertasModel->asObject()
       ->where('status', '1')
@@ -74,12 +76,19 @@ class Index extends BaseController {
     ;
     foreach ($categories as &$category) {
       $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
-      $category->cntOfertas = $ofertasModel->asObject()
+      $cntOfertas = $ofertasModel->asObject()
         ->where('status', '1')
         ->where('oferta_categoria', $category->id)
         ->orderBy('id', 'ASC')
         ->countAllResults()
-      ; 
+      ;
+      $cntCharters = $chartersModel->asObject()
+        ->where('status', '1')
+        ->where('charter_categoria', $category->id)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ;
+      $category->cntOfertas =  $cntOfertas + $cntCharters;
     }
     /**
      * [$equipoModel description]
@@ -523,6 +532,8 @@ class Index extends BaseController {
       'viewPart' => 'charter-page',
       'cntDestinations' => $this->cntDestinations,
       'experienceYears' => $difDF->y,
+      'charterTitle' => $charterTitle,
+      'rawBodyEmail' => '',
       'contacTypes' => $contacTypes,
     ]);
   }
@@ -689,6 +700,41 @@ class Index extends BaseController {
         $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
         $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
       }
+
+
+      $charters = $db
+        ->table('charters AS ot')
+        ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+        ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
+        ->where('ot.status', '1')
+        ->where('oc.status', '1')
+        ->where('ot.charter_lang', $this->locale)
+        ->where('oc.categoria_lang', $this->locale);
+      if(!empty($categoria)) {
+        $charters = $charters->where('oc.categoria_slug', $categoria);
+      }
+      if(!empty($oferta)) {
+        $charters = $charters->where('ot.charter_slug', $oferta);
+      }
+      $charters = $charters->orderBy('ot.charter_orden', 'ASC')
+        ->orderBy('ot.charter_titulo', 'ASC')
+        ->orderBy('ot.id', 'ASC')
+        //->getCompiledSelect()
+        ->get()
+        ->getResult()
+      ;
+
+      foreach ($charters as &$charter) {
+        $ext = explode('.', $charter->charter_file);
+        $filePath = $this->basePath.$charter->charter_file;
+        $ext = end($ext);
+        $charter->charter_filename  = trim($charter->charter_titulo).'.'.$ext;
+        $charter->charter_fileextension  = $ext;
+        $charter->charter_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
+        $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
+        $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
+      }
+
       $categoriaOfertasModel = new CategoriaOfertas();
       $categories = $categoriaOfertasModel->asObject()
         ->where('status', '1')
@@ -739,6 +785,7 @@ class Index extends BaseController {
         'contacTypes' => $contacTypes,
         'category' => $categories,
         'offers' => $offers,
+        'charters' => $charters,
         'experienceYears' => $difDF->y,
       ]);
     } else if(!empty($categoria) && !empty($oferta)) {

@@ -320,7 +320,7 @@ $(function() {
     
     if($('#categories .categoria-oferta > .card').length > 0) {
       $.sameHeight('#categories .categoria-oferta > .card');
-      $('#categories .categoria-oferta-container').slick({
+      /*$('#categories .categoria-oferta-container').slick({
         dots: true,
         loop: true,
         infinite: false,
@@ -356,6 +356,57 @@ $(function() {
               }
             }
         ]
+      });//*/
+       var categoriesSlider = tns({
+        container: '#categoria-oferta-container',
+        items: 3,
+        edgePadding: 50,
+        gutter: 50,
+        slideBy: "page",
+        mouseDrag: true,
+        viewportMax:true,
+        swipeAngle: false,
+        speed: 1000,
+        loop: true,
+        center: true,
+        controlsContainer: false,
+        prevButton: '#categories-control-prev',
+        nextButton: '#categories-control-next',
+        lazyload: true,
+        controls: true,
+        autoplayButton: '#categories-autoplay-toggle',
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 3500,
+        autoplayText: [
+          '<i class="fa fa-play">',
+          '<i class="fa fa-stop">'
+        ],
+        responsive: {
+          576: {
+            gutter:5,
+            items: 1,
+            viewportMax:true,
+          },
+          768: {
+            viewportMax:true,
+            items: 1
+          },
+          992: {
+            viewportMax:true,
+            items: 2
+          },
+          1200: {
+            gutter:30,
+            viewportMax:true,
+            items: 3
+          },
+          1400: {
+            gutter:-30,
+            viewportMax:false,
+            items: 3
+          }
+        }
       });
     }    
 

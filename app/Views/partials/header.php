@@ -156,7 +156,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/js/v5/css/bootstrap.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/LineIcons.css');?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/animate.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/animate.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/aos.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/slick.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">

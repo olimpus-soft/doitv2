@@ -44,17 +44,25 @@ echo view('partials/header');
 	if($offers && is_array($offers) && count($offers) > 0 ) {
 		foreach ($offers as $offer) {
 ?>
+
 				<!--====== <?= $offer->oferta_titulo; ?> PART START ======-->
-				<div class="col-sm-6 pb-30 pt-30">
-			    <div class="card text-center oferta" id="oferta-id-<?= $offer->id; ?>">
-			    	<img class="card-img-top" src="<?= $offer->oferta_image; ?>" alt="<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_titulo); ?>">
-			      <div class="card-body">
-			        <h5 class="card-title"><?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_titulo); ?></h5>
-			        <p class="card-text"><?= !empty($offer->oferta_subtitulo)?'<span class="project-subtitle">'.str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_subtitulo).'</span>':''; ?></p>
-			        <a target="_self" href="<?= base_url('oferta/'. $offer->categoria_slug . '/' . $offer->oferta_slug . '?utm_source=doit&utm_medium=web&utm_campaign=ofertas-bycategories&utm_term=all&utm_content='. $offer->categoria_slug ); ?>" class="main-btn"><?= lang('Doit.seeMore'); ?></a>
-			      </div>
-			    </div>
-			  </div>
+				<div class="col-lg-4 justify-content-center py-4 oferta" id="oferta-id-<?= $offer->id; ?>">
+					<div class="single-project">
+						<?php if($offer->oferta_favorita > 0 ) { ?>
+							<span class="starred"><i class="fas fa-star"></i></span>
+						<?php } ?>
+						<div class="project-image">
+							<img src="<?= $offer->oferta_image; ?>" alt="<?= $offer->oferta_titulo; ?>">
+						</div>
+						<div class="project-content">
+							<a class="project-title" target="_self" href="<?= base_url('oferta/'. $offer->categoria_slug .'/'. $offer->oferta_slug .'?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content='. $offer->categoria_slug .'/'. $offer->oferta_slug ); ?>">
+								<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_titulo); ?>
+							</a>
+							<?= !empty($offer->oferta_subtitulo)?'<span class="project-subtitle">'.str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_subtitulo).'</span>':''; ?>
+							<?= !empty($offer->oferta_subtitulo)?'<span class="project-subtitle categoria">'.str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->categoria).'</span>':''; ?>
+						</div>
+					</div>
+				</div>
 				<!--====== <?= $offer->oferta_titulo; ?> PART ENDS ======-->
 <?php
 		} //foreach ($offers as $offer) 

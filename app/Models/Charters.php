@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Ofertas extends Model
+class Charters extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'ofertas';
+    protected $table            = 'charters';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'oferta_titulo', 'oferta_subtitulo', 'oferta_categoria', 'oferta_lang', 'oferta_file', 'oferta_file_type', 'oferta_image', 'oferta_favorita', 'oferta_orden', 'status', 'created_at', 'updated_at' ];
+    protected $allowedFields    = ['id', 'charter_titulo', 'charter_categoria', 'charter_subtitulo', 'charter_resumen', 'charter_lang', 'charter_slug', 'charter_image', 'charter_favorito', 'charter_orden', 'charter_plans', 'charter_description', 'charter_itinerary', 'charter_conditions', 'charter_file', 'charter_file_type', 'status'];
 
     // Dates
     protected $useTimestamps = false;

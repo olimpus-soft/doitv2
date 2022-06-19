@@ -1489,8 +1489,12 @@ p.form-message.error,
   text-shadow: 1px 1px 2px  var(--primary);
   padding: 5px;
 }
+.single-project:hover  span.starred {
+  animation: heartBeat 2s infinite;
+}
 
 #page-all-destinos .destino .single-project .project-content,
+#page-all-offers-bycategories .oferta .single-project .project-content,
 #page-all-offers .oferta .single-project .project-content {
   opacity: 1;
   -webkit-transform: translateY(0%);

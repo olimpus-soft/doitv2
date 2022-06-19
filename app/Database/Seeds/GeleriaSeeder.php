@@ -4,7 +4,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class Geleria extends Seeder {
+class GeleriaSeeder extends Seeder {
   protected $tableName = 'geleria';
   public function run() {
     $data = [

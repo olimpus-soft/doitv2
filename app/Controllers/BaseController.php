@@ -54,7 +54,7 @@ class BaseController extends Controller {
   public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger) {
       // Do Not Edit This Line
       parent::initController($request, $response, $logger);
-      $this->locale = $this->request->getLocale();
+      $this->locale = 'es'; //$this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
       $paramsModel = new Parameters();
       $parameters = $paramsModel->asObject()
