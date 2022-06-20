@@ -77,6 +77,21 @@ $routes->get('oferta/(:any)', 'Index::getOferta/$1');
 $routes->get('oferta/(:any)/(:any)', 'Index::getOferta/$1/$2');
 $routes->get('disfruta-nuestro-charter', 'Index::getCharterOffer');
 $routes->get('plan-charter', 'Index::getCharterOffer');
+$routes->get('agent/getVcard/(:any)', 'Index::getAgentVcard/$1');
+$routes->get('charter/(:any)', 'Index::getCharterDetail/$1');
+
+
+$routes->get('bucket/(:any)', 'Index::getBucketFile/$1');
+$routes->get('bucket/(:any)/(:any)', 'Index::getBucketFile/$1/$2');
+$routes->get('bucket/(:any)/(:any)/(:any)', 'Index::getBucketFile/$1/$2/$3');
+
+$routes->get('bucketC/(:any)', 'Index::getBucketCFile/$1');
+$routes->get('bucketC/(:any)/(:any)', 'Index::getBucketCFile/$1/$2');
+$routes->get('bucketC/(:any)/(:any)/(:any)', 'Index::getBucketCFile/$1/$2/$3');
+
+$routes->post('getGallery', 'Index::getHomeGalery');
+$routes->post('getGallery/(:any)', 'Index::getHomeGalery/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

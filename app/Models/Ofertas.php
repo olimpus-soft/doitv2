@@ -14,7 +14,7 @@ class Ofertas extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'oferta_titulo', 'oferta_subtitulo', 'oferta_lang', 'oferta_file', 'oferta_image', 'oferta_favorita', 'oferta_orden', 'status', 'created_at', 'updated_at' ];
+    protected $allowedFields    = [ 'id', 'oferta_titulo', 'oferta_subtitulo', 'oferta_categoria', 'oferta_lang', 'oferta_file', 'oferta_file_type', 'oferta_image', 'oferta_favorita', 'oferta_orden', 'status', 'created_at', 'updated_at' ];
 
     // Dates
     protected $useTimestamps = false;

@@ -1,7 +1,5 @@
 <?php
-$charterTitle = 'Santa Clara, Ciudad y Playa';
-$fileCharter = '/assets/images/project/curent_charter.jpg';
-$rawBodyEmail = rawurlencode('Hola, <span style="color:#ff7f00;">' . COMERCIALNAME . '</span>!<br><br>Envio los documentos adjuntos y la información sobre la reserva para el charter:<br><b>'.$charterTitle.'</b><br><br>Un Saludo.<br>--<br>');
+
 ?>
 
 <section id="page-charter-page" class="services-area pt-125 pb-90 gray-bg">

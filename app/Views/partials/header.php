@@ -1,9 +1,23 @@
+<?php
+if(
+    (isset($statusCode) 
+    && $statusCode >= 400 
+    && (
+        !isset($aditionalTitle) 
+        || 
+        (isset($aditionalTitle) && empty($aditionalTitle))
+    )
+    )) {
+    $aditionalTitle = lang('Doit.hasOcurredError');
+}
+?>
 <!DOCTYPE html>
-<html lang="<?= $locale; ?>">
+<html lang="<?= $locale ?? 'es'; ?>">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= COMPANY_ANALITYCS_KEY;?>"></script>
     <script>
+        window.baseUrl = "<?= base_url(); ?>";
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('config', '<?= COMPANY_ANALITYCS_KEY;?>');
@@ -38,9 +52,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="author" content="<?= DEV_AUTHOR; ?>">
     <meta name="type" content="WebApp">
-    <meta name="application-name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
+    <meta name="application-name" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP;?>" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:'');?>" />
+    <meta name="apple-mobile-web-app-title" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP;?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="revisit-after" content="periode" />
     <meta name="copyright" content="<?= DEV_COMPANY;?>" />
@@ -79,34 +93,34 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="<?= CONTACT_TW; ?>" />
-    <meta name="twitter:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta name="twitter:title" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>">
     <meta name="twitter:creator" content="<?= DEV_TW_PROFILE;?>" />
     <meta name="twitter:description" content="<?= COMPANY_DESC; ?>">
-    <meta name="twitter:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta name="twitter:image:alt" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>">
     <meta name="twitter:image:src" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta itemprop="name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
+    <meta itemprop="name" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>">
     <meta itemprop="description" content="<?= COMPANY_DESC; ?>">
     <meta itemprop="image" content="<?= base_url(SOCIAL_IMG); ?>">
 
-    <meta property="og:title" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:title" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>" />
     <meta property="og:description" content="<?= COMPANY_DESC; ?>" />
     <meta property="og:url" content="<?= base_url(); ?>" />
     <meta name="og:image" content="<?= base_url(SOCIAL_IMG); ?>">
     <meta name="og:url" content="<?= base_url(); ?>">
-    <meta name="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>">
-    <meta property="og:site_name" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta name="og:site_name" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>">
+    <meta property="og:site_name" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>" />
     <meta name="og:locale" content="es-419">
 
     <meta name="og:type" content="business.business">
     <meta property="og:type" content="business.business" />
-    <meta property="og:publisher" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:publisher" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>" />
 
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>" />
+    <meta property="og:image:alt" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>" />
     <meta property="og:locale" content="es_LA">
-    <!--meta name="og:video" content="<?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?>"-->
+    <!--meta name="og:video" content="<?= (isset($aditionalTitle)&&!empty($aditionalTitle)?$aditionalTitle.' - ':'').TITLEAPP; ?>"-->
     <meta property="og:publisher" content="<?= DEV_COMPANY;?>" />
     <meta property="og:type" content="business.business" />
     <meta property="og:type" content="website" />
@@ -142,24 +156,29 @@
     <link rel="shortcut icon" href="<?= base_url(FAVICON);?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url(FAVICON);?>">
 
+    <link rel="canonical" href="<?= CANNONICAL_URL; ?>?utm=doit&id=doitviajesyturismo" />
+
     <meta name="theme-color" content="<?= MAIN_COLOR;?>">
     <meta name="msapplication-TileColor" content="<?= MAIN_COLOR;?>">
     <meta name="apple-mobile-web-app-status-bar-style" content="<?= MAIN_COLOR;?>" />  
 
     <link rel="manifest" href="<?= base_url('manifest.json');?>">
 
-    <title><?= TITLEAPP.(defined('ADITIONAL_TITLE')?ADITIONAL_TITLE:''); ?></title>
+    <title><?= (isset($aditionalTitle) && !empty($aditionalTitle) ? $aditionalTitle .' - ' : '').TITLEAPP; ?></title>
 
 	<!-- core CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
+    <!--link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet"-->
+    <link rel="stylesheet" href="<?= base_url('assets/js/v5/css/bootstrap.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/LineIcons.css');?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/animate.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/animate.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/aos.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/slick.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/js/slideshow/prettyPhoto.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/js/slider/tiny-slider.css');?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css');?>" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/ie8-responsive-file-warning.js"></script>
     <![endif]-->

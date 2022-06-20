@@ -24,7 +24,7 @@ echo view('partials/header');
 	
 
 	<?php
-	echo view('home/header-no-banner');
+	echo view('home/header');
 	?>
 	<?php
 	if($offer) {
@@ -40,9 +40,9 @@ echo view('partials/header');
 					</div>
 				</div> <!-- row -->
 				<div class="row justify-content-center text-justify">
-					<div class="col-lg-12 justify-content-center text-center pb-30">
+					<!--div class="col-lg-12 justify-content-center text-center pb-30">
 						<img alt="<?= $offer->oferta_titulo;?>" src="<?= $offer->oferta_image;?>" data-image="<?= $offer->oferta_image;?>" data-description="<?= !empty($offer->oferta_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_subtitulo) : ''; ?>">
-					</div>
+					</div-->
 					<div class="col-lg-12 justify-content-center text-center pb-30">
 						<?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_resumen);?>
 					</div>

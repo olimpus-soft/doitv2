@@ -47,6 +47,11 @@ class Ofertas extends Migration {
         'NULL'           => TRUE,
         'default'        => NULL,
       ],
+      'oferta_file_type'      => [
+        'type'           => 'ENUM',
+        'constraint'     => ['local', 'url'],
+        'default'        => 'local',
+      ],
       'oferta_slug'      => [
         'type'           => 'VARCHAR',
         'constraint'     => '200',

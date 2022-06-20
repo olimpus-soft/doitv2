@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
 use App\Models\Destinos;
+use App\Models\ContactType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use \DateTime;
@@ -37,6 +38,7 @@ class BaseController extends Controller {
   protected $encryption;
   protected $foudDateTime;
   protected $foudDiffDate;
+  public $viewParams = [];
   protected $cntDestinations;
 
   /**
@@ -54,7 +56,7 @@ class BaseController extends Controller {
   public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger) {
       // Do Not Edit This Line
       parent::initController($request, $response, $logger);
-      $this->locale = $this->request->getLocale();
+      $this->locale = 'es'; //$this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
       $paramsModel = new Parameters();
       $parameters = $paramsModel->asObject()
@@ -123,6 +125,16 @@ class BaseController extends Controller {
       ], true);
       die();
       */
+    $this->viewParams = [
+      'noBanner'        => true,
+      'menuUrl'         => false,
+      'locale'          => $this->locale,
+      'experienceYears' => $this->foudDiffDate->y,
+      'cntDestinations' => $this->cntDestinations,
+      'contentScripts'  => '',
+      'statusCode'      => 200,
+      'aditionalTitle'  => null,
+    ];
   }
 
   public static function validateReCaptcha($token, $action, &$arrResponse =[]) {
@@ -458,5 +470,16 @@ class BaseController extends Controller {
         date('01/02/Y', strtotime(FOUND_DATE)),
       ]
     ];
+  }
+
+  public function getContactType() {
+    $contacTypesModel = new ContactType();
+    $contacTypes = $contacTypesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+    return $contacTypes;
   }
 }
