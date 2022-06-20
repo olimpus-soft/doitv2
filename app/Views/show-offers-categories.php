@@ -24,7 +24,7 @@ echo view('partials/header');
 	
 
 	<?php
-	echo view('home/header-no-banner');
+	echo view('home/header');
 	?>
 	<?php
 	if($categories && is_array($categories) && count($categories) > 0 ) {

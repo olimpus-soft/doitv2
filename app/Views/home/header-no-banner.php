@@ -44,7 +44,7 @@
 									<a class="page-scroll" hash="#objetivos" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#objetivos?utm_source=doit&utm_medium=web&utm_campaign=objetivos&utm_term=all&utm_content="><?= lang('Doit.objectives'); ?></a>
 								</li>
 								<li class="nav-item">
-									<a class="page-scroll" hash="#ofertas" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#cc?utm_source=doit&utm_medium=web&utm_campaign=ofertas&utm_term=all&utm_content="><?= lang('Doit.offers'); ?></a>
+									<a class="page-scroll" hash="#ofertas" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#ofertas?utm_source=doit&utm_medium=web&utm_campaign=ofertas&utm_term=all&utm_content="><?= lang('Doit.offers'); ?></a>
 								</li>
 								<?php
 								if($cntDestinations > 0) { 

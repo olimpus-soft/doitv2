@@ -197,15 +197,12 @@ $(function() {
 
     $.extend({
       sameHeight: (selector) => {
-        console.log(selector);
         if($(selector).length > 0) {
           let objsSelector = $(selector);
           let minHeight = 0;
           let auxHeight = 0;
-          console.log(selector, objsSelector);
           for (var i = objsSelector.length - 1; i >= 0; i--) {
             auxHeight = $(objsSelector[i]).height();
-            console.log(selector, auxHeight, minHeight, auxHeight > minHeight, $(objsSelector[i]));
             if( auxHeight > minHeight) {
               minHeight = auxHeight; 
             }
@@ -263,17 +260,21 @@ $(function() {
     }
     
     if($('#news .news-slider > .news').length > 0) {
-      $.sameHeight('#news .news-slider > .news > .new');
+      
       var newsSlider = tns({
         container: '#news-slider',
-        items: 2,
-        edgePadding: 50,
-        gutter: 50,
-        slideBy: "page",
+        items: 3,
+        slideBy: 1,
+        edgePadding: 0,
+        gutter: 0,
+        //slideBy: "page",
+        rewind: true,
+        autoHeight: true,
+        responsive: true,
         mouseDrag: true,
-        viewportMax:true,
+        viewportMax:false,
         swipeAngle: false,
-        speed: 1000,
+        speed: 2000,
         loop: true,
         center: true,
         controlsContainer: false,
@@ -293,19 +294,19 @@ $(function() {
           576: {
             gutter:5,
             items: 1,
-            viewportMax:true,
+            viewportMax:false,
           },
           768: {
-            viewportMax:true,
+            viewportMax:false,
             items: 1
           },
           992: {
-            viewportMax:true,
+            viewportMax:false,
             items: 2
           },
           1200: {
             gutter:30,
-            viewportMax:true,
+            viewportMax:false,
             items: 2
           },
           1400: {
@@ -314,13 +315,14 @@ $(function() {
             items: 2
           }
         }
-      });
+      });//*/
+      //$.sameHeight('#news .news-slider > .news > .card');
     }
 
     
     if($('#categories .categoria-oferta > .card').length > 0) {
       $.sameHeight('#categories .categoria-oferta > .card');
-      $('#categories .categoria-oferta-container').slick({
+      /*$('#categories .categoria-oferta-container').slick({
         dots: true,
         loop: true,
         infinite: false,
@@ -356,6 +358,61 @@ $(function() {
               }
             }
         ]
+      });//*/
+       var categoriesSlider = tns({
+        container: '#categoria-oferta-container',
+        items: 3,
+        slideBy: 1,
+        edgePadding: 0,
+        gutter: 0,
+        //slideBy: "page",
+        rewind: true,
+        autoHeight: true,
+        responsive: true,
+        mouseDrag: true,
+        viewportMax:false,
+        swipeAngle: false,
+        speed: 1000,
+        loop: true,
+        center: true,
+        controlsContainer: false,
+        prevButton: '#categories-control-prev',
+        nextButton: '#categories-control-next',
+        lazyload: true,
+        controls: true,
+        autoplayButton: '#categories-autoplay-toggle',
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 3500,
+        autoplayText: [
+          '<i class="fa fa-play">',
+          '<i class="fa fa-stop">'
+        ],
+        responsive: {
+          576: {
+            gutter:5,
+            items: 1,
+            viewportMax:true,
+          },
+          768: {
+            viewportMax:true,
+            items: 1
+          },
+          992: {
+            viewportMax:true,
+            items: 2
+          },
+          1200: {
+            gutter:30,
+            viewportMax:true,
+            items: 3
+          },
+          1400: {
+            gutter:-30,
+            viewportMax:false,
+            items: 3
+          }
+        }
       });
     }    
 

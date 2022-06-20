@@ -36,7 +36,7 @@ if($news && is_array($news) && count($news) > 0 ) {
 	foreach ($news as $new) {
 ?>
 					<!--====== <?= $new->title; ?> PART START ======-->
-					<div class="col-sm-6 justify-content-center news" id="new-id-<?= $new->id; ?>">
+					<!--div class="col-sm-4 justify-content-center news" id="new-id-<?= $new->id; ?>">
 						<div class="new">
 							<div class="row col-sm-12">
 		            <div class="image-wrapper col-sm-6 d-sm-none d-md-block">
@@ -53,7 +53,26 @@ if($news && is_array($news) && count($news) > 0 ) {
 		          	</div>
 	          	</div>
 	          </div>
-					</div>
+					</div-->
+
+					<div class="justify-content-center news" id="new-id-<?= $new->id; ?>">
+						<div class="card new">
+							<?php if(!empty($new->photo)) { ?>
+							<div class="image-wrapper d-sm-none d-md-block justify-content-center">
+						  	<img src="<?= $new->photo; ?>" class="img" alt="<?= $new->title; ?>">
+						  </div>
+						<?php } ?>
+						  <div class="card-body">
+						    <h5 class="card-title text-center"><?= $new->title; ?></h5>
+				        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+						    <p class="card-text text-justify"><?= mb_strlen($new->details) > 150 ? substr($new->details, 0, 147).'...' : $new->details; ?></p>
+						    <!--a href="<?= $new->news_link; ?>" target="_blank" class="main-btn d-block">Ver Más</a-->
+						  </div>
+						  <div class="card-footer">
+						    <a href="<?= $new->news_link; ?>" target="_blank" class="main-btn d-block"><?= lang('Doit.seeMore'); ?></a>
+						  </div>
+					  </div>
+				  </div>
 					<!--====== <?= $new->title; ?> PART ENDS ======-->
 <?php
 	} ?>

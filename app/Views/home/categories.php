@@ -31,7 +31,7 @@
           </div>
         </div>
 			</div>
-			<div class="row categoria-oferta-container">
+			<div class="row categoria-oferta-container" id="categoria-oferta-container">
 						<?php
 						  $i = 0;
 							foreach ($categories as &$category) {
@@ -48,7 +48,7 @@
 					      </div>
 					      <div class="card-footer">
                     <a class="d-block" target="_self" href="<?= base_url('oferta/'. $category->categoria_slug .'?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content='. $category->categoria_slug); ?>">
-                    	<small class="text-muted">Ofertas: <b class="numscroller" data-min='0' data-max='<?= $category->cntOfertas; ?>' data-delay='3' data-increment='1'><?= $category->cntOfertas; ?></b></small>
+                    	<small class="text-muted">Ofertas: <b class="numscroller" data-min='0' data-max='<?= $category->cntOfertas; ?>' data-delay='2' data-increment='1'><?= $category->cntOfertas; ?></b></small>
                     </a>
                 </div>
 							</div>
@@ -59,9 +59,9 @@
 						?>
 			</div>
 			<div class="container col-lg-12 text-center">
-				<a class="main-btn mt-25" data-aos="fade-right" data-aos-duration="500" data-aos-offset="-300" data-aos-easing="ease-in-sine"  target="_self" href="<?= base_url('ofertas?utm_source=doit&utm_medium=web&utm_campaign=ofertas-por-categoria&utm_term=all&utm_content=');?>"><?= lang('Doit.all_categories'); ?></a>
-				<a class="main-btn mt-25" data-aos="fade-up" data-aos-duration="500" data-aos-offset="-300" data-aos-easing="ease-in-sine" target="_self" href="<?= base_url('disfruta-nuestro-charter?utm_source=doit&utm_medium=web&utm_campaign=disfruta-nuestro-charter&utm_term=all&utm_content=');?>"><?= lang('Doit.enjoyCharter'); ?></a>
-				<a class="main-btn mt-25" data-aos="fade-left" data-aos-duration="500" data-aos-offset="-300" data-aos-easing="ease-in-sine" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-right" data-aos-duration="500" data-aos-offset="-800"  data-aos-easing="ease-in-sine"  target="_self" href="<?= base_url('ofertas?utm_source=doit&utm_medium=web&utm_campaign=ofertas-por-categoria&utm_term=all&utm_content=');?>"><?= lang('Doit.all_categories'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-up" data-aos-duration="500" data-aos-offset="-700"  data-aos-easing="ease-in-sine" target="_self" href="<?= base_url('disfruta-nuestro-charter?utm_source=doit&utm_medium=web&utm_campaign=disfruta-nuestro-charter&utm_term=all&utm_content=');?>"><?= lang('Doit.enjoyCharter'); ?></a>
+				<a class="main-btn mt-25" data-aos="fade-left" data-aos-duration="500" data-aos-offset="-600" data-aos-easing="ease-in-sine" target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.all_offers'); ?></a>
 			</div>
 		</div>
 	</section>

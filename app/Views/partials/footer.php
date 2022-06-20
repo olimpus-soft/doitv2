@@ -53,7 +53,7 @@
 		?>
     <script>
       var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "<?= FB_APP_ID;?>");
+      chatbox.setAttribute("page_id", "<?= FB_ID_PAGE;?>");
       chatbox.setAttribute("attribution", "biz_inbox");
     </script>
 		<script async defer type="text/javascript">
@@ -69,7 +69,7 @@
 			      cookie     : true,
 			      xfbml      : true,
 			      status      : true,
-			      version    : 'v13.0',
+			      version    : 'v14.0',
 			      autoLogAppEvents : false,
 			    });
 			        
