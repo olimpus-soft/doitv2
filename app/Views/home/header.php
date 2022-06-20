@@ -50,7 +50,7 @@
 									<a class="page-scroll" hash="#ofertas" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#ofertas?utm_source=doit&utm_medium=web&utm_campaign=ofertas&utm_term=all&utm_content="><?= lang('Doit.offers'); ?></a>
 								</li>
 								<?php
-								if($cntDestinations > 0) { 
+								if(isset($cntDestinations) && $cntDestinations > 0) { 
 								?> 
 									<li class="nav-item">
 										<a class="" href="<?= base_url('nuestros-destinos?utm_source=doit&utm_medium=web&utm_campaign=nuestros-destinos&utm_term=all&utm_content=');?>"><?= lang('Doit.destinations'); ?></a>
@@ -71,7 +71,9 @@
 			</div> <!-- row -->
 		</div> <!-- container -->
 	</div> <!-- navigation bar -->
-
+	<?php
+	if((isset($noBanner) && $noBanner === false)) { 
+	?> 
 	<div class="header-banner d-flex align-items-center">
 		<div class="container">
 			<div class="row">
@@ -87,6 +89,10 @@
 		</div> <!-- container -->
 		<div class="banner-image bg_cover" style="background-image: url(<?= base_url('assets/images/banner/banner-image-'.(date('j')).'.jpg');?>)"></div>
 	</div> <!-- header banner -->
+
+	<?php 
+	}
+	?>
 </header>
 
 <!--====== HEADER PART ENDS ======-->

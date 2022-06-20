@@ -85,4 +85,7 @@ return [
     'socialMedia'               => 'Social networks',
     'ourgalery'                 => 'Our Gallery',
     'galery'                    => 'Gallery',
+    'prodError'                 => 'Looks like we\'ve hit a snag. Please try again later...',
+    'hasOcurredError'           => 'An error has occurred',
+    'Whoops'                    => 'Whoops!!',
 ];

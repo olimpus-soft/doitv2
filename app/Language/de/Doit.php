@@ -85,4 +85,7 @@ return [
     'socialMedia'               => 'Soziale Netzwerke',
     'ourgalery'                 => 'Our Gallery',
     'galery'                    => 'Gallery',
+    'prodError'                 => 'Sieht aus, als wären wir auf einen Haken gestoßen. Bitte versuchen Sie es später noch einmal...',
+    'hasOcurredError'           => 'Ein Fehler ist aufgetreten',
+    'Whoops'                    => 'Hoppla!!',
 ];

@@ -944,6 +944,8 @@ p {
         top: 50%;
         left: -60px; }
 
+      .single-project .project-content a .project-subtitle,
+      .single-project .project-content .project-subtitle a,
       .single-project .project-content .project-subtitle {
         font-size: 14px;
         font-weight: 400;
@@ -953,8 +955,11 @@ p {
         margin-right: 30px; 
         width: calc(100% - 30px);
         text-align: right;
+        text-decoration: none !important;
       }
 
+      .single-project .project-content a .project-subtitle.categoria,
+      .single-project .project-content .project-subtitle.categoria a,
       .single-project .project-content .project-subtitle.categoria {
         border: 1px solid;
         text-align: center;
@@ -962,7 +967,13 @@ p {
         background-color: #ffffff;
         font-weight: bold;
         box-shadow: 0px 0px 2px gray;
+        text-decoration: none !important;
       }
+      .single-project .project-content .project-subtitle.categoria a {
+        box-shadow: unset !important;
+        border: none !important;
+      }
+      .single-project .project-content a .project-subtitle::after,
       .single-project .project-content .project-subtitle::after {
         position: absolute;
         content: '';
@@ -1516,6 +1527,7 @@ p.form-message.error,
   opacity: 1;
 }
 
+#page-all-destinos .destino .single-project a .project-subtitle a,
 #page-all-destinos .destino .single-project .project-subtitle a {
   color: white;
 }
@@ -2141,3 +2153,16 @@ section:nth-of-type(even){
   aspect-ratio: auto 50 / 50;
   height: 50px;
 }
+
+
+    .charter .single-project .project-image::before {
+      background: white;
+      background: -webkit-linear-gradient(rgba(255, 255, 255, 0) 50%,  var(--secondary) 100%);
+      background: -o-linear-gradient(rgba(255, 255, 255, 0) 50%,  var(--secondary) 100%);
+      background: linear-gradient(rgba(255, 255, 255, 0) 50%,  var(--secondary) 100%);
+    }
+    .charter .single-project a .project-subtitle:not(.categoria),
+    .charter .single-project .project-subtitle:not(.categoria),
+    .charter .single-project .project-title {
+      text-shadow: 0 0 5px black;
+    }

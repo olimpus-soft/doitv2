@@ -37,6 +37,7 @@ class BaseController extends Controller {
   protected $encryption;
   protected $foudDateTime;
   protected $foudDiffDate;
+  public $viewParams = [];
   protected $cntDestinations;
 
   /**
@@ -123,6 +124,13 @@ class BaseController extends Controller {
       ], true);
       die();
       */
+    $this->viewParams = [
+      'noBanner'        => false,
+      'menuUrl'         => false,
+      'locale'          => $this->locale,
+      'experienceYears' => $this->foudDiffDate->y,
+      'cntDestinations' => $this->cntDestinations,
+    ];
   }
 
   public static function validateReCaptcha($token, $action, &$arrResponse =[]) {

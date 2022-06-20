@@ -57,7 +57,7 @@
 							<li><a target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.about_us'); ?></a></li>
 							<li><a target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.offers'); ?></a></li>
 							<?php
-							if($cntDestinations > 0) { 
+							if(isset($cntDestinations) && $cntDestinations > 0) { 
 							?>
 								<li><a target="_self" href="<?= base_url('nuestros-destinos?utm_source=doit&utm_medium=web&utm_campaign=nuestros-destinos&utm_term=all&utm_content=');?>"><?= lang('Doit.destinations'); ?></a></li>
 							<?php 

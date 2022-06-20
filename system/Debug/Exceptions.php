@@ -228,7 +228,8 @@ class Exceptions
 
         echo(function () use ($exception, $statusCode, $viewFile): string {
             $vars = $this->collectVars($exception, $statusCode);
-            extract($vars, EXTR_SKIP);
+            array_push($vars, $viewFile);
+            extract($vars, EXTR_SKIP);            
 
             ob_start();
             include $viewFile;
@@ -249,13 +250,17 @@ class Exceptions
         }
 
         return [
-            'title'   => get_class($exception),
-            'type'    => get_class($exception),
-            'code'    => $statusCode,
-            'message' => $exception->getMessage() ?? '(null)',
-            'file'    => $exception->getFile(),
-            'line'    => $exception->getLine(),
-            'trace'   => $trace,
+            'title'          => get_class($exception),
+            'type'           => get_class($exception),
+            'code'           => $statusCode,
+            'statusCode'     => $statusCode,
+            'message'        => $exception->getMessage() ?? '(null)',
+            'file'           => $exception->getFile(),
+            'line'           => $exception->getLine(),
+            'trace'          => $trace,
+            'locale'         => $this->request->getLocale(),
+            'aditionalTitle' => lang('Doit.hasOcurredError'),
+            'noBanner'       => false,
         ];
     }
 

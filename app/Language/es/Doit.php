@@ -85,4 +85,7 @@ return [
     'socialMedia'               => 'Redes Sociales',
     'ourgalery'                 => 'Nuestra Galería',
     'galery'                    => 'Galería',
+    'prodError'                 => 'Parece que nos hemos topado con un obstáculo. Por favor, inténtelo de nuevo más tarde...',
+    'hasOcurredError'           => 'Ha ocurrido un error',
+    'Whoops'                    => 'Ups!!',
 ];

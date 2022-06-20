@@ -1,5 +1,10 @@
+<?php
+if(!(isset($statusCode) && $statusCode >= 400 && (!isset($aditionalTitle) || (isset($aditionalTitle) && empty($aditionalTitle))))) {
+    $aditionalTitle = lang('Doit.hasOcurredError');
+}
+?>
 <!DOCTYPE html>
-<html lang="<?= $locale; ?>">
+<html lang="<?= $locale ?? 'es'; ?>">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= COMPANY_ANALITYCS_KEY;?>"></script>
