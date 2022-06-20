@@ -121,13 +121,7 @@ class Index extends BaseController {
       $new->details = strlen($new->details) > 150 ? substr($new->details, 0, 147) . '...' : trim($new->details);
     } 
 
-    $contacTypesModel = new ContactType();
-    $contacTypes = $contacTypesModel->asObject()
-      ->where('status', '1')
-      ->where('lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ; 
+    $contacTypes = $this->getContactType();
 
     $agentsModel = new Agents();
     $agents = $agentsModel->asObject()
@@ -410,9 +404,12 @@ class Index extends BaseController {
             ],
             'cc' => [
               //'Miguel Morales CEO' => 'mmoralesceo1706@gmail.com',
+              'Operaciones' => 'operaciones@doitviajesyturismo.com',
+              'Ejecutivo Comercial' => 'ejecutivocomercial@doitviajesyturismo.com',
             ],
             'cco' => [
               SUPPORT_NAME => CONTACT_EMAIL_SUPPORT,
+              COMERCIALNAME => 'admin@doitviajesyturismo.com',
             ],
             'files' => [
             ],
@@ -452,10 +449,6 @@ class Index extends BaseController {
   }
 
   public function aboutUs() {
-    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.about_us'));
-    $dtF = new DateTime(FOUND_DATE);
-    $dtNow = new DateTime(date('Y-m-d'));
-    $difDF = $dtNow->diff($dtF);
     $aditionalPagesModel = new AditionalPages();
     $aditionalPages = $aditionalPagesModel->asObject()
       ->where('status', '1')
@@ -464,21 +457,14 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
-
-    $destinosModel = new Destinos();
-    $destinos = $destinosModel->asObject()
-      ->where('status', '1')
-      ->where('destino_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->countAllResults()
-    ; 
-    $paramsView = [
+    $this->viewParams = array_merge($this->viewParams, [
       'noBanner'        => false,
       'menuUrl'         => true,
       'viewPart'        => 'about-us',
       'aditionalPages'  => $aditionalPages,
-    ];
-    return view('about-us', $paramsView);
+      'aditionalTitle'  => lang('Doit.about_us'),
+    ]);
+    return view('about-us', $this->viewParams);
   }
 
   public function aditionalPage($pageslug) {
@@ -491,43 +477,59 @@ class Index extends BaseController {
       ->findAll()
     ;
     if(count($aditionalPages) > 0) {
-      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', $aditionalPages[0]->title);
+      $aditionalTitle = $aditionalPages[0]->title;
     }
     $this->viewParams = array_merge($this->viewParams, [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => true,
       'viewPart'        => 'aditional-pages',
-      'aditionalPages'  => $aditionalPages,
+      'aditionalPages'  => $aditionalPages,      
+      'aditionalTitle'  => $aditionalTitle,
     ]);
     return view('about-us', $this->viewParams);
   }
 
   public function getCharterOffer() {
-    $dtF = new DateTime(FOUND_DATE);
-    $dtNow = new DateTime(date('Y-m-d'));
-    $difDF = $dtNow->diff($dtF);
+    $db      = \Config\Database::connect();
+    $charters = $db
+      ->table('charters AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', '1')
+      ->where('oc.status', '1')
+      ->where('ot.charter_lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale)
+      ->orderBy('ot.charter_orden', 'ASC')
+      ->orderBy('ot.charter_titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
 
-    $contacTypesModel = new ContactType();
-    $contacTypes = $contacTypesModel->asObject()
-      ->where('status', '1')
-      ->where('lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ; 
-    $charterTitle = 'Santa Clara, Ciudad y Playa';
-    $fileCharter = '/assets/images/project/curent_charter.jpg';
-    $rawBodyEmail = rawurlencode('Hola, <span style="color:#ff7f00;">' . COMERCIALNAME . '</span>!<br><br>Envio los documentos adjuntos y la información sobre la reserva para el charter:<br><b>'.$charterTitle.'</b><br><br>Un Saludo.<br>--<br>');
-    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', 'Charter ' . $charterTitle);
-    return view('about-us', [
-      'locale' => $this->locale,
-      'menuUrl' => true,
-      'viewPart' => 'charter-page',
-      'cntDestinations' => $this->cntDestinations,
-      'experienceYears' => $difDF->y,
-      'charterTitle' => $charterTitle,
-      'rawBodyEmail' => '',
-      'contacTypes' => $contacTypes,
+    foreach ($charters as &$charter) {
+      $ext = explode('.', $charter->charter_file);
+      $filePath = $this->basePath.$charter->charter_file;
+      $ext = end($ext);
+      $charter->charter_filename  = trim($charter->charter_titulo).'.'.$ext;
+      $charter->charter_fileextension  = $ext;
+      $charter->charter_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
+      $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
+      $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
+    }
+    $contacTypes = $this->getContactType(); 
+    
+    $this->viewParams = array_merge($this->viewParams, [
+      'noBanner'        => true,
+      'menuUrl'         => true,
+      'viewPart'        => 'all-offers',
+      'category'        => null,
+      'offers'          => [],
+      'charters'        => $charters,
+      'contacTypes'     => $contacTypes,
+      'aditionalTitle'  => lang('Doit.enjoyCharter'),
     ]);
+    return view('about-us', $this->viewParams);
   }
 
   public function allOffers() {
@@ -559,13 +561,42 @@ class Index extends BaseController {
       $offer->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($offer->oferta_filename))));
       $offer->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($offer->oferta_image))));
     }
-    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.all_offers'));
+    $charters = $db
+      ->table('charters AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', '1')
+      ->where('oc.status', '1')
+      ->where('ot.charter_lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale)
+      ->orderBy('ot.charter_orden', 'ASC')
+      ->orderBy('ot.charter_titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
+
+    foreach ($charters as &$charter) {
+      $ext = explode('.', $charter->charter_file);
+      $filePath = $this->basePath.$charter->charter_file;
+      $ext = end($ext);
+      $charter->charter_filename  = trim($charter->charter_titulo).'.'.$ext;
+      $charter->charter_fileextension  = $ext;
+      $charter->charter_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
+      $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
+      $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
+    }
+    $contacTypes = $this->getContactType(); 
 
     $this->viewParams = array_merge($this->viewParams, [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => true,
       'viewPart'        => 'all-offers',
       'offers'          => $offers,
+      'charters'        => $charters,
+      'contacTypes'     => $contacTypes,
+      'aditionalTitle'  => lang('Doit.all_offers'),
     ]);
     return view('about-us', $this->viewParams);
   }
@@ -585,12 +616,12 @@ class Index extends BaseController {
     foreach ($destinos as &$destino) {
       $destino->destino_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($destino->destino_image))));
     }
-    defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.all_destinations'));
     $this->viewParams = array_merge($this->viewParams, [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => true,
       'viewPart'        => 'all-destinos',
       'destinos'        => $destinos,
+      'aditionalTitle'  => lang('Doit.all_destinations'),
     ]);
     return view('about-us', $this->viewParams);
   }
@@ -608,7 +639,7 @@ class Index extends BaseController {
       ->first()
     ;
     $contacTypes = null;
-
+    $aditionalTitle = null;
     if($destino) {
       $destino->destino_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($destino->destino_image))));
       $detalleModel = new DestinoDetalles();
@@ -630,22 +661,17 @@ class Index extends BaseController {
           $imagen->recurso = base_url('files/'.strrev(str_replace('=', '', base64_encode($imagen->recurso))));
         }
       }
-      $contacTypesModel = new ContactType();
-      $contacTypes = $contacTypesModel->asObject()
-        ->where('status', '1')
-        ->where('lang', $this->locale)
-        ->orderBy('id', 'ASC')
-        ->findAll()
-      ; 
-      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.destination') . ' ' . ($destino->destino_titulo ?? '404'));
+      $contacTypes = $this->getContactType();
+      $aditionalTitle = lang('Doit.destination') . ' ' . ($destino->destino_titulo ?? '404');
     }
 
     $this->viewParams = array_merge($this->viewParams, [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => true,
       'viewPart'        => 'aditional-pages',
       'destino'         => $destino,
       'contacTypes'     => $contacTypes,
+      'aditionalTitle'  => $aditionalTitle,
     ]);
     return view('show-destination', $this->viewParams);
   }
@@ -692,8 +718,7 @@ class Index extends BaseController {
           $offer->oferta_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
           $offer->oferta_file  = base_url('bucketC/' . $offer->oferta_file );
         } else {
-          $offer->oferta_fileMimeType  = exif_imagetype($offer->oferta_file);
-          dd($offer);
+          $offer->oferta_fileMimeType  = 'application/octet-stream';
         }
       }
 
@@ -741,13 +766,7 @@ class Index extends BaseController {
       ;
     }
 
-    $contacTypesModel = new ContactType();
-    $contacTypes = $contacTypesModel->asObject()
-      ->where('status', '1')
-      ->where('lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ; 
+    $contacTypes = $this->getContactType(); 
 
     if(empty($categoria) && empty($oferta)) {
       //Mostrar todas las categorias
@@ -759,7 +778,6 @@ class Index extends BaseController {
         ->orderBy('id', 'ASC')
         ->findAll()
       ;
-      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offers') . ' ' . lang('Doit.all_categories'));
 
       $this->viewParams = array_merge($this->viewParams, [
         'noBanner'        => true,
@@ -768,11 +786,11 @@ class Index extends BaseController {
         'destino'         => $destino,
         'categories'      => $categories,
         'contacTypes'     => $contacTypes,
+        'aditionalTitle'  => lang('Doit.offers') . ' ' . lang('Doit.all_categories'),
       ]);
       return view('show-offers-categories', $this->viewParams);
     } else if(!empty($categoria) && empty($oferta)) {
       //Mostrar todas las ofertas de la categoria
-      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offers') . ' ' . ($categories->categoria ?? '404'));
       $this->viewParams = array_merge($this->viewParams, [
         'noBanner'        => true,
         'menuUrl'         => true,
@@ -781,6 +799,7 @@ class Index extends BaseController {
         'offers'          => $offers,
         'charters'        => $charters,
         'contacTypes'     => $contacTypes,
+        'aditionalTitle'  => lang('Doit.offers') . ' ' . ($categories->categoria ?? '404'),
       ]);
       return view('show-offers-bycategories', $this->viewParams);
     } else if(!empty($categoria) && !empty($oferta)) {
@@ -788,17 +807,6 @@ class Index extends BaseController {
       if($offers && is_array($offers) && count($offers) > 0) {
         $offers = $offers[0];
       }
-      $contentScripts = '';
-      if(strstr($offer->oferta_fileMimeType, 'image')) {
-        $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offer->oferta_titulo . "\" src=\"" . $offer->oferta_file . "/true\" data-image=\"" . $offer->oferta_file . "\" data-description=\"" . (!empty($offer->oferta_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offer->oferta_subtitulo) : '') ."\">');";
-      }
-      if(strstr($offer->oferta_fileMimeType, 'pdf')) { 
-        $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $offer->oferta_file ."/true\" type=\"" . $offer->oferta_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
-      }
-      if(strstr($offer->oferta_fileMimeType, 'video')) { 
-        $contentScripts = "$('#docpdf.docpdf').html('<video preload=\"auto\" width=\"320\" height=\"240\" controls><source src=\"" . $offer->oferta_file . "/true\" type=\"" . $offer->oferta_fileMimeType . "\"></video>');";
-      }
-      defined('ADITIONAL_TITLE') || define('ADITIONAL_TITLE', lang('Doit.offer') . ' ' . ($offers->oferta_titulo ?? '404'));
       $this->viewParams = array_merge($this->viewParams, [
         'noBanner'        => true,
         'menuUrl'         => true,
@@ -806,12 +814,13 @@ class Index extends BaseController {
         'category'        => $categories,
         'offer'           => $offers,
         'contacTypes'     => $contacTypes,
+        'contentScripts'  => $contentScripts,
       ]);
       return view('show-offer-detail', $this->viewParams);
     }
 
     $this->viewParams = array_merge($this->viewParams, [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => true,
       'viewPart'        => 'aditional-pages',
       'destino'         => $destino,
@@ -869,49 +878,88 @@ class Index extends BaseController {
   }
 
   public function getCharterDetail($pageslug) {
+    $contentScripts = '';
+    $aditionalTitle = null;
     $db      = \Config\Database::connect();
-    $charters = $db
+    $charter = $db
       ->table('charters AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
       ->where('ot.status', '1')
       ->where('oc.status', '1')
       ->where('ot.charter_lang', $this->locale)
-      ->where('oc.categoria_lang', $this->locale);
-    if(!empty($categoria)) {
-      $charters = $charters->where('oc.categoria_slug', $categoria);
-    }
-    if(!empty($oferta)) {
-      $charters = $charters->where('ot.charter_slug', $oferta);
-    }
-    $charters = $charters->orderBy('ot.charter_orden', 'ASC')
+      ->where('oc.categoria_lang', $this->locale)
+      ->where('ot.charter_slug', $pageslug)
+      ->orderBy('ot.charter_orden', 'ASC')
       ->orderBy('ot.charter_titulo', 'ASC')
       ->orderBy('ot.id', 'ASC')
       //->getCompiledSelect()
       ->get()
-      ->getResult()
+      ->getRow()
     ;
 
-    foreach ($charters as &$charter) {
-      $ext = explode('.', $charter->charter_file);
-      $filePath = $this->basePath.$charter->charter_file;
-      $ext = end($ext);
-      $charter->charter_filename  = trim($charter->charter_titulo).'.'.$ext;
-      $charter->charter_fileextension  = $ext;
-      $charter->charter_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
-      $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
-      $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
+    if($charter) {
+      $charter->charter_image = base_url('bucketC/' . $charter->charter_image);
+      if($charter->charter_file_type == 'local') {
+        $ext = explode('.', $charter->charter_file);
+        $filePath = $this->basePath.$charter->charter_file;
+        $ext = end($ext);
+        $charter->charter_filename  = trim($charter->charter_titulo).'.'.$ext;
+        $charter->charter_fileextension  = $ext;
+        $charter->charter_fileMimeType  = file_exists($filePath) && !empty($charter->charter_file) ?  mime_content_type($filePath) : 'text/html';
+        $charter->charter_file  = base_url('bucketC/' . $charter->charter_file );
+      } else {
+        $charter->charter_fileMimeType  = 'application/octet-stream';
+      }
+      if(strstr($charter->charter_fileMimeType, 'image')) {
+        $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $charter->charter_titulo . "\" src=\"" . $charter->charter_file . "/true\" data-image=\"" . $charter->charter_file . "\" data-description=\"" . (!empty($charter->charter_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $charter->charter_subtitulo) : '') ."\">');";
+      } else if(strstr($charter->charter_fileMimeType, 'pdf')) { 
+        $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $charter->charter_file ."/true\" type=\"" . $charter->charter_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
+      } else if(strstr($charter->charter_fileMimeType, 'video')) { 
+        $contentScripts = "$('#docpdf.docpdf').html('<video preload=\"auto\" width=\"320\" height=\"240\" controls><source src=\"" . $charter->charter_file . "/true\" type=\"" . $charter->charter_fileMimeType . "\"></video>');";
+      } else {
+        if(strstr($charter->charter_file, 'drive.google.com')) {
+          $charter->charter_file = str_replace(['/view?'], ['/preview?'], $charter->charter_file);
+        }
+        $charter->charter_file = preg_replace(['/(\/view?)/', '/(\?usp\=(share|edit|sharing))/'], ['/preview', '?usp=drivesdk'], $charter->charter_file);
+        $contentScripts = "$('#docpdf.docpdf').html('<iframe class=\"responsive-iframe\" src=\"" . $charter->charter_file ."\"></iframe>');";
+      }
+      $aditionalTitle = ($charter->charter_titulo ?? '404');
+      $charter->basePath = $this->basePath;
+      $charter->charter_itinerary_file = $this->basePath . $charter->charter_itinerary;
+      $charter->charter_plans_file = $this->basePath . $charter->charter_plans;
+      $charter->charter_itinerary = [];
+      $charter->charter_plans = [];
+      if(file_exists($charter->charter_itinerary_file)) {
+        $fp = new \SplFileObject($charter->charter_itinerary_file, 'r');
+        while (!$fp->eof()) {
+          $charter->charter_itinerary[] = $fp->fgetcsv(';', '"');
+        }
+      }
+
+      if(file_exists($charter->charter_plans_file)) {
+        $fp = new \SplFileObject($charter->charter_plans_file, 'r');
+        while (!$fp->eof()) {
+          $charter->charter_plans[] = $fp->fgetcsv(';', '"');
+        }
+      }
+      $rawBodyEmail = sprintf(lang('Doit.charterEnjoy'), $charter->categoria . ' &mdash; ' . $charter->charter_titulo);
+    } else {
+      $charter = null;
     }
 
-
-  $this->viewParams = array_merge($this->viewParams, [
-    'noBanner'        => false,
-    'menuUrl'         => true,
-    'viewPart'        => 'aditional-pages',
-    'destino'         => $destino,
-    'contacTypes'     => $contacTypes,
-  ]);
-  return view('show-destination', $this->viewParams);
+    $contacTypes = $this->getContactType();
+    $this->viewParams = array_merge($this->viewParams, [
+      'noBanner'        => true,
+      'menuUrl'         => true,
+      'viewPart'        => 'show-charter',
+      'charter'         => $charter,
+      'contacTypes'     => $contacTypes,
+      'contentScripts'  => $contentScripts,
+      'rawBodyEmail'    => $rawBodyEmail,
+      'aditionalTitle'  => $aditionalTitle,
+    ]);
+    return view('about-us', $this->viewParams);
   }
 }
   

@@ -88,4 +88,7 @@ return [
     'prodError'                 => 'Sieht aus, als wären wir auf einen Haken gestoßen. Bitte versuchen Sie es später noch einmal...',
     'hasOcurredError'           => 'Ein Fehler ist aufgetreten',
     'Whoops'                    => 'Hoppla!!',
+    'listPlnas'                 => 'Liste der Pläne',
+    'charterEnjoy'             => '<br>Hallo!!<br><br>Ich möchte Informationen von %s.<br><br>Meine Daten sind:<br><table><tr><th>Vollständiger Name:</th><td style="width:200px;"></td></tr><tr><th>Telefon:</th><td style="width:200px;"></td></tr><tr><th>Mobilfunk:</th><td style="width:200px;"></td></tr><tr><th>E-Mail:</th><td style="width:200px;"></td></tr><tr><th>Nachricht:</th><td style="width:200px;height:300px;"></td></tr></table><br><br>Alles Gute.',
+    'nextDepartures'              => 'Nächste Abfahrten',
 ];

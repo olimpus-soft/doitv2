@@ -197,15 +197,12 @@ $(function() {
 
     $.extend({
       sameHeight: (selector) => {
-        console.log(selector);
         if($(selector).length > 0) {
           let objsSelector = $(selector);
           let minHeight = 0;
           let auxHeight = 0;
-          console.log(selector, objsSelector);
           for (var i = objsSelector.length - 1; i >= 0; i--) {
             auxHeight = $(objsSelector[i]).height();
-            console.log(selector, auxHeight, minHeight, auxHeight > minHeight, $(objsSelector[i]));
             if( auxHeight > minHeight) {
               minHeight = auxHeight; 
             }
@@ -263,17 +260,21 @@ $(function() {
     }
     
     if($('#news .news-slider > .news').length > 0) {
-      $.sameHeight('#news .news-slider > .news > .new');
+      
       var newsSlider = tns({
         container: '#news-slider',
-        items: 2,
-        edgePadding: 50,
-        gutter: 50,
-        slideBy: "page",
+        items: 3,
+        slideBy: 1,
+        edgePadding: 0,
+        gutter: 0,
+        //slideBy: "page",
+        rewind: true,
+        autoHeight: true,
+        responsive: true,
         mouseDrag: true,
-        viewportMax:true,
+        viewportMax:false,
         swipeAngle: false,
-        speed: 1000,
+        speed: 2000,
         loop: true,
         center: true,
         controlsContainer: false,
@@ -293,19 +294,19 @@ $(function() {
           576: {
             gutter:5,
             items: 1,
-            viewportMax:true,
+            viewportMax:false,
           },
           768: {
-            viewportMax:true,
+            viewportMax:false,
             items: 1
           },
           992: {
-            viewportMax:true,
+            viewportMax:false,
             items: 2
           },
           1200: {
             gutter:30,
-            viewportMax:true,
+            viewportMax:false,
             items: 2
           },
           1400: {
@@ -314,7 +315,8 @@ $(function() {
             items: 2
           }
         }
-      });
+      });//*/
+      //$.sameHeight('#news .news-slider > .news > .card');
     }
 
     
@@ -360,11 +362,15 @@ $(function() {
        var categoriesSlider = tns({
         container: '#categoria-oferta-container',
         items: 3,
-        edgePadding: 50,
-        gutter: 50,
-        slideBy: "page",
+        slideBy: 1,
+        edgePadding: 0,
+        gutter: 0,
+        //slideBy: "page",
+        rewind: true,
+        autoHeight: true,
+        responsive: true,
         mouseDrag: true,
-        viewportMax:true,
+        viewportMax:false,
         swipeAngle: false,
         speed: 1000,
         loop: true,

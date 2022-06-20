@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
 use App\Models\Destinos;
+use App\Models\ContactType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use \DateTime;
@@ -125,11 +126,14 @@ class BaseController extends Controller {
       die();
       */
     $this->viewParams = [
-      'noBanner'        => false,
+      'noBanner'        => true,
       'menuUrl'         => false,
       'locale'          => $this->locale,
       'experienceYears' => $this->foudDiffDate->y,
       'cntDestinations' => $this->cntDestinations,
+      'contentScripts'  => '',
+      'statusCode'      => 200,
+      'aditionalTitle'  => null,
     ];
   }
 
@@ -466,5 +470,16 @@ class BaseController extends Controller {
         date('01/02/Y', strtotime(FOUND_DATE)),
       ]
     ];
+  }
+
+  public function getContactType() {
+    $contacTypesModel = new ContactType();
+    $contacTypes = $contacTypesModel->asObject()
+      ->where('status', '1')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+    return $contacTypes;
   }
 }

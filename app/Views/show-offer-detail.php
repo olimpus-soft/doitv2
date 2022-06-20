@@ -59,7 +59,6 @@ echo view('partials/header');
 		</section>
 
 	<?php
-	dd($offer);
 	echo view('home/contact');
 	
 	} else {

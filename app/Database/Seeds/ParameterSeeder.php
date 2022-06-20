@@ -366,6 +366,9 @@ class ParameterSeeder extends Seeder {
       ], [
         'parameter' => 'SUPPORT_URL',
         'parameter_value' => 'https://olimpussoft.com',
+      ],[
+        'parameter' => 'CANNONICAL_URL',
+        'parameter_value' => 'https://olimpussoft.com/cannonical',
       ], [
         'parameter' => 'CONTACT_PHONE_SUPPORT',
         'parameter_value' => '+573174428875',
