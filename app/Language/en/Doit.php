@@ -91,4 +91,5 @@ return [
     'listPlnas'                 => 'List of Plans',
     'charterEnjoy'              => '<br>Hello!!<br><br>I want information from %s.<br><br>My details are:<br><table><tr><th>Full Name:</th><td style="width:200px;"></td></tr><tr><th>Phone:</th><td style="width:200px;"></td></tr><tr><th>Cellular:</th><td style="width:200px;"></td></tr><tr><th>Email:</th><td style="width:200px;"></td></tr><tr><th>Message:</th><td style="width:200px;height:300px;"></td></tr></table><br><br>All the best.',
     'nextDepartures'              => 'Next Departures',
+    'commRelations'             => 'Commercial Relationships',
 ];

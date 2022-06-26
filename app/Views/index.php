@@ -54,10 +54,7 @@ echo view('partials/header');
 
 	echo view('home/galeria');
 
-	/**
-	 * Pendiente por desarrollar realciones comerciales en principal
-	 */
-	//echo view('home/comm-relation');
+	echo view('home/commercial-relations');
 
 	echo view('home/footer');
 	?>

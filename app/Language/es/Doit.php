@@ -90,5 +90,6 @@ return [
     'Whoops'                    => 'Ups!!',
     'listPlnas'                 => 'Lista de Planes',
     'charterEnjoy'              => '<br>Hola!!<br><br>Deseo Información del %s.<br><br>Mis datos son:<br><table><tr><th>Nombre Completo:</th><td style="width:200px;"></td></tr><tr><th>Teléfono:</th><td style="width:200px;"></td></tr><tr><th>Celular:</th><td style="width:200px;"></td></tr><tr><th>Correo Eletrónico:</th><td style="width:200px;"></td></tr><tr><th>Mensaje:</th><td style="width:200px;height:300px;"></td></tr></table><br><br>Un saludo.',
-    'nextDepartures'              => 'Próximas Salidas',
+    'nextDepartures'            => 'Próximas Salidas',
+    'commRelations'             => 'Relaciones Comerciales',
 ];
