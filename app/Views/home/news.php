@@ -64,7 +64,7 @@ if($news && is_array($news) && count($news) > 0 ) {
 						<?php } ?>
 						  <div class="card-body">
 						    <h5 class="card-title text-center"><?= $new->title; ?></h5>
-				        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+				        <h6 class="card-subtitle mb-2 text-muted"></h6>
 						    <p class="card-text text-justify"><?= mb_strlen($new->details) > 150 ? substr($new->details, 0, 147).'...' : $new->details; ?></p>
 						    <!--a href="<?= $new->news_link; ?>" target="_blank" class="main-btn d-block">Ver Más</a-->
 						  </div>
