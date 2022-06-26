@@ -199,6 +199,16 @@ class NewsSeeder extends Seeder {
         'lang'      => 'es',
         'status'    => '1',
       ],
+      [
+        'tipo'      => 'enlace',
+        'photo'     => 'news/020.jpg',
+        'news_link' => 'https://www.prensa-latina.cu/2022/06/25/cayos-de-villa-clara-en-cuba-una-opcion-para-turistas-colombianos',
+        'title'     => 'Cayos de Villa Clara en Cuba una opción para turistas colombianos (+Foto)',
+        'details'   => 'Operadores colombianos de agencias de viajes conocieron detalles del vuelo chárter Bogotá-Santa Clara (Cuba).',
+        'orden'     => '1',
+        'lang'      => 'es',
+        'status'    => '1',
+      ],
     ];
     $this->db->table($this->tableName)->emptyTable();
     $this->db->query("ALTER TABLE {$this->tableName} AUTO_INCREMENT = 1;");
