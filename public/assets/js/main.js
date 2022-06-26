@@ -418,6 +418,55 @@ $(function() {
       });
     }    
 
+    if($('#relationscomms > .logo-item').length > 0) {
+      $('#relationscomms').slick({
+            infinite: true,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: true,
+            speed: 700,
+            dots: false,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 1201,
+                    settings: {
+                        slidesToShow: 5,
+                    }
+                },
+                {
+                    breakpoint: 1025,
+                    settings: {
+                        slidesToShow: 4,
+                    }
+                },
+                {
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 3,
+                        dots: true,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 481,
+                    settings: {
+                        slidesToShow: 2,
+                        dots: true,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 381,
+                    settings: {
+                        slidesToShow: 1,
+                        dots: true,
+                        arrows: false,
+                    }
+                }
+            ]
+        });
+    }
 
     setTimeout(() => {
       $.ajax({

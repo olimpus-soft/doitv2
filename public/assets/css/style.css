@@ -2232,3 +2232,65 @@ section:nth-of-type(even){
   height: 66pc;
 }
 }
+
+/*----------  4.3. Hyperlink  ----------*/
+.hyperlink {
+  background-color: #121212;
+}
+.hyperlink .slide-logo-wrapper {
+  width: 100%;
+  margin: 10px auto;
+}
+.hyperlink .social-footer {
+  margin-bottom: 5px;
+}
+.hyperlink .name-company {
+  margin-bottom: 20px;
+}
+.hyperlink.bg-transparent {
+  background-color: transparent;
+}
+.hyperlink.bg-transparent .slide-logo-wrapper .logo-item .link {
+  opacity: .5;
+}
+.hyperlink.bg-transparent .slide-logo-wrapper .logo-item .link:hover {
+  opacity: 1;
+  filter: drop-shadow(1mm 3mm 1mm rgba(0, 0, 10, .6));
+  -moz-filter: drop-shadow(1mm 3mm 1mm rgba(0, 0, 10, .6));
+  -webkit-filter: drop-shadow(1mm 3mm 1mm rgba(0, 0, 10, .6));
+}
+.hyperlink.bg-transparent .social-footer .link {
+  color: #b4b4b4 !important;
+}
+.hyperlink.bg-transparent .social-footer .link:hover {
+  color: #2b2b2b !important;
+}
+.hyperlink.bg-transparent .name-company {
+  color: #b4b4b4;
+}
+.slide-logo-wrapper .logo-item .link {
+  opacity: .2;
+  display: block;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  max-width: 200px;
+  float: left;
+  max-height: 200px;
+  margin:  auto 10px;
+  border-radius: 50%;
+}
+.slide-logo-wrapper .logo-item .link:hover {
+  opacity: 1;
+  border-radius: 25%;
+}
+
+#commertials-relations {
+    background-color: rgba(0, 0, 10, 0.6) !important;
+}
+#commertials-relations .container {
+  width: 100% !important;    
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
