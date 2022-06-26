@@ -263,16 +263,16 @@ $(function() {
       
       var newsSlider = tns({
         container: '#news-slider',
-        items: 3,
-        slideBy: 1,
+        items: 1,
+        //slideBy: 1,
         edgePadding: 0,
         gutter: 0,
-        //slideBy: "page",
+        slideBy: "page",
         rewind: true,
         autoHeight: true,
         responsive: true,
         mouseDrag: true,
-        viewportMax:false,
+        viewportMax:true,
         swipeAngle: false,
         speed: 2000,
         loop: true,
@@ -318,6 +318,8 @@ $(function() {
       });//*/
       //$.sameHeight('#news .news-slider > .news > .card');
     }
+
+
 
     
     if($('#categories .categoria-oferta > .card').length > 0) {

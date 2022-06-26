@@ -682,7 +682,7 @@ class Index extends BaseController {
     $difDF = $dtNow->diff($dtF);
     $offers = [];
     $categories = [];
-
+    $contentScripts = '';
     if(!empty($categoria) || !empty($oferta)) {
       $db      = \Config\Database::connect();
       $offers = $db
@@ -806,6 +806,20 @@ class Index extends BaseController {
       //Mostrar as ofertas seleccionada
       if($offers && is_array($offers) && count($offers) > 0) {
         $offers = $offers[0];
+
+        if(strstr($offers->oferta_fileMimeType, 'image')) {
+          $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offers->charter_titulo . "\" src=\"" . $offers->oferta_file . "/true\" data-image=\"" . $offers->oferta_file . "\" data-description=\"" . (!empty($offers->charter_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offers->charter_subtitulo) : '') ."\">');";
+        } else if(strstr($offers->oferta_fileMimeType, 'pdf')) { 
+          $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $offers->oferta_file ."/true\" type=\"" . $offers->oferta_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
+        } else if(strstr($offers->oferta_fileMimeType, 'video')) { 
+          $contentScripts = "$('#docpdf.docpdf').html('<video preload=\"auto\" width=\"320\" height=\"240\" controls><source src=\"" . $offers->oferta_file . "/true\" type=\"" . $offers->oferta_fileMimeType . "\"></video>');";
+        } else {
+          if(strstr($offers->oferta_file, 'drive.google.com')) {
+            $offers->oferta_file = str_replace(['/view?'], ['/preview?'], $offers->oferta_file);
+          }
+          $offers->oferta_file = preg_replace(['/(\/view?)/', '/(\?usp\=(share|edit|sharing))/'], ['/preview', '?usp=drivesdk'], $offers->oferta_file);
+          $contentScripts = "$('#docpdf.docpdf').html('<iframe class=\"responsive-iframe\" src=\"" . $offers->oferta_file ."\"></iframe>');";
+        }
       }
       $this->viewParams = array_merge($this->viewParams, [
         'noBanner'        => true,
