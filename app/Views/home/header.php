@@ -63,8 +63,8 @@
 								</li>
 							</ul> <!-- navbar nav -->
 						</div>
-						<div class="navbar-btn ml-20 d-none d-sm-block">
-							<a class="main-btn" href="https://wa.me/<?= str_replace(['+','.',' '], '', CONTACT_PHONE);?>?text=<?= CONTACT_MSG_OFFERS;?>"><i class="lni-whatsapp"></i><?= CONTACT_PHONE;?></a>
+						<div class="navbar-btn ml-20 d-sm-block">
+							<a class="main-btn" href="https://wa.me/<?= str_replace(['+','.',' '], '', CONTACT_PHONE);?>?text=<?= CONTACT_MSG_OFFERS;?>"><i class="lni-whatsapp"></i><span class="d-none d-md-inline"><?= CONTACT_PHONE;?></span></a>
 						</div>
 					</nav> <!-- navbar -->
 				</div>
