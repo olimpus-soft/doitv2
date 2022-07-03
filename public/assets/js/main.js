@@ -13,6 +13,7 @@ $(function() {
     
     $(".navbar-toggler").on('click', function() {
         $(this).toggleClass('active');
+        $(".navbar-collapse").toggleClass("show");
     });
     
     $(".navbar-nav a").on('click', function() {
@@ -221,7 +222,7 @@ $(function() {
 
     if($('#agents .agents-slider > .agent').length > 0) {
       $.sameHeight('#agents .agents-slider > .agent');
-      $('#agents-slider').slick({
+      /*$('#agents-slider').slick({
         dots: true,
         infinite: true,
         speed: 2000,
@@ -256,66 +257,165 @@ $(function() {
               }
             }
         ]
+      });*/
+
+      const swiperNews = new Swiper('.swiper.agents-swiper', {
+        speed: 400,
+        spaceBetween: 100,
+        //slidesPerView: 1,
+        centerInsufficientSlides: true,
+        centeredSlides: true,
+        //loop: true, //no se puede usar junto a rewind
+        rewind: true, //no se puede usar junto a loop
+        autoplay: {
+          delay: 2000,
+        },
+        navigation: {
+          enabled: true,
+          nextEl: '.agents-swiper .swiper-button-next',
+          prevEl: '.agents-swiper .swiper-button-prev',
+        },
+        scrollbar: {
+          el: '.agents-swiper .swiper-scrollbar',
+          draggable: true,
+        },
+        pagination: {
+          el: '.agents-swiper .swiper-pagination',
+          type: 'bullets',
+        },
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          576: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          768: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 2,
+            spaceBetween: 5,
+          },
+          992: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1200: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 2,
+            spaceBetween: 50,
+          },
+          1400: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+          2000: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        },
       });
     }
     
     if($('#news .news-slider > .news').length > 0) {
-      
-      var newsSlider = tns({
-        container: '#news-slider',
-        items: 1,
-        //slideBy: 1,
-        edgePadding: 0,
-        gutter: 0,
-        slideBy: "page",
-        rewind: true,
-        autoHeight: true,
-        responsive: true,
-        mouseDrag: true,
-        viewportMax:true,
-        swipeAngle: false,
-        speed: 2000,
-        loop: true,
-        center: true,
-        controlsContainer: false,
-        prevButton: '#news-control-prev',
-        nextButton: '#news-control-next',
-        lazyload: true,
-        controls: true,
-        autoplayButton: '#news-autoplay-toggle',
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 3500,
-        autoplayText: [
-          '<i class="fa fa-play">',
-          '<i class="fa fa-stop">'
-        ],
-        responsive: {
+      const swiperNews = new Swiper('.swiper.news-swiper', {
+        speed: 400,
+        spaceBetween: 100,
+        //slidesPerView: 1,
+        centerInsufficientSlides: true,
+        centeredSlides: true,
+        //loop: true, //no se puede usar junto a rewind
+        rewind: true, //no se puede usar junto a loop
+        autoplay: {
+          delay: 2000,
+        },
+        navigation: {
+          enabled: true,
+          nextEl: '.news-swiper .swiper-button-next',
+          prevEl: '.news-swiper .swiper-button-prev',
+        },
+        scrollbar: {
+          el: '.news-swiper .swiper-scrollbar',
+          draggable: true,
+        },
+        pagination: {
+          el: '.news-swiper .swiper-pagination',
+          type: 'bullets',
+        },
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
           576: {
-            gutter:5,
-            items: 1,
-            viewportMax:false,
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
           },
           768: {
-            viewportMax:false,
-            items: 1
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 2,
+            spaceBetween: 5,
           },
           992: {
-            viewportMax:false,
-            items: 2
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 3,
+            spaceBetween: 20,
           },
           1200: {
-            gutter:30,
-            viewportMax:false,
-            items: 2
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 3,
+            spaceBetween: 20,
           },
           1400: {
-            gutter:-30,
-            viewportMax:false,
-            items: 2
-          }
-        }
-      });//*/
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+          2000: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
+        },
+      });
       //$.sameHeight('#news .news-slider > .news > .card');
     }
 
@@ -361,7 +461,7 @@ $(function() {
             }
         ]
       });//*/
-       var categoriesSlider = tns({
+      /*var categoriesSlider = tns({
         container: '#categoria-oferta-container',
         items: 3,
         slideBy: 1,
@@ -415,6 +515,83 @@ $(function() {
             items: 3
           }
         }
+      });//*/
+      const swiperNews = new Swiper('.swiper.categoria-oferta-swiper', {
+        speed: 400,
+        spaceBetween: 100,
+        //slidesPerView: 1,
+        centerInsufficientSlides: true,
+        centeredSlides: true,
+        //loop: true, //no se puede usar junto a rewind
+        rewind: true, //no se puede usar junto a loop
+        autoplay: {
+          delay: 2000,
+        },
+        navigation: {
+          enabled: true,
+          nextEl: '.categoria-oferta-swiper .swiper-button-next',
+          prevEl: '.categoria-oferta-swiper .swiper-button-prev',
+        },
+        scrollbar: {
+          el: '.categoria-oferta-swiper .swiper-scrollbar',
+          draggable: true,
+        },
+        pagination: {
+          el: '.categoria-oferta-swiper .swiper-pagination',
+          type: 'bullets',
+        },
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          576: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          768: {
+            navigation: {
+              enabled: false,
+            },
+            slidesPerView: 2,
+            spaceBetween: 5,
+          },
+          992: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1200: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1400: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+          2000: {
+            navigation: {
+              enabled: true,
+            },
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
+        },
       });
     }    
 
@@ -429,27 +606,37 @@ $(function() {
             arrows: false,
             responsive: [
                 {
-                    breakpoint: 1201,
+                    breakpoint: 2000,
+                    settings: {
+                        slidesToShow: 8,
+                    }
+                },
+                {
+                    breakpoint: 1600,
+                    settings: {
+                        slidesToShow: 6,
+                    }
+                },
+                {
+                    breakpoint: 1400,
                     settings: {
                         slidesToShow: 5,
                     }
                 },
                 {
-                    breakpoint: 1025,
+                    breakpoint: 1200,
                     settings: {
                         slidesToShow: 4,
                     }
                 },
                 {
-                    breakpoint: 769,
+                    breakpoint: 992,
                     settings: {
                         slidesToShow: 3,
-                        dots: true,
-                        arrows: false,
                     }
                 },
                 {
-                    breakpoint: 481,
+                    breakpoint: 768,
                     settings: {
                         slidesToShow: 2,
                         dots: true,
@@ -457,7 +644,15 @@ $(function() {
                     }
                 },
                 {
-                    breakpoint: 381,
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 2,
+                        dots: true,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 380,
                     settings: {
                         slidesToShow: 1,
                         dots: true,

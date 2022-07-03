@@ -16,8 +16,7 @@
     <script src="<?= base_url('assets/js/jquery.easing.min.js');?>"></script>
     <script src="<?= base_url('assets/js/aos.js');?>"></script>
     <script src="<?= base_url('assets/js/sweetalert2.all.min.js');?>"></script>
-    <script src="<?= base_url('assets/js/slider/tiny-slider.js');?>"></script>
-    <script src="<?= base_url('assets/js/slider/tiny-slider.helper.ie8.js');?>"></script>
+    <script src="<?= base_url('assets/js/swiper/swiper-bundle.min.js');?>"></script>
     <script src="<?= base_url('assets/js/numscroller-1.0.js');?>"></script>
     <script src="<?= base_url('assets/js/slideshow/jquery.prettyPhoto.js');?>"></script>
     <!--script src="<?= base_url('assets/js/jquery.serialize-object.min.js');?>"></script-->
@@ -87,6 +86,5 @@
     </script>
   		<!-- END: CUSTTOM JS FOR PAGES-->
 
-		<!--script src="//code.jivosite.com/widget.js" data-jv-id="K9FLC6LJEP" async></script-->
     </body>
 </html>

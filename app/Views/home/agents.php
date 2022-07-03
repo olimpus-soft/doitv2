@@ -11,32 +11,22 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
 					</div> <!-- section title -->
 				</div>
 			</div> <!-- row -->
-			<div class="row justify-content-center  tiny-slider"> 
-				<div class="customize-tools"  id="agents-customize-controls">
-          <ul class="controls" aria-label="Carousel Navigation" tabindex="0">
-            <li class="prev" aria-controls="prev" tabindex="-1" data-controls="prev" id="agents-control-prev">
-              <i class="fa fa-chevron-left"></i>
-            </li>
-            <li class="next" aria-controls="next" tabindex="-1" data-controls="next" id="agents-control-next">
-              <i class="fa fa-chevron-right"></i>
-            </li>
-          </ul>
-          <div class="playbutton-wrapper">
-            <button class="customize-toggle" id="agents-autoplay-toggle" data-action="stop" data-slider-id="agents-slider"><span class="tns-visually-hidden">Detener Animación</span><i class="fa fa-stop"></i></button>
-          </div>
-          <div class="col-lg-12 slick-dots">
-          </div>
-        </div>
+			<div class="swiper agents-swiper"> 
+        <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
 
-        <!--button class="prev" data-action="prev" aria-label="Anterior" tabindex="0"><span class="tns-visually-hidden">Anterior</span><i class="fa fa-chevron-left"></i></button-->
-        <!--button class="next" data-action="next" aria-label="Siguiente" tabindex="0"><span class="tns-visually-hidden">Siguiente</span><i class="fa fa-chevron-rigth"></i></button-->
-        
-				<div class="agents-slider tiny-slider-content pb-20" id="agents-slider">
-<?php
-	foreach ($agents as $agent) {
-?>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+      <div class="swiper-wrapper agents-slider pb-20" id="agents-slider">
+          <?php
+          	foreach ($agents as $agent) {
+          ?>
 					<!--====== <?= $agent->fullname; ?> PART START ======-->
-					<div class="col-sm-6 wrapper-content justify-content-center agent float-left" id="agent-id-<?= $agent->id; ?>">
+					<div class="swiper-slide wrapper-content justify-content-center agent float-left" id="agent-id-<?= $agent->id; ?>">
 						<div class="avatar">
               <div class="image-wrapper">
                 <img src="<?= $agent->photo; ?>" alt="<?= $agent->fullname; ?>" class="img img-responsive">
@@ -138,8 +128,8 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
           	</div>
 					</div>
 					<!--====== <?= $agent->fullname; ?> PART ENDS ======-->
-<?php
-	} ?>
+          <?php
+          	} ?>
 				</div>
 			</div>
 		</div>
