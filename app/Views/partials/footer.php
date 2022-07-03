@@ -86,6 +86,5 @@
     </script>
   		<!-- END: CUSTTOM JS FOR PAGES-->
 
-		<!--script src="//code.jivosite.com/widget.js" data-jv-id="K9FLC6LJEP" async></script-->
     </body>
 </html>
