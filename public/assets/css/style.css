@@ -2435,3 +2435,42 @@ section:nth-of-type(even){
     margin-right: 85px;
   }
 }
+
+
+#agents-slider .agent-card {
+  color:#fff;
+    width: 350px;
+    border-radius: 10px;
+   background: linear-gradient(145deg, #9a40a9, #b74cc9);
+box-shadow:  20px 20px 60px #913ca0, 
+             -20px -20px 60px #c552d8;
+    border: none
+}
+#agents-slider .agent-card .profile {
+  bottom: 5px;
+  position: absolute;
+  margin: auto;
+  width: calc(100% - 2rem);
+  width: -webkit-fill-available;
+  padding: 1rem 1rem 0 1rem !important;
+}
+
+#agents-slider .agent-card .neo-button {
+    width: 40px;
+    height: 40px;
+    outline: 0 !important;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 50%;
+background: linear-gradient(145deg, #9a40a9, #b74cc9);
+box-shadow: inset 20px 20px 60px #913ca0, 
+             inset -20px -20px 60px #c552d8;
+}
+
+#agents-slider .agent-card .num{
+  
+  color:#eee !important;
+}

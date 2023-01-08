@@ -234,7 +234,7 @@ $(function() {
         draggable: true,
         pauseOnDotsHover: true,
         centerMode: true,
-        centerPadding: '60px',
+        //centerPadding: '60px',
         arrows: true,
         //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
         //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
@@ -257,9 +257,9 @@ $(function() {
               }
             }
         ]
-      });*/
+      });//*/
 
-      const swiperNews = new Swiper('.swiper.agents-swiper', {
+      /*const swiperNews = new Swiper('.swiper.agents-swiper', {
         speed: 400,
         spaceBetween: 100,
         //slidesPerView: 1,
@@ -335,7 +335,7 @@ $(function() {
             spaceBetween: 20,
           },
         },
-      });
+      });//*/
     }
     
     if($('#news .news-slider > .news').length > 0) {
