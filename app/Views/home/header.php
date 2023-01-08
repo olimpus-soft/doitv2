@@ -40,9 +40,9 @@
 								<li class="nav-item">
 									<a class="page-scroll" hash="#nosotoros" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#nosotoros?utm_source=doit&utm_medium=web&utm_campaign=nosotoros&utm_term=all&utm_content="><?= lang('Doit.us'); ?></a>
 								</li>
-								<li class="nav-item">
+								<!--li class="nav-item">
 									<a class="page-scroll" data-aos="fade-up" target="_self" href="<?= base_url('disfruta-nuestro-charter?utm_source=doit&utm_medium=web&utm_campaign=disfruta-nuestro-charter&utm_term=all&utm_content=');?>"><?= lang('Doit.charter'); ?></a>
-								</li>
+								</li-->
 								<li class="nav-item">
 									<a class="page-scroll" hash="#objetivos" href="<?= isset($menuUrl) && $menuUrl == true ? base_url('/') : '';?>#objetivos?utm_source=doit&utm_medium=web&utm_campaign=objetivos&utm_term=all&utm_content="><?= lang('Doit.objectives'); ?></a>
 								</li>
