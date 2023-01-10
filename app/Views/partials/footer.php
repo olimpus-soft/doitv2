@@ -59,7 +59,7 @@
       chatbox.setAttribute("attribution", "biz_inbox");
     </script>
 		<script async defer type="text/javascript">
-			/*(function(d){
+			(function(d){
 			  var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 			  js = d.createElement('script'); js.id = id; js.async = true;
 			  js.src = "https://connect.facebook.net/<?= ( in_array(DEFAULT_LOCALE, ['es_CO', 'es']) || substr(DEFAULT_LOCALE, 0, 2) == 'es') ? 'es_LA' : 'en_US' ;?>/all.js";
