@@ -1,4 +1,5 @@
-$(function() {
+//$(function() {
+$(document).ready(function(){ 
     
     "use strict";
     
@@ -220,45 +221,56 @@ $(function() {
     });
     
 
-    if($('#agents .agents-slider > .agent').length > 0) {
-      $.sameHeight('#agents .agents-slider > .agent');
-      /*$('#agents-slider').slick({
+    if($('#agents #agents-slider .agent').length > 0) {
+      $.sameHeight('#agents #agents-slider .agent');
+      $('#agents-slider').slick({
         dots: true,
-        infinite: true,
-        speed: 2000,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,        
-        autoplaySpeed: 3000,
-        mobileFirst: true,
-        draggable: true,
-        pauseOnDotsHover: true,
-        centerMode: true,
-        //centerPadding: '60px',
         arrows: true,
-        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
-        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
-        prevArrow:document.getElementById('agents-control-prev'),
-        //prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
-        nextArrow:document.getElementById('agents-control-next'),
-        //nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
-        appendDots: $('#agents-customize-controls .slick-dots'),
+        infinite: false,
+        autoplay: true,        
+        autoplaySpeed: 3000,        
+        speed: 2000,
+        draggable: true,
+        mobileFirst: true,
+        pauseOnDotsHover: true,
+        variableWidth: true,
+        centerMode: true,
+        centerPadding: '60px',
         responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
             {
               breakpoint: 576,
               settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
+                centerPadding: '5px',
               }
-            }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerPadding: '15px',
+              }
+            },
+            {
+              breakpoint: 1280,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
+            },
+            {
+              breakpoint: 1400,
+              settings: {
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
+            },
         ]
       });//*/
-
+      $.sameHeight('#agents #agents-slider .agent');
       /*const swiperNews = new Swiper('.swiper.agents-swiper', {
         speed: 400,
         spaceBetween: 100,
@@ -707,4 +719,7 @@ $(function() {
         }
       });
     }, 5000)
+
+
+    
 });

@@ -1,7 +1,7 @@
 <?php
 if($news && is_array($news) && count($news) > 0 ) {
 	$replaceViewValues = App\Controllers\BaseController::replaceViewValues(); ?>
-	<section id="news" class="about-area news-area  pt-40 pb-120 white-bg">
+	<section id="news" class="about-area news-area  pt-20 pb-30 white-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">

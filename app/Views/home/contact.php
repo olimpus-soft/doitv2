@@ -1,7 +1,7 @@
 
 <!--====== CONTACT PART START ======-->
 
-<section id="contacto" class="contact-area pt-125 pb-130 gray-bg">
+<section id="contacto" class="contact-area pt-20 pb-30 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">

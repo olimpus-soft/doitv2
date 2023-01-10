@@ -1,10 +1,10 @@
 <!--====== FOOTER PART START ======-->
 <footer id="footer" class="footer-area">
-	<div class="footer-widget pt-80 pb-130">
+	<div class="footer-widget pt-30 pb-30">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-4 col-sm-8">
-					<div class="footer-logo mt-50">
+					<div class="footer-logo mt-20">
 						<a href="#">
 							<img src="<?= base_url('assets/images/logo.png');?>" alt="Logo">
 						</a>
@@ -49,7 +49,7 @@
 					</div> <!-- footer logo -->
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="footer-link mt-45">
+					<div class="footer-link mt-20">
 						<div class="f-title">
 							<h4 class="title"><?= lang('Doit.linksEscentials'); ?></h4>
 						</div>
@@ -73,7 +73,7 @@
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-4 col-sm-6">
-					<div class="footer-link mt-45">
+					<div class="footer-link mt-20">
 						<div class="f-title">
 							<h4 class="title"><?= COMERCIALNAME; ?></h4>
 						</div>
