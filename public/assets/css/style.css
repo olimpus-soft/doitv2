@@ -620,7 +620,7 @@ p {
   left: 0;
   width: 100%;
   z-index: 99;
-  padding: 25px 0;
+  padding: 10px 0;
   -webkit-transition: all 0.4s ease-out 0s;
   -moz-transition: all 0.4s ease-out 0s;
   -ms-transition: all 0.4s ease-out 0s;
@@ -633,7 +633,7 @@ p {
     -moz-box-shadow: 0px 5px 21px 0px rgba(254, 119, 101, 0.2);
     box-shadow: 0px 5px 21px 0px rgba(254, 119, 101, 0.2);
     z-index: 99;
-    padding: 15px 0; }
+    padding: 5px 0; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .navigation-bar.sticky .navbar-btn {
         top: 50%;
@@ -655,7 +655,7 @@ p {
   padding: 0;
   position: relative; }
   .navbar .navbar-brand img {
-    max-width: 180px; }
+    max-width: 100px; }
   .navbar .navbar-toggler .toggler-icon {
     width: 30px;
     height: 2px;
@@ -911,7 +911,7 @@ p {
     padding-bottom: 80px; } }
 
 .single-services {
-  padding: 50px 30px;
+  padding: 10px 15px;
   background-color: #fff;
   -webkit-transition: all 0.4s ease-out 0s;
   -moz-transition: all 0.4s ease-out 0s;
@@ -925,7 +925,7 @@ p {
 .page-charter-area ul,
 #page-charter-page ol,
 #page-charter-page ul {
-  padding-inline-start: 4em;
+  padding-inline-start: 2em;
   text-align: justify;
 }
   @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -2165,10 +2165,10 @@ p.form-message.error,
   width: 100%;
   text-align: center;
 }
-.slick-dots li {
+/*.slick-dots li {
   display: inline;
-}
-.slick-dots li button {
+}*/
+/*.slick-dots li button {
   border: 1px solid var(--primary);
   background-color: var(--secondary-rgb-30);
   border-radius: 50%;
@@ -2178,12 +2178,12 @@ p.form-message.error,
   display: inline;
   font-size: 0;
   margin-left: 2px;
-}
+}*/
 .slick-dots li button:before {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   font-size: 8px;
-  line-height: 11px;
+  line-height: 16px;
   color: #f0f0f0;
   opacity: 1;
 }
@@ -2193,10 +2193,10 @@ p.form-message.error,
 .slick-dots li button:hover:before {
   color: #ffdd00;
 }
-.slick-dots li.slick-active button {
+/*.slick-dots li.slick-active button {
   border: 1px solid var(--secondary);
   background-color: var(--primary);
-}
+}*/
 .slick-dots li.slick-active button:before {
   color: var(--primary);
 }
@@ -2434,4 +2434,86 @@ section:nth-of-type(even){
   .navbar-toggler {
     margin-right: 85px;
   }
+}
+
+#agents .slick-slide {
+  width: 390px !important;
+  max-width: 390px !important;
+  padding: 20px !important;
+}
+#agents-slider .agent-card {
+  color:#000;
+  width: 350px;
+  min-height: 370px;
+  max-width: 350px !important;
+  min-height: 360px !important;
+  border-radius: 10px;
+  background: linear-gradient(145deg, var(--secondary-rgb-60), var(--secondary-rgb-20));
+  box-shadow: inset 10px 10px 10px var(--primary-rgb-40),
+              inset  -10px -10px 10px var(--primary-rgb-60);
+    border: none
+}
+#agents-slider .agent-card .profile {
+  bottom: 5px;
+  position: absolute;
+  margin: auto;
+  width: calc(100% - 2rem);
+  width: -webkit-fill-available;
+  padding: 1rem 1rem 0 1rem !important;
+}
+
+#agents-slider .agent-card .card-footer {
+  bottom: 10px;
+  position: absolute;
+  margin: auto;
+  width: calc(100% - 2rem);
+  padding: 1rem 1rem 0 1rem !important;
+  left: 1rem;
+}
+
+#agents-slider .agent-card .neo-button {
+  width: 3em;
+  height: 3em;
+  outline: 0 !important;
+  cursor: pointer;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--secondary-rgb-60), var(--secondary-rgb-20));
+  box-shadow: inset 10px 10px 10px var(--primary-rgb-40),
+              inset  -10px -10px 10px var(--primary-rgb-60);
+
+}
+
+#agents-slider .agent-card .neo-button > i {
+  padding-top: 0.25em;
+}
+
+#agents-slider .agent-card .num{
+  
+  color:#eee !important;
+}
+
+#agents-slider .agent-card .agent-picture {
+  width: 100px !important;
+  max-width: 100px !important;
+  min-width: 100px !important;
+  max-height: 100px !important;
+  height: auto !important;
+  margin: auto;
+  float:left;
+}
+
+#agents-slider .agent-card .agent-name,
+#agents-slider .agent-card .agent-cargo {
+  width: 100%;
+}
+
+.agent-modal .card img.card-img-top {
+  max-width: 200px;
+  text-align: center;
+  float: left;
+  margin: auto;
 }

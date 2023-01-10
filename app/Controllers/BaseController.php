@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
 use App\Models\Destinos;
+use App\Models\Ofertas;
 use App\Models\ContactType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -40,6 +41,7 @@ class BaseController extends Controller {
   protected $foudDiffDate;
   public $viewParams = [];
   protected $cntDestinations;
+  protected $cntOffers;
 
   /**
    * An array of helpers to be loaded automatically upon
@@ -73,6 +75,14 @@ class BaseController extends Controller {
       $this->cntDestinations = $destinosModel->asObject()
         ->where('status', '1')
         ->where('destino_lang', $this->locale)
+        ->orderBy('id', 'ASC')
+        ->countAllResults()
+      ;
+
+      $offersModel = new Ofertas();
+      $this->cntOffers = $offersModel->asObject()
+        ->where('status', '1')
+        ->where('oferta_lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ; 
@@ -131,6 +141,7 @@ class BaseController extends Controller {
       'locale'          => $this->locale,
       'experienceYears' => $this->foudDiffDate->y,
       'cntDestinations' => $this->cntDestinations,
+      'cntOffers'       => $this->cntOffers,
       'contentScripts'  => '',
       'statusCode'      => 200,
       'aditionalTitle'  => null,

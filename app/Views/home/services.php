@@ -2,7 +2,7 @@
 <?php
 	if(isset($objetivos) && is_array($objetivos) && count($objetivos) > 0) {
 ?>
-	<section id="objetivos" class="services-area pt-125 pb-130 gray-bg">
+	<section id="objetivos" class="services-area pt-10 pb-20 gray-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
@@ -17,11 +17,11 @@
 		foreach ($objetivos as &$objetivo) {
 ?>
 				<div class="col-lg-4 col-md-6 col-sm-8" id="objetivo-id-<?= $objetivo->id; ?>">
-					<div class="single-services text-center mt-30 wow fadeInUp" >
+					<div class="single-services text-center mt-1 wow fadeInUp" >
 						<div class="services-icon">
 							<i class="<?= $objetivo->icon; ?>"></i>
 						</div>
-						<div class="services-content mt-15">
+						<div class="services-content mt-1">
 							<h4 class="services-title"><?= $objetivo->title; ?></h4>
 							<?php
 								if(isset($objetivo->details) && is_array($objetivo->details) && count($objetivo->details) > 0) {

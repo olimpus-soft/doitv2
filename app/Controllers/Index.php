@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use Config\Mimes;
 use App\Models\Objetivos;
 use App\Models\ObjetivosDetalles;
 use App\Models\Ofertas;
@@ -205,8 +206,15 @@ class Index extends BaseController {
       if(!file_exists($filePath) && is_file($filePath)) {
         throw new Exception(lang('Doit.fileInvalid').' '.$fileHash);
       }
+      $mime = null;
+      if (($lastDotPosition = strrpos($filePath, '.')) !== false) {
+        $mime = Mimes::guessTypeFromExtension(substr($filePath, $lastDotPosition + 1));
+      }
+      if (empty($mime)) {
+        $mime = mime_content_type($filePath);
+      }
       if ($buffer) {
-        header("Content-Type: ".mime_content_type($filePath));
+        header("Content-Type: " . $mime . "; charset=UFT-8;");
         header("Content-Disposition: inline; filename=" . urlencode(basename($fileName)));
         header("Content-Description: File Transfer");
         header('Content-Transfer-Encoding: binary');
@@ -222,9 +230,12 @@ class Index extends BaseController {
         fclose($fp);
       } else {
         $response = $this->response->download($filePath, null);
-        $response->setContentType(mime_content_type($filePath));
+        $response->setContentType($mime);
         if(!empty($downloadName)) {
           $downloadName = base64_decode(strrev($downloadName));
+          if (($lastDotPosition = strrpos($filePath, '.')) !== false) {
+            $downloadName .= '.'.Mimes::guessExtensionFromType($mime);
+          }
           $response->setFileName($downloadName);
         }
         $response->setHeader('Accept-Ranges', 'bytes');
@@ -294,7 +305,7 @@ class Index extends BaseController {
           }
         }
         $vcard->addURL(base_url());
-
+        
         if(file_exists(FCPATH.LOGO)) {
           $vcard->addLogoContent(file_get_contents(FCPATH.LOGO));
         }

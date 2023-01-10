@@ -6,12 +6,15 @@
     </div>
 
     <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js');?>"></script>
-    <script src="<?= base_url('assets/js/vendor/jquery-1.12.4.min.js');?>"></script>
+    <script src="<?= base_url('assets/js/vendor/jquery-3.6.3.min.js');?>"></script>
+    <!--script src="<?= base_url('assets/js/vendor/jquery-1.12.4.min.js');?>"></script-->
+    <!--script src="<?= base_url('assets/js/slick.min.js');?>"></script-->
+    <script src="<?= base_url('assets/js/slick/slick.js');?>"></script>
+    <script src="<?= base_url('assets/js/popper.min.js');?>"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=<?= GOOGLE_RECAPTCHA_SITEKEY; ?>" SameSite="None"  async defer type="text/javascript"></script>
     <!--script src="<?= base_url('assets/js/bootstrap.min.js');?>"></script-->
     <script src="<?= base_url('assets/js/v5/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('assets/js/wow.min.js');?>"></script>
-    <script src="<?= base_url('assets/js/slick.min.js');?>"></script>
     <script src="<?= base_url('assets/js/scrolling-nav.js');?>"></script>
     <script src="<?= base_url('assets/js/jquery.easing.min.js');?>"></script>
     <script src="<?= base_url('assets/js/aos.js');?>"></script>
@@ -82,6 +85,12 @@
     <script>
       $(document).ready(function() { 
     		<?= $contentScripts ?? '';  ?>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl, {
+             trigger: 'hover focus'
+          });
+        });
       }); 
     </script>
   		<!-- END: CUSTTOM JS FOR PAGES-->

@@ -973,7 +973,6 @@ class RouteCollection implements RouteCollectionInterface
                 return $this->localizeRoute($route);
             }
         }
-
         // If it's not a named route, then loop over
         // all routes to find a match.
         foreach ($this->routes as $collection) {
@@ -1008,7 +1007,6 @@ class RouteCollection implements RouteCollectionInterface
                 return $this->localizeRoute($route);
             }
         }
-
         // If we're still here, then we did not find a match.
         return false;
     }
