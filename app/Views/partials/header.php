@@ -44,7 +44,11 @@ if(
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','<?= COMPANY_GTM_KEY; ?>');</script>
     <!-- End Google Tag Manager -->
+    <meta name="locale" content="<?= $locale ?? 'es'; ?>"> 
+    <meta name="lang" content="<?= $locale ?? 'es'; ?>"> 
     <meta charset="utf-8"> 
+    <meta lang="<?= $locale ?? 'es'; ?>"> 
+    <meta locale="<?= $locale ?? 'es'; ?>"> 
     <link rel="profile" href="//gmpg.org/xfn/11">
     <meta name="keywords" content="<?= KEYWORDS; ?>">
     <meta name="type" content="WebApp">
@@ -173,7 +177,8 @@ if(
     <link rel="stylesheet" href="<?= base_url('assets/css/LineIcons.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/animate.min.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/aos.css');?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/slick.css');?>" rel="stylesheet">
+    <!--link rel="stylesheet" href="<?= base_url('assets/css/slick.css');?>" rel="stylesheet"-->
+    <link rel="stylesheet" href="<?= base_url('assets/js/slick/slick.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/default.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/js/slideshow/prettyPhoto.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css');?>" rel="stylesheet">    

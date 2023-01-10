@@ -1,6 +1,6 @@
 <!--====== OFFERS PART START ======-->
 <?php
-	if(isset($categories) && is_array($categories) && count($categories) > 0) {
+	if(isset($categories) && is_array($categories) && count($categories) > 0 && (isset($cntOffers) && $cntOffers > 0)) {
 ?>
 	<section id="categories" class="project-area pt-125 pb-130">
 		<div class="container">
