@@ -11,47 +11,51 @@ if($news && is_array($news) && count($news) > 0 ) {
 					</div> <!-- section title -->
 				</div>
 			</div> <!-- row -->
-			<!--div class="row justify-content-center"--> 
-			<div class="swiper news-swiper"> 
-				<!-- If we need pagination -->
-			  <div class="swiper-pagination"></div>
-
-			  <!-- If we need navigation buttons -->
-			  <div class="swiper-button-prev"></div>
-			  <div class="swiper-button-next"></div>
-
-			  <!-- If we need scrollbar -->
-			  <div class="swiper-scrollbar"></div>
-				<div class="swiper-wrapper news-slider pb-50" id="news-slider">
-					<?php
-						foreach ($news as $new) {
-					?>
-						<!--====== <?= $new->title; ?> PART START ======-->
-						<div class="justify-content-center news swiper-slide new-id-<?= $new->id; ?>">
-							<div class="card new">
-								<?php if(!empty($new->photo)) { ?>
-								<div class="image-wrapper d-md-block justify-content-center">
-							  	<img src="<?= $new->photo; ?>" class="img" alt="<?= $new->title; ?>">
-							  </div>
-								<?php } ?>
-							  <div class="card-body">
-							    <h5 class="card-title text-center"><?= $new->title; ?></h5>
-					        <h6 class="card-subtitle mb-2 text-muted"></h6>
-							    <p class="card-text text-justify"><?= mb_strlen($new->details) > 150 ? substr($new->details, 0, 147).'...' : $new->details; ?></p>
-							  </div>
-							  <div class="card-footer">
-							    <a href="<?= $new->news_link; ?>" target="_blank" class="main-btn d-block"><?= lang('Doit.seeMore'); ?></a>
-							  </div>
-						  </div>
-					  </div>
-						<!--====== <?= $new->title; ?> PART ENDS ======-->
-					<?php
-						} 
-					?>
+			<div class="row justify-content-center" id="news-slick-slider"> 
+				<div class="container d-flex news-slick-slider"> <!-- row-cols-1 row-cols-md-3 -->
+				<?php
+					foreach ($news as $new) {
+				?>
+					<!--====== <?= $new->title; ?> PART START ======-->
+			    <div class="col">
+				    <div class="card h-100">
+				    	<?php if(!empty($new->photo)) { ?>
+				      	<img src="<?= $new->photo; ?>" class="card-img-top" alt="<?= $new->title; ?>">
+				      <?php } ?>
+				      <div class="card-body">
+				        <h5 class="card-title"><?= $new->title; ?></h5>
+				        <p class="card-text"><?= mb_strlen($new->details) > 150 ? substr($new->details, 0, 147).'...' : $new->details; ?> <a href="<?= $new->news_link; ?>" target="_blank" class="btn btn-link"><?= lang('Doit.seeMore'); ?></a></p>
+				      </div>
+				      <div class="card-footer">
+				        <small class="text-muted">Ultima actualización <?= timeago($new->updated_at);?></small>
+				      </div>
+				    </div>
+			    </div>
+					<!--====== <?= $new->title; ?> PART ENDS ======-->
+				<?php
+					} 
+				?>
 				</div>
 			</div>
 		</div>
 	</section>
 <?php
 } 
+function timeago($date) {
+	   $timestamp = strtotime($date);	
+	   
+	   $strTime = array("segundo", "minuto", "hora", "día", "mes", "año");
+	   $length = array("60","60","24","30","12","10");
+
+	   $currentTime = time();
+	   if($currentTime >= $timestamp) {
+			$diff     = time()- $timestamp;
+			for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
+				$diff = $diff / $length[$i];
+			}
+
+			$diff = round($diff);
+			return " hace " . $diff . " " . $strTime[$i] . "(s) ";
+	   }
+	}
 ?>

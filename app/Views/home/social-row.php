@@ -9,8 +9,17 @@
 				<br/>
 				<div class="fb-share-button" data-uri="https://www.facebook.com/hashtag/doitviajesyturismo/" data-lazy="true" data-size="small"></div>
 			</div>
-			<div class="col-lg-6 mt-5 text-center justify-content-center">
-				<a class="twitter-timeline" data-height="600" data-dnt="true" data-theme="light" href="https://twitter.com/Doitviajesytur?ref_src=twsrc%5Etfw">Tweets by @Doitviajesytur</a>
+			<div class="col-lg-6 mt-5 text-center justify-content-center">	
+				<a class="twitter-timeline"
+					href="https://twitter.com/Doitviajesytur?ref_src=twsrc%5Etfw"
+					data-width="300"
+					data-dnt="true" data-theme="light" 
+					data-chrome="nofooter noborders"
+					data-tweet-limit="5"
+					data-aria-polite="assertive"
+					data-height="600">
+					Tweets by @Doitviajesytur
+				</a>
 				<br>
 				<a href="https://twitter.com/doitviajesytur?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-dnt="true" data-show-count="false">Follow @doitviajesytur</a>
 				<br>
