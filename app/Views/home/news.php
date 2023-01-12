@@ -42,20 +42,20 @@ if($news && is_array($news) && count($news) > 0 ) {
 <?php
 } 
 function timeago($date) {
-	   $timestamp = strtotime($date);	
-	   
-	   $strTime = array("segundo", "minuto", "hora", "día", "mes", "año");
-	   $length = array("60","60","24","30","12","10");
+ $timestamp = strtotime($date);	
+ 
+ $strTime = array("segundo", "minuto", "hora", "día", "mes", "año");
+ $length = array("60","60","24","30","12","10");
 
-	   $currentTime = time();
-	   if($currentTime >= $timestamp) {
-			$diff     = time()- $timestamp;
-			for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
-				$diff = $diff / $length[$i];
-			}
-
-			$diff = round($diff);
-			return " hace " . $diff . " " . $strTime[$i] . "(s) ";
-	   }
+ $currentTime = time();
+ if($currentTime >= $timestamp) {
+	$diff     = time()- $timestamp;
+	for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
+		$diff = $diff / $length[$i];
 	}
+
+	$diff = round($diff);
+	return " hace " . $diff . " " . $strTime[$i] . "(s) ";
+ }
+}
 ?>
