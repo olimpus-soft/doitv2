@@ -113,6 +113,8 @@ class Index extends BaseController {
     $news = $newsModel->asObject()
       ->where('status', '1')
       ->where("(lang = '{$this->locale}' OR lang IS NULL)")
+      //->where("updated_at >= '" . date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' - 60 days')) . "'")
+      ->orderBy('updated_at', 'DESC')
       ->orderBy('orden', 'ASC')
       ->orderBy('id', 'ASC')
       ->findAll()

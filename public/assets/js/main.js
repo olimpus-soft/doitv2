@@ -350,83 +350,54 @@ $(document).ready(function(){
       });//*/
     }
     
-    if($('#news .news-slider > .news').length > 0) {
-      const swiperNews = new Swiper('.swiper.news-swiper', {
-        speed: 400,
-        spaceBetween: 100,
-        //slidesPerView: 1,
-        centerInsufficientSlides: true,
-        centeredSlides: true,
-        //loop: true, //no se puede usar junto a rewind
-        rewind: true, //no se puede usar junto a loop
-        autoplay: {
-          delay: 2000,
-        },
-        navigation: {
-          enabled: true,
-          nextEl: '.news-swiper .swiper-button-next',
-          prevEl: '.news-swiper .swiper-button-prev',
-        },
-        scrollbar: {
-          el: '.news-swiper .swiper-scrollbar',
-          draggable: true,
-        },
-        pagination: {
-          el: '.news-swiper .swiper-pagination',
-          type: 'bullets',
-        },
-        breakpoints: {
-          // when window width is >= 320px
-          320: {
-            navigation: {
-              enabled: false,
+    if($('#news-slick-slider .news-slick-slider .card').length > 0) {
+      $.sameHeight('#news-slick-slider .news-slick-slider .card');
+      $('#news-slick-slider .news-slick-slider').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: true,        
+        autoplaySpeed: 3000,        
+        speed: 2000,
+        draggable: true,
+        mobileFirst: true,
+        pauseOnDotsHover: true,
+        variableWidth: true,
+        centerMode: true,
+        centerPadding: '60px',
+        responsive: [
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerPadding: '5px',
+              }
             },
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          576: {
-            navigation: {
-              enabled: false,
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerPadding: '15px',
+              }
             },
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          768: {
-            navigation: {
-              enabled: false,
+            {
+              breakpoint: 1280,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
             },
-            slidesPerView: 2,
-            spaceBetween: 5,
-          },
-          992: {
-            navigation: {
-              enabled: true,
+            {
+              breakpoint: 1400,
+              settings: {
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
             },
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1200: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1400: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 4,
-            spaceBetween: 50,
-          },
-          2000: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 5,
-            spaceBetween: 20,
-          },
-        },
+        ]
       });
       //$.sameHeight('#news .news-slider > .news > .card');
     }
