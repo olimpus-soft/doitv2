@@ -75,21 +75,24 @@ class Index extends BaseController {
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
-    foreach ($categories as &$category) {
-      $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
-      $cntOfertas = $ofertasModel->asObject()
-        ->where('status', '1')
-        ->where('oferta_categoria', $category->id)
-        ->orderBy('id', 'ASC')
-        ->countAllResults()
-      ;
-      $cntCharters = $chartersModel->asObject()
-        ->where('status', '1')
-        ->where('charter_categoria', $category->id)
-        ->orderBy('id', 'ASC')
-        ->countAllResults()
-      ;
-      $category->cntOfertas =  $cntOfertas + $cntCharters;
+    if(count($categories) > 0) {
+      foreach ($categories as &$category) {
+        $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+        $cntOfertas = $ofertasModel->asObject()
+          ->where('status', '1')
+          ->where('oferta_categoria', $category->id)
+          ->orderBy('id', 'ASC')
+          ->countAllResults()
+        ;
+        $cntCharters = $chartersModel->asObject()
+          ->where('status', '1')
+          ->where('charter_categoria', $category->id)
+          ->orderBy('id', 'ASC')
+          ->countAllResults()
+        ;
+        $category->cntOfertas =  $cntOfertas + $cntCharters;
+      }
+      $ofertas = self::searchOffers($categories[0]->categoria_slug, null, $limit = 5);
     }
     /**
      * [$equipoModel description]
@@ -157,6 +160,20 @@ class Index extends BaseController {
       'contacTypes'     => $contacTypes,
     ]);
     return view('index', $this->viewParams);
+  }
+
+  public static function getMimeTypeFileName($filePath='') {
+    $mime = null;
+    if (($lastDotPosition = strrpos($filePath, '.')) !== false) {
+      $mime = Mimes::guessTypeFromExtension(substr($filePath, $lastDotPosition + 1));
+    }
+    if (empty($mime)) {
+      $mime = mime_content_type($filePath);
+    }
+    if (empty($mime)) {
+      $mime = 'application/octet-stream';
+    }
+    return $mime;
   }
 
   public static function hashBucketFilemname($arg1, $arg2=null, $arg3=null, $arg4=null) {
@@ -689,52 +706,62 @@ class Index extends BaseController {
     return view('show-destination', $this->viewParams);
   }
 
-  public function getOferta($categoria=null,$oferta=null) {
+  private function searchOffers($categoria=null, $oferta=null, $limit=null, $offset=0) {
+    $db      = \Config\Database::connect();
+    $offers = $db
+      ->table('ofertas AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_file_type, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', '1')
+      ->where('oc.status', '1')
+      ->where('ot.oferta_lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale);
+    if(!empty($categoria)) {
+      $offers = $offers->where('oc.categoria_slug', $categoria);
+    }
+    if(!empty($oferta)) {
+      $offers = $offers->where('ot.oferta_slug', $oferta);
+    }
+    if(!empty($limit) && is_int($limit) && $limit > 0) {
+      $offers = $offers->limit($limit);
+    }
+    if(!empty($offset) && is_int($offset) && $offset > 0) {
+      $offers = $offers->offset($offset);
+    }
+    $offers = $offers->orderBy('ot.oferta_orden', 'ASC')
+      ->orderBy('ot.oferta_titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
+
+    foreach ($offers as &$offer) {
+      $offer->oferta_image = base_url('bucketC/' . $offer->oferta_image);
+      $offer->oferta_fileMimeType = self::getMimeTypeFileName($offer->oferta_image);
+      if($offer->oferta_file_type == 'local') {
+        $ext = explode('.', $offer->oferta_file);
+        $filePath = $this->basePath.$offer->oferta_file;
+        $ext = end($ext);
+        $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
+        $offer->oferta_fileextension  = $ext;
+        $offer->oferta_file  = base_url('bucketC/' . $offer->oferta_file );
+      }
+    }
+    return $offers;
+  }
+
+  public function getOferta($categoria=null, $oferta=null) {
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
     $difDF = $dtNow->diff($dtF);
     $offers = [];
     $categories = [];
     $contentScripts = '';
+    $db      = \Config\Database::connect();
     if(!empty($categoria) || !empty($oferta)) {
-      $db      = \Config\Database::connect();
-      $offers = $db
-        ->table('ofertas AS ot')
-        ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_file_type, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
-        ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
-        ->where('ot.status', '1')
-        ->where('oc.status', '1')
-        ->where('ot.oferta_lang', $this->locale)
-        ->where('oc.categoria_lang', $this->locale);
-      if(!empty($categoria)) {
-        $offers = $offers->where('oc.categoria_slug', $categoria);
-      }
-      if(!empty($oferta)) {
-        $offers = $offers->where('ot.oferta_slug', $oferta);
-      }
-      $offers = $offers->orderBy('ot.oferta_orden', 'ASC')
-        ->orderBy('ot.oferta_titulo', 'ASC')
-        ->orderBy('ot.id', 'ASC')
-        //->getCompiledSelect()
-        ->get()
-        ->getResult()
-      ;
-
-      foreach ($offers as &$offer) {
-        $offer->oferta_image = base_url('bucketC/' . $offer->oferta_image);
-        if($offer->oferta_file_type == 'local') {
-          $ext = explode('.', $offer->oferta_file);
-          $filePath = $this->basePath.$offer->oferta_file;
-          $ext = end($ext);
-          $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
-          $offer->oferta_fileextension  = $ext;
-          $offer->oferta_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
-          $offer->oferta_file  = base_url('bucketC/' . $offer->oferta_file );
-        } else {
-          $offer->oferta_fileMimeType  = 'application/octet-stream';
-        }
-      }
-
+      
+      $offers = $this->searchOffers($categoria, $oferta);
 
       $charters = $db
         ->table('charters AS ot')
@@ -821,7 +848,7 @@ class Index extends BaseController {
         $offers = $offers[0];
 
         if(strstr($offers->oferta_fileMimeType, 'image')) {
-          $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offers->charter_titulo . "\" src=\"" . $offers->oferta_file . "/true\" data-image=\"" . $offers->oferta_file . "\" data-description=\"" . (!empty($offers->charter_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offers->charter_subtitulo) : '') ."\">');";
+          $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offers->oferta_titulo . "\" src=\"" . $offers->oferta_file . "/true\" data-image=\"" . $offers->oferta_file . "\" data-description=\"" . (!empty($offers->oferta_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offers->oferta_subtitulo) : '') ."\">');";
         } else if(strstr($offers->oferta_fileMimeType, 'pdf')) { 
           $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $offers->oferta_file ."/true\" type=\"" . $offers->oferta_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
         } else if(strstr($offers->oferta_fileMimeType, 'video')) { 
