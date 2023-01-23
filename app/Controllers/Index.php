@@ -78,7 +78,7 @@ class Index extends BaseController {
     if(count($categories) > 0) {
       foreach ($categories as &$category) {
         $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
-        $cntOfertas = $ofertasModel->asObject()
+        /*$cntOfertas = $ofertasModel->asObject()
           ->where('status', '1')
           ->where('oferta_categoria', $category->id)
           ->orderBy('id', 'ASC')
@@ -90,7 +90,9 @@ class Index extends BaseController {
           ->orderBy('id', 'ASC')
           ->countAllResults()
         ;
-        $category->cntOfertas =  $cntOfertas + $cntCharters;
+        $category->cntOfertas =  $cntOfertas + $cntCharters;*/
+        $category->ofertas =  self::searchOffers($categories[0]->categoria_slug);
+        $category->cntOfertas = count($category->ofertas);
       }
       $ofertas = self::searchOffers($categories[0]->categoria_slug, null, $limit = 5);
     }
