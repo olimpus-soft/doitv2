@@ -2,7 +2,7 @@
 <?php
 	if(isset($categories) && is_array($categories) && count($categories) > 0 && (isset($cntOffers) && $cntOffers > 0)) {
 ?>
-	<section id="categories" class="project-area pt-125 pb-130">
+	<section id="ofertas" class="project-area pt-20 pb-10">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
@@ -30,8 +30,8 @@
               foreach ($category->ofertas as &$oferta) {
               ?>
               <li style="padding:10px 25px;">
-                <a href="<?= $oferta->oferta_file; ?>?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=<?= $oferta->categoria_slug .'/'. $oferta->oferta_slug ; ?>" class="d-block w-100 d-sm-inline-block btn-light btn-link">
-                  <?= $oferta->oferta_titulo; ?>                    
+                <a href="<?= $oferta->file; ?>?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=<?= $oferta->categoria_slug .'/'. $oferta->slug ; ?>" class="d-block w-100 d-sm-inline-block btn-light btn-link" target="_blank">
+                  <?= $oferta->titulo; ?>                    
                 </a>
               </li>
               <?php

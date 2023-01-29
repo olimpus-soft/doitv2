@@ -42,6 +42,7 @@ class Database extends Config
         'DBDebug'  => (ENVIRONMENT !== 'production'),
         'charset'  => 'utf8',
         'DBCollat' => 'utf8_general_ci',
+        'schema'  => 'doitv2_web',
         'swapPre'  => '',
         'encrypt'  => false,
         'compress' => false,

@@ -88,7 +88,7 @@
 							<h4 class="title" itemprop="name"><?= COMERCIALNAME; ?></h4>
 						</div>
 						<p class="mt-15 text-justify" itemprop="description"><?= COMPANY_LEGAL_DESC; ?></p>
-						<span itemprop="priceRange">$$$$$</span>
+						<span itemprop="priceRange" style="display: none;">$$$$$</span>
 					</div>
 				</div>
 			</div> <!-- row -->

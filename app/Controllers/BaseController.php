@@ -7,11 +7,24 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Mimes;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
-use App\Models\Destinos;
+use App\Models\AgencyType;
+use App\Models\Objetivos;
+use App\Models\ObjetivosDetalles;
 use App\Models\Ofertas;
-use App\Models\ContactType;
+use App\Models\Destinos;
+use App\Models\DestinoDetalles;
+use App\Models\DestinosImagenes;
+use App\Models\Equipo;
+use App\Models\Contactos;
+use App\Models\AditionalPages;
+use App\Models\CategoriaOfertas;
+use App\Models\Agents;
+use App\Models\AgentsContacts;
+use App\Models\News;
+use App\Models\Geleria;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use \DateTime;
@@ -62,8 +75,9 @@ class BaseController extends Controller {
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
       $paramsModel = new Parameters();
       $parameters = $paramsModel->asObject()
-          ->where("status = 1 AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
+          ->where("status = 'ACTIVE' AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
           ->orderBy('parameter', 'ASC')
+          //->getCompiledSelect()
           ->findAll()
       ;
       foreach ($parameters as $parameter) {
@@ -73,16 +87,16 @@ class BaseController extends Controller {
 
       $destinosModel = new Destinos();
       $this->cntDestinations = $destinosModel->asObject()
-        ->where('status', '1')
-        ->where('destino_lang', $this->locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ;
 
       $offersModel = new Ofertas();
       $this->cntOffers = $offersModel->asObject()
-        ->where('status', '1')
-        ->where('oferta_lang', $this->locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ; 
@@ -483,14 +497,206 @@ class BaseController extends Controller {
     ];
   }
 
-  public function getContactType() {
-    $contacTypesModel = new ContactType();
-    $contacTypes = $contacTypesModel->asObject()
-      ->where('status', '1')
+  public function getAgencyType() {
+    $agencyTypesModel = new AgencyType();
+    $agencyTypes = $agencyTypesModel->asObject()
+      ->where('status', 'ACTIVE')
       ->where('lang', $this->locale)
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
-    return $contacTypes;
+    return $agencyTypes;
+  }
+
+  public function getObjetivesWeb() {    
+    $objetivosModel = new Objetivos();
+    $objetivos = $objetivosModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $objetivosDetallesModel = new ObjetivosDetalles();
+    foreach ($objetivos as &$objetivo) {
+      $objetivo->details = $objetivosDetallesModel->asObject()
+        ->where('status', 'ACTIVE')
+        ->where('objetivo_id', $objetivo->id)
+        ->findAll()
+      ; 
+    }
+    return $objetivos;
+  }
+
+  public function getTeamWeb() {    
+    $equipos = [];
+    /**
+     * [$equipoModel description]
+     * @var Equipo
+     */
+    /*$equipoModel = new Equipo();
+    $equipos = $equipoModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('equipo_lang', $this->locale)
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+    foreach ($equipos as &$equipo) {
+      $equipo->equipo_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($equipo->equipo_image))));
+    }
+    */
+   return $equipos;
+  }
+
+  public function getCategoriesWithOffers() {    
+    $categoriaOfertasModel = new CategoriaOfertas();
+    $categories = $categoriaOfertasModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('categoria_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    if(count($categories) > 0) {
+      foreach ($categories as &$category) {
+        $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+        $category->ofertas =  self::searchOffers($categories[0]->categoria_slug);
+        $category->cntOfertas = count($category->ofertas);
+      }
+    }
+   return $categories;
+  }
+
+  public function getNewsWeb() {    
+    $newsModel = new News();
+    $news = $newsModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where("(lang = '{$this->locale}' OR lang IS NULL)")
+      //->where("updated_at >= '" . date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' - 60 days')) . "'")
+      ->orderBy('updated_at', 'DESC')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    foreach ($news as &$new) {
+      $new->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($new->photo))));
+      $new->details = strlen($new->details) > 150 ? substr($new->details, 0, 147) . '...' : trim($new->details);
+    } 
+    return $news;
+  }
+
+  public function getAgentsWeb() {        
+    $agentsModel = new Agents();
+    $agents = $agentsModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $agentsContactsModel = new AgentsContacts();
+    foreach ($agents as &$agent) {
+      $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
+      $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
+      $agent->contacts = $agentsContactsModel->asObject()
+        ->where('status', 'ACTIVE')
+        ->where('agent_id', $agent->id)
+        ->orderBy('orden', 'ASC')
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ; 
+    }
+    return $agents;
+  }
+
+
+
+  public static function getMimeTypeFileName($filePath='') {
+    $mime = null;
+    if (($lastDotPosition = strrpos($filePath, '.')) !== false) {
+      $mime = Mimes::guessTypeFromExtension(substr($filePath, $lastDotPosition + 1));
+    }
+    if (empty($mime)) {
+      $mime = mime_content_type($filePath);
+    }
+    if (empty($mime)) {
+      $mime = 'application/octet-stream';
+    }
+    return $mime;
+  }
+
+  public static function hashBucketFilemname($arg1, $arg2=null, $arg3=null, $arg4=null) {
+    $filePath = '';
+    $cleanChars = ['.'];
+    if($arg1 && !empty($arg1)) {
+      foreach ($cleanChars as $char) {
+        $arg1 = ltrim($arg1, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg1;
+    }
+    if($arg2 && !empty($arg2)) {
+      foreach ($cleanChars as $char) {
+        $arg2 = ltrim($arg2, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg2;
+    }
+    if($arg3 && !empty($arg3)) {
+      foreach ($cleanChars as $char) {
+        $arg3 = ltrim($arg3, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg3;
+    }
+    if($arg4 && !empty($arg4)) {
+      foreach ($cleanChars as $char) {
+        $arg4 = ltrim($arg4, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg4;
+    }
+    return strrev(str_replace('=', '', base64_encode($filePath)));
+  }
+
+
+
+  public function searchOffers($categoria=null, $oferta=null, $limit=null, $offset=0) {
+    $db      = \Config\Database::connect();
+    $offers = $db
+      ->table('ofertas AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.slug, ot.titulo, ot.subtitulo, ot.favorita, ot.resumen, ot.file, ot.file_type, ot.image, ot.orden, oc.categoria, oc.categoria_descripcion, ot.lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.categoria_id AND ot.lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
+      ->where('ot.lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale);
+    if(!empty($categoria)) {
+      $offers = $offers->where('oc.categoria_slug', $categoria);
+    }
+    if(!empty($oferta)) {
+      $offers = $offers->where('ot.slug', $oferta);
+    }
+    if(!empty($limit) && is_int($limit) && $limit > 0) {
+      $offers = $offers->limit($limit);
+    }
+    if(!empty($offset) && is_int($offset) && $offset > 0) {
+      $offers = $offers->offset($offset);
+    }
+    $offers = $offers->orderBy('ot.orden', 'ASC')
+      ->orderBy('ot.titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
+
+    foreach ($offers as &$offer) {
+      $offer->image = base_url('bucketC/' . $offer->image);
+      $offer->fileMimeType = self::getMimeTypeFileName($offer->image);
+      if($offer->file_type == 'local') {
+        $ext = explode('.', $offer->file);
+        $filePath = $this->basePath.$offer->file;
+        $ext = end($ext);
+        $offer->filename  = trim($offer->titulo).'.'.$ext;
+        $offer->fileextension  = $ext;
+        $offer->file  = base_url('bucketC/' . $offer->file );
+      }
+    }
+    return $offers;
   }
 }

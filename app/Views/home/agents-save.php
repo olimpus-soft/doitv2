@@ -1,11 +1,11 @@
 <?php
 if($agents && is_array($agents) && count($agents) > 0 ) {
 	$replaceViewValues = App\Controllers\BaseController::replaceViewValues(); ?>
-	<section id="agents" class="about-area agents-area  pt-40 pb-120 white-bg">
+	<section id="agents" class="about-area agents-area  pt-10 pb-20 white-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
-					<div class="section-title text-center pb-20">
+					<div class="section-title text-center pb-10">
 						<h5 class="sub-title mb-15"><?= lang('Doit.contactusPleasure'); ?></h5>
 						<h2 class="title"><?= lang('Doit.ouragents'); ?></h2>
 					</div> <!-- section title -->
@@ -21,7 +21,7 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
 
       <!-- If we need scrollbar -->
       <div class="swiper-scrollbar"></div>
-      <div class="swiper-wrapper agents-slider pb-20" id="agents-slider">
+      <div class="swiper-wrapper agents-slider pb-10" id="agents-slider">
           <?php
           	foreach ($agents as $agent) {
           ?>

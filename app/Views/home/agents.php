@@ -41,53 +41,53 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
                     $contact->contact_url = '#';
                     $contact->itemPropDescr = '';
                     $contact->itemPropValue = '';
-                    if(in_array($contact->tipo, ['phone', 'movil'])) {
+                    if(in_array($contact->tipo_contacto, ['phone', 'movil'])) {
                       $contact->contact_value = str_replace([' ', '.','-','(',')'], '', $contact->contact_value);
-                      $contact->contact_ico = 'fa '.($contact->tipo == 'phone' ? 'fa-phone' : 'fa-mobile');
+                      $contact->contact_ico = 'fa '.($contact->tipo_contacto == 'phone' ? 'fa-phone' : 'fa-mobile');
                       $contact->contact_url = 'call:'.$contact->contact_value;
                       $contact->itemPropDescr = 'telephone';
-                    } else if(in_array($contact->tipo, ['zoom', 'skype'])) {
+                    } else if(in_array($contact->tipo_contacto, ['zoom', 'skype'])) {
                       $contact->contact_url = 'live:'.$contact->contact_value;
-                      //$contact->contact_ico = 'fa '.($contact->tipo == 'phone' ? 'fa-phone' : 'fa-mobile');
+                      //$contact->contact_ico = 'fa '.($contact->tipo_contacto == 'phone' ? 'fa-phone' : 'fa-mobile');
                       //$contact->itemPropDescr = 'telephone';
-                    } else if($contact->tipo == 'email') {
+                    } else if($contact->tipo_contacto == 'email') {
                       $contact->contact_url = 'mailto:'.$contact->contact_value;
                       $contact->contact_ico = 'fas fa-envelope';
                       $contact->itemPropDescr = 'email';
-                    } else if($contact->tipo == 'facebook') {
+                    } else if($contact->tipo_contacto == 'facebook') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-facebook';
-                    } else if($contact->tipo == 'twiter') {
+                    } else if($contact->tipo_contacto == 'twiter') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-twiter';
-                    } else if($contact->tipo == 'instagram') {
+                    } else if($contact->tipo_contacto == 'instagram') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-instagram';
-                    } else if($contact->tipo == 'telegram') {
+                    } else if($contact->tipo_contacto == 'telegram') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-telegram';
-                    } else if($contact->tipo == 'tiktok') {
+                    } else if($contact->tipo_contacto == 'tiktok') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-tiktok';
-                    } else if($contact->tipo == 'linkedin') {
+                    } else if($contact->tipo_contacto == 'linkedin') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-linkedin';
-                    } else if($contact->tipo == 'pinterest') {
+                    } else if($contact->tipo_contacto == 'pinterest') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-pinterest';
-                    } else if($contact->tipo == 'tumblr') {
+                    } else if($contact->tipo_contacto == 'tumblr') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-tumblr';
-                    } else if($contact->tipo == 'reddit') {
+                    } else if($contact->tipo_contacto == 'reddit') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-reddit';
-                    } else if($contact->tipo == 'viber') {
+                    } else if($contact->tipo_contacto == 'viber') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-viber';
-                    } else if($contact->tipo == 'line') {
+                    } else if($contact->tipo_contacto == 'line') {
                       $contact->contact_url = $contact->contact_value;
                       $contact->contact_ico = 'fab fa-line';
-                    } else if($contact->tipo == 'whatsapp') {
+                    } else if($contact->tipo_contacto == 'whatsapp') {
                       $contact->contact_value = str_replace([' ', '.','-','(',')', '+'], '', $contact->contact_value);
                       $contact->contact_url = '//wa.me/'.$contact->contact_value;
                       $contact->contact_ico = 'fab fa-whatsapp';
@@ -99,7 +99,7 @@ if($agents && is_array($agents) && count($agents) > 0 ) {
                     }
                   ?>
                     <a href="<?= $contact->contact_url; ?>" target="_blank" class="neo-button"
-                       data-bs-toggle="popover" data-bs-trigger="hover focus" title="<?= $contact->tipo; ?>" data-bs-content="<?= $contact->contact_value; ?>"
+                       data-bs-toggle="popover" data-bs-trigger="hover focus" title="<?= $contact->tipo_contacto; ?>" data-bs-content="<?= $contact->contact_value; ?>"
                     >
                       <i class="<?= $contact->contact_ico; ?> fa-2x" aria-hidden="true"></i>
                       <?php

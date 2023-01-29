@@ -5,9 +5,9 @@ $(document).ready(function(){
     
     //===== Prealoder
     
-    $(window).on('load', function(event) {
-        $('.preloader').delay(100).fadeOut(200);
-    });
+    //$(window).on('load', function(event) {
+        $('.preloader').delay(500).fadeOut(300);
+    //});
     
     
     //===== Mobile Menu 
@@ -55,42 +55,8 @@ $(document).ready(function(){
         }); ///grecaptcha.ready(function()
     });
     
-    //===== Sticky
-    
-    $(window).on('scroll',function(event) {    
-        var scroll = $(window).scrollTop();
-        if (scroll < 10) {
-            $(".navigation-bar").removeClass("sticky");
-        }else{
-            $(".navigation-bar").addClass("sticky");
-        }
-    });
     
     
-    //===== Section Menu Active
-    
-    var scrollLink = $('.page-scroll');
-        // Active link switching
-    $(window).scroll(function() {
-        var scrollbarLocation = $(this).scrollTop();
-        if($(this).scrollTop() > 600){
-            $('.back-to-top').fadeIn(200)
-        } else{
-            $('.back-to-top').fadeOut(200)
-        }
-        scrollLink.each(function() {
-          this.hash = this.hash.split('?');
-          this.hash = this.hash[0];
-          if($(this.hash).length > 0) {
-            var sectionOffset = $(this.hash).offset().top - 90;
-
-            if ( sectionOffset <= scrollbarLocation ) {
-              $(this).parent().addClass('active');
-              $(this).parent().siblings().removeClass('active');
-            }
-          }
-        });
-    });
     
     
     //===== wow

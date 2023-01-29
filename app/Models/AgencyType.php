@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ContactType extends Model
+class AgencyType extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'tipo_contacto';
+    protected $table            = 'tipo_agencia';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'description', 'status', 'created_at', 'updated_at' ];
+    protected $allowedFields    = [ 'id', 'description', 'lang', 'status', 'created_at', 'updated_at' ];
 
     // Dates
     protected $useTimestamps = false;
