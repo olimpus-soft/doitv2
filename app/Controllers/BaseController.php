@@ -73,17 +73,7 @@ class BaseController extends Controller {
       parent::initController($request, $response, $logger);
       $this->locale = 'es'; //$this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
-      $paramsModel = new Parameters();
-      $parameters = $paramsModel->asObject()
-          ->where("status = 'ACTIVE' AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
-          ->orderBy('parameter', 'ASC')
-          //->getCompiledSelect()
-          ->findAll()
-      ;
-      foreach ($parameters as $parameter) {
-        if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
-        defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
-      }
+      self::getParameterApp($this->locale);
 
       $destinosModel = new Destinos();
       $this->cntDestinations = $destinosModel->asObject()
@@ -548,24 +538,6 @@ class BaseController extends Controller {
    return $equipos;
   }
 
-  public function getCategoriesWithOffers() {    
-    $categoriaOfertasModel = new CategoriaOfertas();
-    $categories = $categoriaOfertasModel->asObject()
-      ->where('status', 'ACTIVE')
-      ->where('categoria_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ;
-    if(count($categories) > 0) {
-      foreach ($categories as &$category) {
-        $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
-        $category->ofertas =  self::searchOffers($categories[0]->categoria_slug);
-        $category->cntOfertas = count($category->ofertas);
-      }
-    }
-   return $categories;
-  }
-
   public function getNewsWeb() {    
     $newsModel = new News();
     $news = $newsModel->asObject()
@@ -655,9 +627,27 @@ class BaseController extends Controller {
 
 
 
+  public function getCategoriesWithOffers() {    
+    $categoriaOfertasModel = new CategoriaOfertas();
+    $categories = $categoriaOfertasModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('categoria_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    if(count($categories) > 0) {
+      foreach ($categories as &$category) {
+        $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+        $category->ofertas =  self::searchOffers($category->categoria_slug);
+        $category->cntOfertas = count($category->ofertas);
+      }
+    }
+    return $categories;
+  }
+
   public function searchOffers($categoria=null, $oferta=null, $limit=null, $offset=0) {
     $db      = \Config\Database::connect();
-    $offers = $db
+    $offersQuery = $db
       ->table('ofertas AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.slug, ot.titulo, ot.subtitulo, ot.favorita, ot.resumen, ot.file, ot.file_type, ot.image, ot.orden, oc.categoria, oc.categoria_descripcion, ot.lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.categoria_id AND ot.lang = oc.categoria_lang', 'INNER')
@@ -666,25 +656,24 @@ class BaseController extends Controller {
       ->where('ot.lang', $this->locale)
       ->where('oc.categoria_lang', $this->locale);
     if(!empty($categoria)) {
-      $offers = $offers->where('oc.categoria_slug', $categoria);
+      $offersQuery = $offersQuery->where('oc.categoria_slug', $categoria);
     }
     if(!empty($oferta)) {
-      $offers = $offers->where('ot.slug', $oferta);
+      $offersQuery = $offersQuery->where('ot.slug', $oferta);
     }
     if(!empty($limit) && is_int($limit) && $limit > 0) {
-      $offers = $offers->limit($limit);
+      $offersQuery = $offersQuery->limit($limit);
     }
     if(!empty($offset) && is_int($offset) && $offset > 0) {
-      $offers = $offers->offset($offset);
+      $offersQuery = $offersQuery->offset($offset);
     }
-    $offers = $offers->orderBy('ot.orden', 'ASC')
+    $offers = $offersQuery->orderBy('ot.orden', 'ASC')
       ->orderBy('ot.titulo', 'ASC')
       ->orderBy('ot.id', 'ASC')
       //->getCompiledSelect()
       ->get()
       ->getResult()
     ;
-
     foreach ($offers as &$offer) {
       $offer->image = base_url('bucketC/' . $offer->image);
       $offer->fileMimeType = self::getMimeTypeFileName($offer->image);
@@ -698,5 +687,20 @@ class BaseController extends Controller {
       }
     }
     return $offers;
+  }
+
+  public static function getParameterApp(String $locale) {
+    $paramsModel = new Parameters();
+    $parameters = $paramsModel->asObject()
+        ->where("status = 'ACTIVE' AND (parameter_lang = '{$locale}' OR parameter_lang IS NULL)")
+        ->orderBy('parameter', 'ASC')
+        //->getCompiledSelect()
+        ->findAll()
+    ;
+    foreach ($parameters as $parameter) {
+      if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
+      defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
+    }
+    return $parameters;
   }
 }

@@ -25,16 +25,7 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override(function( $message = null ) {
     $locale = AppServices::request()->getLocale() ?? 'es';
     AppServices::response()->setStatusCode(404, lang('Doit.pageNotFound'));
-    $paramsModel = new \App\Models\Parameters();
-    $parameters = $paramsModel->asObject()
-      ->where("status = 1 AND (parameter_lang = '{$locale}' OR parameter_lang IS NULL)")
-      ->orderBy('parameter', 'ASC')
-      ->findAll()
-    ;
-    foreach ($parameters as $parameter) {
-        if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
-        defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
-    }
+    App\Controllers\BaseController::getParameterApp($locale);
     $destinosModel = new \App\Models\Destinos();
     $cntDestinations = $destinosModel->asObject()
         ->where('status', '1')
