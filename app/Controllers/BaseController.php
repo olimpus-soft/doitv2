@@ -178,6 +178,139 @@ class BaseController extends Controller {
       return $ret;
   } 
 
+  /**
+   * [requestApi description]
+   * @param  [type]  $url         [description]
+   * @param  [type]  $postData    [description]
+   * @param  string  $method      [description]
+   * @param  array   $curlOpts    [description]
+   * @param  array   $headers     [description]
+   * @param  [type]  &$resultado  [description]
+   * @param  boolean $jsonConvert [description]
+   * @param  boolean $verbose     [description]
+   * @return [type]               [description]
+   */
+  public static function requestApi($url, $postData, &$resultado=null, $method = 'POST', $curlOpts=array(), $headers=array(), $jsonConvert=true, $verbose = false) {
+    try {
+      $config            = clone config('App');
+      $baseURL = rtrim($config->apiBaseUrl, '/') . '/';
+      if(!$url || empty($url)) throw new Exception("Url {$url} invalida o vacia", 1);
+      if(!is_array($curlOpts)) throw new Exception("curlOpts No es de tipo array", 1);
+      $url = $baseURL . $url;
+      if(!$resultado || !is_array($resultado)) $resultado = array();
+
+      $curl  = curl_init();
+      $error = false;
+      if($verbose) {        
+        $fl = fopen(realpath(__DIR__.'/../..').'/writable/logs/logApi-'.(time()).(!empty($tailLogFile)?'-'.$tailLogFile:'').'.log', 'a+');
+        fwrite($fl, PHP_EOL.PHP_EOL."INICIO DE REQUEST".PHP_EOL.PHP_EOL);
+      }
+
+      $arrHeaders = [
+        'Content-Type: application/json; charset=utf-8;',
+        'Connection: Keep-Alive',
+        'Accept: application/json; charset=utf-8;',
+        'x-request-ip: ' . \CodeIgniter\Config\Services::request()->getIPAddress(),
+        'x-request-url: ' . current_url(),
+      ];
+
+      $session = \Config\Services::session();
+      $token = $session->get('token');
+      if(!empty($token)) {
+        $arrHeaders[] = 'Authorization: OlimpusS ' . $token;
+        $arrHeaders[] = 'Proxy-Authorization: OlimpusS ' . $token;
+        $arrHeaders[] = 'X-Olimpus-Auth: OlimpusS ' . $token;
+      }
+
+      if(count($headers) > 0) {
+        $arrHeaders = array_merge($arrHeaders, $headers);
+      }
+      $opts = array(
+        CURLOPT_URL => $url,
+        CURLOPT_POST => $method == 'POST',
+        CURLOPT_PROXY => false,
+        CURLOPT_HEADER => true,
+        CURLOPT_VERBOSE => false,
+        CURLOPT_ENCODING => 'utf-8',
+        CURLOPT_USERAGENT => 'Web Admin Doit v2',
+        CURLOPT_HTTPHEADER => $arrHeaders,
+        CURLOPT_POSTFIELDS => json_encode($postData),
+        CURLOPT_AUTOREFERER => true,
+        CURLOPT_FAILONERROR => false,
+        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_HTTP200ALIASES => array(400, 401, 402, 403, 404, 405, 500, 501, 502, 503, 504, 505),
+      );
+
+      if(count($curlOpts) > 0) {
+        foreach ($curlOpts as $key => $value) {
+          $opts[$key] = $value;
+        }
+      }
+
+      if($verbose) {
+        $opts[CURLOPT_VERBOSE] = true;
+        $opts[CURLOPT_STDERR] = $fl;
+      }
+
+      curl_setopt_array($curl, $opts);
+      $resultado['response']      = curl_exec ($curl);
+      $resultado['header_size']   = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+      $resultado['header']        = substr($resultado['response'], 0, $resultado['header_size']);
+      $resultado['response']      = substr($resultado['response'], $resultado['header_size']);
+      $resultado['response_size'] = mb_strlen($resultado['response'], '8bit');
+      $resultado['url']           = $url;
+      $resultado['efective_url']  = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
+      $resultado['params']        = $postData;
+      $totaltime                  = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+      $resultado['httpcode']      = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      $resultado['error']         = curl_error($curl);
+      //$resultado['opts']          = $opts;
+      $resultado['resLog']        =  array(
+        'efective_url' => $resultado['efective_url'],
+        'response_size' => $resultado['response_size'],
+        'header_size' => $resultado['header_size'],
+        'httpcode' => $resultado['httpcode'],
+      );
+      if($totaltime > 5) {
+        $resultado['resLog']['timesdetails'] = array(
+          'TOTALTIME'           => round($totaltime, 2).' segs',
+          //'APPCONNECT_TIME'   => round(curl_getinfo($curl, CURLINFO_APPCONNECT_TIME), 4),
+          'NAMELOOKUP_TIME'     => round(curl_getinfo($curl, CURLINFO_NAMELOOKUP_TIME), 4).' segs',
+          'CONNEC_TIME'         => round(curl_getinfo($curl, CURLINFO_CONNECT_TIME), 4).' segs',
+          'PRETRANSFER_TIME'    => round(curl_getinfo($curl, CURLINFO_PRETRANSFER_TIME), 4).' segs',
+          'STARTTRANSFER_TIME'  => round(curl_getinfo($curl, CURLINFO_STARTTRANSFER_TIME), 4).' segs',
+          'REDIRECT_TIME'       => round(curl_getinfo($curl, CURLINFO_REDIRECT_TIME), 4).' segs',
+          'SIZE_UPLOAD'         => curl_getinfo($curl, CURLINFO_SIZE_UPLOAD),
+          'SIZE_DOWNLOAD'       => curl_getinfo($curl, CURLINFO_SIZE_DOWNLOAD),
+          'SPEED_UPLOAD'        => curl_getinfo($curl, CURLINFO_SPEED_UPLOAD),
+          'SPEED_DOWNLOAD'      => curl_getinfo($curl, CURLINFO_SPEED_DOWNLOAD),
+        );
+      }
+      curl_close ($curl);      
+      if($verbose) {
+        fwrite($fl, PHP_EOL.PHP_EOL."FIN DE REQUEST".PHP_EOL.PHP_EOL.PHP_EOL);
+      }
+      if($resultado['httpcode'] != 200 || !empty($resultado['error']) || $resultado['response'] === false || empty($resultado['httpcode'])) {
+        $error = true;
+      }
+      if($resultado['httpcode'] == 0) {
+        $error = true; 
+        $resultado['response'] = '{"success": false, "result":null, "message":"Servicio no disponible: 503"}';
+      }
+      if($jsonConvert) {
+        $resultado['response'] = json_decode($resultado['response'], false);
+      }
+      return !$error ? $resultado['response'] : false;
+    } catch (Exception $e) {
+      $resultado['error'] = $e->getMessage().'  =>  '.$e->getFile().':'.$e->getLine();
+      return false;
+    }
+  }
+
   public static function sendMail(object $config=null, &$ErrorInfo=''): bool {
     $send = false;
     try {
