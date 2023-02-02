@@ -24,125 +24,19 @@ use Config\Kint;
 
 class Index extends BaseController {
   
+  public function info() {
+    return phpinfo();
+  }
   public function index() {
-    $ofertas = [];
-    $objetivosModel = new Objetivos();
-    $objetivos = $objetivosModel->asObject()
-      ->where('status', '1')
-      ->where('lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ;
-    $objetivosDetallesModel = new ObjetivosDetalles();
-    foreach ($objetivos as &$objetivo) {
-      $objetivo->details = $objetivosDetallesModel->asObject()
-        ->where('status', '1')
-        ->where('objetivo_id', $objetivo->id)
-        ->findAll()
-      ; 
-    }
+    $ofertas      = [];
+    $objetivos    = $this->getObjetivesWeb();
+    $equipos      = $this->getTeamWeb();
+    $categories   = $this->getCategoriesWithOffers();
+    $agencyTypes  = $this->getAgencyType();
+    $news         = $this->getNewsWeb();
+    $agents       = $this->getAgentsWeb();
 
-    /*$db      = \Config\Database::connect();
-    $ofertas = $db
-      ->table('ofertas AS ot')
-      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
-      ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
-      ->where('ot.status', '1')
-      ->where('oc.status', '1')
-      ->where('ot.oferta_favorita', '1')
-      ->where('ot.oferta_lang', $this->locale)
-      ->where('oc.categoria_lang', $this->locale)
-      ->orderBy('ot.oferta_orden', 'ASC')
-      ->orderBy('ot.oferta_titulo', 'ASC')
-      ->orderBy('ot.id', 'ASC')
-      //->getCompiledSelect()
-      ->get()
-      ->getResult()
-    ;
-    foreach ($ofertas as &$oferta) {
-      $ext = explode('.', $oferta->oferta_file);
-      $ext = end($ext);
-      $oferta->oferta_filename  = trim($oferta->oferta_titulo).'.'.$ext;
-      $oferta->oferta_file  = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_file))).'/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_filename))));
-      $oferta->oferta_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($oferta->oferta_image))));
-    }//*/
-    $ofertasModel = new Ofertas();
-    $chartersModel = new Charters();
-    $categoriaOfertasModel = new CategoriaOfertas();
-    $categories = $categoriaOfertasModel->asObject()
-      ->where('status', '1')
-      ->where('categoria_lang', $this->locale)
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ;
-    foreach ($categories as &$category) {
-      $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
-      $cntOfertas = $ofertasModel->asObject()
-        ->where('status', '1')
-        ->where('oferta_categoria', $category->id)
-        ->orderBy('id', 'ASC')
-        ->countAllResults()
-      ;
-      $cntCharters = $chartersModel->asObject()
-        ->where('status', '1')
-        ->where('charter_categoria', $category->id)
-        ->orderBy('id', 'ASC')
-        ->countAllResults()
-      ;
-      $category->cntOfertas =  $cntOfertas + $cntCharters;
-    }
-    /**
-     * [$equipoModel description]
-     * @var Equipo
-     */
-    /*$equipoModel = new Equipo();
-    $equipos = $equipoModel->asObject()
-      ->where('status', '1')
-      ->where('equipo_lang', $this->locale)
-      ->orderBy('orden', 'ASC')
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ; 
-    foreach ($equipos as &$equipo) {
-      $equipo->equipo_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($equipo->equipo_image))));
-    }
-    */
-    $equipos = [];
 
-    $newsModel = new News();
-    $news = $newsModel->asObject()
-      ->where('status', '1')
-      ->where("(lang = '{$this->locale}' OR lang IS NULL)")
-      ->orderBy('orden', 'ASC')
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ;
-    foreach ($news as &$new) {
-      $new->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($new->photo))));
-      $new->details = strlen($new->details) > 150 ? substr($new->details, 0, 147) . '...' : trim($new->details);
-    } 
-
-    $contacTypes = $this->getContactType();
-
-    $agentsModel = new Agents();
-    $agents = $agentsModel->asObject()
-      ->where('status', '1')
-      ->orderBy('orden', 'ASC')
-      ->orderBy('id', 'ASC')
-      ->findAll()
-    ;
-    $agentsContactsModel = new AgentsContacts();
-    foreach ($agents as &$agent) {
-      $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
-      $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
-      $agent->contacts = $agentsContactsModel->asObject()
-        ->where('status', '1')
-        ->where('agent_id', $agent->id)
-        ->orderBy('orden', 'ASC')
-        ->orderBy('id', 'ASC')
-        ->findAll()
-      ; 
-    }
     $this->viewParams = array_merge($this->viewParams, [
       'noBanner'        => false,
       'menuUrl'         => false,
@@ -152,39 +46,9 @@ class Index extends BaseController {
       'news'            => $news,
       'equipos'         => $equipos,
       'agents'          => $agents,
-      'contacTypes'     => $contacTypes,
+      'agencyTypes'     => $agencyTypes,
     ]);
     return view('index', $this->viewParams);
-  }
-
-  public static function hashBucketFilemname($arg1, $arg2=null, $arg3=null, $arg4=null) {
-    $filePath = '';
-    $cleanChars = ['.'];
-    if($arg1 && !empty($arg1)) {
-      foreach ($cleanChars as $char) {
-        $arg1 = ltrim($arg1, $char);
-      }
-      $filePath.= (!empty($filePath) ? '/' : '').$arg1;
-    }
-    if($arg2 && !empty($arg2)) {
-      foreach ($cleanChars as $char) {
-        $arg2 = ltrim($arg2, $char);
-      }
-      $filePath.= (!empty($filePath) ? '/' : '').$arg2;
-    }
-    if($arg3 && !empty($arg3)) {
-      foreach ($cleanChars as $char) {
-        $arg3 = ltrim($arg3, $char);
-      }
-      $filePath.= (!empty($filePath) ? '/' : '').$arg3;
-    }
-    if($arg4 && !empty($arg4)) {
-      foreach ($cleanChars as $char) {
-        $arg4 = ltrim($arg4, $char);
-      }
-      $filePath.= (!empty($filePath) ? '/' : '').$arg4;
-    }
-    return strrev(str_replace('=', '', base64_encode($filePath)));
   }
 
   public function getBucketFile($arg1, $arg2=null, $arg3=null, $arg4=null) {
@@ -416,6 +280,7 @@ class Index extends BaseController {
             'cc' => [
               //'Miguel Morales CEO' => 'mmoralesceo1706@gmail.com',
               'Operaciones' => 'operaciones@doitviajesyturismo.com',
+              'Operaciones 1' => 'operaciones1@doitviajesyturismo.com',
               'Ejecutivo Comercial' => 'ejecutivocomercial@doitviajesyturismo.com',
             ],
             'cco' => [
@@ -462,9 +327,9 @@ class Index extends BaseController {
   public function aboutUs() {
     $aditionalPagesModel = new AditionalPages();
     $aditionalPages = $aditionalPagesModel->asObject()
-      ->where('status', '1')
+      ->where('status', 'ACTIVE')
       ->where('lang', $this->locale)
-      ->whereIn('lCASE(slug)', ['sobre-nosotros', 'mision', 'vision'])
+      ->whereIn('lower(slug)', ['sobre-nosotros', 'mision', 'vision'])
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
@@ -479,11 +344,12 @@ class Index extends BaseController {
   }
 
   public function aditionalPage($pageslug) {
+    $aditionalTitle = "";
     $aditionalPagesModel = new AditionalPages();
     $aditionalPages = $aditionalPagesModel->asObject()
-      ->where('status', '1')
+      ->where('status', 'ACTIVE')
       ->where('lang', $this->locale)
-      ->where('lCASE(slug)', strtolower($pageslug))
+      ->where('lower(slug)', strtolower($pageslug))
       ->orderBy('id', 'ASC')
       ->findAll()
     ;
@@ -506,8 +372,8 @@ class Index extends BaseController {
       ->table('charters AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
-      ->where('ot.status', '1')
-      ->where('oc.status', '1')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
       ->where('ot.charter_lang', $this->locale)
       ->where('oc.categoria_lang', $this->locale)
       ->orderBy('ot.charter_orden', 'ASC')
@@ -528,7 +394,7 @@ class Index extends BaseController {
       $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
       $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
     }
-    $contacTypes = $this->getContactType(); 
+    $contacTypes = $this->getAgencyTypef(); 
     
     $this->viewParams = array_merge($this->viewParams, [
       'noBanner'        => true,
@@ -553,8 +419,8 @@ class Index extends BaseController {
       ->table('ofertas AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
-      ->where('ot.status', '1')
-      ->where('oc.status', '1')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
       ->where('ot.oferta_lang', $this->locale)
       ->where('oc.categoria_lang', $this->locale)
       ->orderBy('ot.oferta_orden', 'ASC')
@@ -576,8 +442,8 @@ class Index extends BaseController {
       ->table('charters AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
-      ->where('ot.status', '1')
-      ->where('oc.status', '1')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
       ->where('ot.charter_lang', $this->locale)
       ->where('oc.categoria_lang', $this->locale)
       ->orderBy('ot.charter_orden', 'ASC')
@@ -598,7 +464,7 @@ class Index extends BaseController {
       $charter->charter_file  = $charter->charter_file_type == 'url' ? $charter->charter_file: base_url('bucketC/'.$charter->charter_file);
       $charter->charter_image = base_url('bucketC/'.$charter->charter_image);
     }
-    $contacTypes = $this->getContactType(); 
+    $contacTypes = $this->getAgencyTypef(); 
 
     $this->viewParams = array_merge($this->viewParams, [
       'noBanner'        => true,
@@ -618,7 +484,7 @@ class Index extends BaseController {
     $difDF = $dtNow->diff($dtF);
     $destinosModel = new Destinos();
     $destinos = $destinosModel->asObject()
-      ->where('status', '1')
+      ->where('status', 'ACTIVE')
       ->where('destino_lang', $this->locale)
       ->orderBy('id', 'ASC')
       ->findAll()
@@ -643,7 +509,7 @@ class Index extends BaseController {
     $difDF = $dtNow->diff($dtF);
     $destinosModel = new Destinos();
     $destino = $destinosModel->asObject()
-      ->where('status', '1')
+      ->where('status', 'ACTIVE')
       ->where('destino_lang', $this->locale)
       ->where('destino_slug', $pageslug)
       ->orderBy('id', 'ASC')
@@ -656,13 +522,13 @@ class Index extends BaseController {
       $detalleModel = new DestinoDetalles();
       $imagenesModel = new DestinosImagenes();
       $destino->detalle = $detalleModel->asObject()
-        ->where('status', '1')
+        ->where('status', 'ACTIVE')
         ->where('destino_id', $destino->id)
         ->orderBy('id', 'ASC')
         ->first()
       ;
       $destino->imagenes = $imagenesModel->asObject()
-        ->where('status', '1')
+        ->where('status', 'ACTIVE')
         ->where('destino_id', $destino->id)
         ->orderBy('id', 'ASC')
         ->findAll()
@@ -672,7 +538,7 @@ class Index extends BaseController {
           $imagen->recurso = base_url('files/'.strrev(str_replace('=', '', base64_encode($imagen->recurso))));
         }
       }
-      $contacTypes = $this->getContactType();
+      $contacTypes = $this->getAgencyTypef();
       $aditionalTitle = lang('Doit.destination') . ' ' . ($destino->destino_titulo ?? '404');
     }
 
@@ -687,59 +553,24 @@ class Index extends BaseController {
     return view('show-destination', $this->viewParams);
   }
 
-  public function getOferta($categoria=null,$oferta=null) {
+  public function getOferta($categoria=null, $oferta=null) {
     $dtF = new DateTime(FOUND_DATE);
     $dtNow = new DateTime(date('Y-m-d'));
     $difDF = $dtNow->diff($dtF);
     $offers = [];
     $categories = [];
     $contentScripts = '';
+    $db      = \Config\Database::connect();
     if(!empty($categoria) || !empty($oferta)) {
-      $db      = \Config\Database::connect();
-      $offers = $db
-        ->table('ofertas AS ot')
-        ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.oferta_slug, ot.oferta_titulo, ot.oferta_subtitulo, ot.oferta_favorita, ot.oferta_resumen, ot.oferta_file, ot.oferta_file_type, ot.oferta_image, ot.oferta_orden, oc.categoria, oc.categoria_descripcion, ot.oferta_lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
-        ->join('categoria_ofertas AS oc', 'oc.id = ot.oferta_categoria AND ot.oferta_lang = oc.categoria_lang', 'INNER')
-        ->where('ot.status', '1')
-        ->where('oc.status', '1')
-        ->where('ot.oferta_lang', $this->locale)
-        ->where('oc.categoria_lang', $this->locale);
-      if(!empty($categoria)) {
-        $offers = $offers->where('oc.categoria_slug', $categoria);
-      }
-      if(!empty($oferta)) {
-        $offers = $offers->where('ot.oferta_slug', $oferta);
-      }
-      $offers = $offers->orderBy('ot.oferta_orden', 'ASC')
-        ->orderBy('ot.oferta_titulo', 'ASC')
-        ->orderBy('ot.id', 'ASC')
-        //->getCompiledSelect()
-        ->get()
-        ->getResult()
-      ;
-
-      foreach ($offers as &$offer) {
-        $offer->oferta_image = base_url('bucketC/' . $offer->oferta_image);
-        if($offer->oferta_file_type == 'local') {
-          $ext = explode('.', $offer->oferta_file);
-          $filePath = $this->basePath.$offer->oferta_file;
-          $ext = end($ext);
-          $offer->oferta_filename  = trim($offer->oferta_titulo).'.'.$ext;
-          $offer->oferta_fileextension  = $ext;
-          $offer->oferta_fileMimeType  = file_exists($filePath) && !empty($oferta) ?  mime_content_type($filePath) : 'text/html';
-          $offer->oferta_file  = base_url('bucketC/' . $offer->oferta_file );
-        } else {
-          $offer->oferta_fileMimeType  = 'application/octet-stream';
-        }
-      }
-
+      
+      $offers = $this->searchOffers($categoria, $oferta);
 
       $charters = $db
         ->table('charters AS ot')
         ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
         ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
-        ->where('ot.status', '1')
-        ->where('oc.status', '1')
+        ->where('ot.status', 'ACTIVE')
+        ->where('oc.status', 'ACTIVE')
         ->where('ot.charter_lang', $this->locale)
         ->where('oc.categoria_lang', $this->locale);
       if(!empty($categoria)) {
@@ -769,7 +600,7 @@ class Index extends BaseController {
 
       $categoriaOfertasModel = new CategoriaOfertas();
       $categories = $categoriaOfertasModel->asObject()
-        ->where('status', '1')
+        ->where('status', 'ACTIVE')
         ->where('categoria_lang', $this->locale)
         ->where('categoria_slug', $categoria)
         ->orderBy('id', 'ASC')
@@ -777,14 +608,14 @@ class Index extends BaseController {
       ;
     }
 
-    $contacTypes = $this->getContactType(); 
+    $contacTypes = $this->getAgencyTypef(); 
 
     if(empty($categoria) && empty($oferta)) {
       //Mostrar todas las categorias
       //show-offers-categories
       $categoriaOfertasModel = new CategoriaOfertas();
       $categories = $categoriaOfertasModel->asObject()
-        ->where('status', '1')
+        ->where('status', 'ACTIVE')
         ->where('categoria_lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->findAll()
@@ -819,7 +650,7 @@ class Index extends BaseController {
         $offers = $offers[0];
 
         if(strstr($offers->oferta_fileMimeType, 'image')) {
-          $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offers->charter_titulo . "\" src=\"" . $offers->oferta_file . "/true\" data-image=\"" . $offers->oferta_file . "\" data-description=\"" . (!empty($offers->charter_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offers->charter_subtitulo) : '') ."\">');";
+          $contentScripts = "$('#docpdf.docpdf').html('<img alt=\"" . $offers->oferta_titulo . "\" src=\"" . $offers->oferta_file . "/true\" data-image=\"" . $offers->oferta_file . "\" data-description=\"" . (!empty($offers->oferta_subtitulo) ? str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, $offers->oferta_subtitulo) : '') ."\">');";
         } else if(strstr($offers->oferta_fileMimeType, 'pdf')) { 
           $contentScripts = "$('#docpdf.docpdf').html('<object data=\"" . $offers->oferta_file ."/true\" type=\"" . $offers->oferta_fileMimeType ."\" width=\"100%\" height=\"700px\"></object>');";
         } else if(strstr($offers->oferta_fileMimeType, 'video')) { 
@@ -866,7 +697,7 @@ class Index extends BaseController {
       }
       $galeriaModel = new Geleria();
       $result['data'] = $galeriaModel->asObject()
-        ->where('status', '1')       
+        ->where('status', 'ACTIVE')       
         ->where('section', $section)
         ->orderBy('id', 'ASC')
         ->findAll()
@@ -910,8 +741,8 @@ class Index extends BaseController {
       ->table('charters AS ot')
       ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.charter_slug, ot.charter_titulo, ot.charter_subtitulo, ot.charter_favorito, ot.charter_resumen, ot.charter_file, ot.charter_file_type, ot.charter_image, ot.charter_orden, oc.categoria, oc.categoria_descripcion, ot.charter_lang, ot.charter_plans, ot.charter_description, ot.charter_itinerary, ot.charter_conditions, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
       ->join('categoria_ofertas AS oc', 'oc.id = ot.charter_categoria AND ot.charter_lang = oc.categoria_lang', 'INNER')
-      ->where('ot.status', '1')
-      ->where('oc.status', '1')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
       ->where('ot.charter_lang', $this->locale)
       ->where('oc.categoria_lang', $this->locale)
       ->where('ot.charter_slug', $pageslug)
@@ -973,7 +804,7 @@ class Index extends BaseController {
       $charter = null;
     }
 
-    $contacTypes = $this->getContactType();
+    $contacTypes = $this->getAgencyTypef();
     $this->viewParams = array_merge($this->viewParams, [
       'noBanner'        => true,
       'menuUrl'         => true,

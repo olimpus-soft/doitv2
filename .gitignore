@@ -32,3 +32,15 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+
+bucket/*
+!bucket/images/*
+!bucket/ofertas/*
+!bucket/team/*
+!bucket/agents/*
+!bucket/com-relation/*
+!bucket/com-relation/*.png
+!bucket/com-relation/*.jpg
+!bucket/.htaccess
+!bucket/RNT.pdf

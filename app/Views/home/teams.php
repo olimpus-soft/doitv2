@@ -2,7 +2,7 @@
 <?php
 	if(isset($equipos) && is_array($equipos) && count($equipos) > 0) {
 ?>
-	<section id="team" class="team-area pt-125 pb-130 gray-bg">
+	<section id="team" class="team-area pt-20 pb-10 gray-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">

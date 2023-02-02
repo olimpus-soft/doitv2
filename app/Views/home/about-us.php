@@ -2,11 +2,11 @@
 $replaceViewValues = App\Controllers\BaseController::replaceViewValues();
 ?>
 <!--====== ABOUT PART START ======-->
-<section id="nosotoros" class="about-area pt-80 pb-40">
+<section id="nosotoros" class="about-area pt-20 pb-20">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="about-image mt-50 clearfix">
+				<div class="about-image mt-10 clearfix">
 					<div class="single-image float-left">
 						<img src="<?= base_url('assets/images/about/about-1.png');?>" alt="About">
 					</div> <!-- single image -->
@@ -19,7 +19,7 @@ $replaceViewValues = App\Controllers\BaseController::replaceViewValues();
 				</div> <!-- about image -->
 			</div>
 			<div class="col-lg-6">
-				<div class="about-content mt-45">
+				<div class="about-content mt-15">
 					<h4 class="about-welcome"><?= lang('Doit.about_us'); ?> </h4>
 					<h3 class="about-title mt-10"><span><?= TITLEAPP_BASE; ?></span> <?= TITLEAPP_TAILS; ?></h3>
 					<p class="mt-25 text-justify"><?= str_replace($replaceViewValues->find2Replace, $replaceViewValues->replace2Found, ABOUT_TEXT); ?>
@@ -45,7 +45,7 @@ $replaceViewValues = App\Controllers\BaseController::replaceViewValues();
 if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) {
 	foreach ($aditionalPages as $aditionalPage) {
 ?>
-<section id="page-<?= $aditionalPage->slug; ?>" class="services-area pt-80 pb-40 gray-bg">
+<section id="page-<?= $aditionalPage->slug; ?>" class="services-area pt-20 pb-20 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">
@@ -65,7 +65,7 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 <?php
 	}
 ?>
-<section id="nosotoros" class="about-area pt-50 pb-50">
+<!--section id="nosotoros" class="about-area pt-20 pb-20">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-12 text-center justify-content-center">
@@ -73,29 +73,10 @@ if($aditionalPages && is_array($aditionalPages) && count($aditionalPages) > 0 ) 
 			</div>
 		</div>
 	</div>
-</section>
+</section-->
 <?php
 
 } else {
-	header("HTTP/1.1 404 Not Found", true);
-?>
-<section id="page-not-found" class="services-area pt-125 pb-130 gray-bg">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-6">
-				<div class="section-title text-center pb-20">
-					<h5 class="sub-title mb-15"><?= lang('Doit.pageNotFound'); ?></h5>
-					<h2 class="title">404</h2>
-				</div> <!-- section title -->
-			</div>
-		</div> <!-- row -->
-		<div class="row justify-content-center">
-			<div class="col-lg-12 text-center">
-				<?= lang('Doit.pageNotFoundDesc'); ?>
-			</div>
-		</div>
-	</div>
-</section>
-<?php
+ 	echo view('partials/notFound');
 }
 ?>

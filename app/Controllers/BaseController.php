@@ -7,11 +7,24 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Mimes;
 use Psr\Log\LoggerInterface;
 use App\Models\Parameters;
-use App\Models\Destinos;
+use App\Models\AgencyType;
+use App\Models\Objetivos;
+use App\Models\ObjetivosDetalles;
 use App\Models\Ofertas;
-use App\Models\ContactType;
+use App\Models\Destinos;
+use App\Models\DestinoDetalles;
+use App\Models\DestinosImagenes;
+use App\Models\Equipo;
+use App\Models\Contactos;
+use App\Models\AditionalPages;
+use App\Models\CategoriaOfertas;
+use App\Models\Agents;
+use App\Models\AgentsContacts;
+use App\Models\News;
+use App\Models\Geleria;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use \DateTime;
@@ -60,29 +73,20 @@ class BaseController extends Controller {
       parent::initController($request, $response, $logger);
       $this->locale = 'es'; //$this->request->getLocale();
       $this->basePath = realpath(__DIR__.'/../..').DIRECTORY_SEPARATOR.'bucket'.DIRECTORY_SEPARATOR;
-      $paramsModel = new Parameters();
-      $parameters = $paramsModel->asObject()
-          ->where("status = 1 AND (parameter_lang = '{$this->locale}' OR parameter_lang IS NULL)")
-          ->orderBy('parameter', 'ASC')
-          ->findAll()
-      ;
-      foreach ($parameters as $parameter) {
-        if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
-        defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
-      }
+      self::getParameterApp($this->locale);
 
       $destinosModel = new Destinos();
       $this->cntDestinations = $destinosModel->asObject()
-        ->where('status', '1')
-        ->where('destino_lang', $this->locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ;
 
       $offersModel = new Ofertas();
       $this->cntOffers = $offersModel->asObject()
-        ->where('status', '1')
-        ->where('oferta_lang', $this->locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ; 
@@ -173,6 +177,139 @@ class BaseController extends Controller {
       }
       return $ret;
   } 
+
+  /**
+   * [requestApi description]
+   * @param  [type]  $url         [description]
+   * @param  [type]  $postData    [description]
+   * @param  string  $method      [description]
+   * @param  array   $curlOpts    [description]
+   * @param  array   $headers     [description]
+   * @param  [type]  &$resultado  [description]
+   * @param  boolean $jsonConvert [description]
+   * @param  boolean $verbose     [description]
+   * @return [type]               [description]
+   */
+  public static function requestApi($url, $postData, &$resultado=null, $method = 'POST', $curlOpts=array(), $headers=array(), $jsonConvert=true, $verbose = false) {
+    try {
+      $config            = clone config('App');
+      $baseURL = rtrim($config->apiBaseUrl, '/') . '/';
+      if(!$url || empty($url)) throw new Exception("Url {$url} invalida o vacia", 1);
+      if(!is_array($curlOpts)) throw new Exception("curlOpts No es de tipo array", 1);
+      $url = $baseURL . $url;
+      if(!$resultado || !is_array($resultado)) $resultado = array();
+
+      $curl  = curl_init();
+      $error = false;
+      if($verbose) {        
+        $fl = fopen(realpath(__DIR__.'/../..').'/writable/logs/logApi-'.(time()).(!empty($tailLogFile)?'-'.$tailLogFile:'').'.log', 'a+');
+        fwrite($fl, PHP_EOL.PHP_EOL."INICIO DE REQUEST".PHP_EOL.PHP_EOL);
+      }
+
+      $arrHeaders = [
+        'Content-Type: application/json; charset=utf-8;',
+        'Connection: Keep-Alive',
+        'Accept: application/json; charset=utf-8;',
+        'x-request-ip: ' . \CodeIgniter\Config\Services::request()->getIPAddress(),
+        'x-request-url: ' . current_url(),
+      ];
+
+      $session = \Config\Services::session();
+      $token = $session->get('token');
+      if(!empty($token)) {
+        $arrHeaders[] = 'Authorization: OlimpusS ' . $token;
+        $arrHeaders[] = 'Proxy-Authorization: OlimpusS ' . $token;
+        $arrHeaders[] = 'X-Olimpus-Auth: OlimpusS ' . $token;
+      }
+
+      if(count($headers) > 0) {
+        $arrHeaders = array_merge($arrHeaders, $headers);
+      }
+      $opts = array(
+        CURLOPT_URL => $url,
+        CURLOPT_POST => $method == 'POST',
+        CURLOPT_PROXY => false,
+        CURLOPT_HEADER => true,
+        CURLOPT_VERBOSE => false,
+        CURLOPT_ENCODING => 'utf-8',
+        CURLOPT_USERAGENT => 'Web Admin Doit v2',
+        CURLOPT_HTTPHEADER => $arrHeaders,
+        CURLOPT_POSTFIELDS => json_encode($postData),
+        CURLOPT_AUTOREFERER => true,
+        CURLOPT_FAILONERROR => false,
+        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_HTTP200ALIASES => array(400, 401, 402, 403, 404, 405, 500, 501, 502, 503, 504, 505),
+      );
+
+      if(count($curlOpts) > 0) {
+        foreach ($curlOpts as $key => $value) {
+          $opts[$key] = $value;
+        }
+      }
+
+      if($verbose) {
+        $opts[CURLOPT_VERBOSE] = true;
+        $opts[CURLOPT_STDERR] = $fl;
+      }
+
+      curl_setopt_array($curl, $opts);
+      $resultado['response']      = curl_exec ($curl);
+      $resultado['header_size']   = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+      $resultado['header']        = substr($resultado['response'], 0, $resultado['header_size']);
+      $resultado['response']      = substr($resultado['response'], $resultado['header_size']);
+      $resultado['response_size'] = mb_strlen($resultado['response'], '8bit');
+      $resultado['url']           = $url;
+      $resultado['efective_url']  = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
+      $resultado['params']        = $postData;
+      $totaltime                  = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+      $resultado['httpcode']      = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      $resultado['error']         = curl_error($curl);
+      //$resultado['opts']          = $opts;
+      $resultado['resLog']        =  array(
+        'efective_url' => $resultado['efective_url'],
+        'response_size' => $resultado['response_size'],
+        'header_size' => $resultado['header_size'],
+        'httpcode' => $resultado['httpcode'],
+      );
+      if($totaltime > 5) {
+        $resultado['resLog']['timesdetails'] = array(
+          'TOTALTIME'           => round($totaltime, 2).' segs',
+          //'APPCONNECT_TIME'   => round(curl_getinfo($curl, CURLINFO_APPCONNECT_TIME), 4),
+          'NAMELOOKUP_TIME'     => round(curl_getinfo($curl, CURLINFO_NAMELOOKUP_TIME), 4).' segs',
+          'CONNEC_TIME'         => round(curl_getinfo($curl, CURLINFO_CONNECT_TIME), 4).' segs',
+          'PRETRANSFER_TIME'    => round(curl_getinfo($curl, CURLINFO_PRETRANSFER_TIME), 4).' segs',
+          'STARTTRANSFER_TIME'  => round(curl_getinfo($curl, CURLINFO_STARTTRANSFER_TIME), 4).' segs',
+          'REDIRECT_TIME'       => round(curl_getinfo($curl, CURLINFO_REDIRECT_TIME), 4).' segs',
+          'SIZE_UPLOAD'         => curl_getinfo($curl, CURLINFO_SIZE_UPLOAD),
+          'SIZE_DOWNLOAD'       => curl_getinfo($curl, CURLINFO_SIZE_DOWNLOAD),
+          'SPEED_UPLOAD'        => curl_getinfo($curl, CURLINFO_SPEED_UPLOAD),
+          'SPEED_DOWNLOAD'      => curl_getinfo($curl, CURLINFO_SPEED_DOWNLOAD),
+        );
+      }
+      curl_close ($curl);      
+      if($verbose) {
+        fwrite($fl, PHP_EOL.PHP_EOL."FIN DE REQUEST".PHP_EOL.PHP_EOL.PHP_EOL);
+      }
+      if($resultado['httpcode'] != 200 || !empty($resultado['error']) || $resultado['response'] === false || empty($resultado['httpcode'])) {
+        $error = true;
+      }
+      if($resultado['httpcode'] == 0) {
+        $error = true; 
+        $resultado['response'] = '{"success": false, "result":null, "message":"Servicio no disponible: 503"}';
+      }
+      if($jsonConvert) {
+        $resultado['response'] = json_decode($resultado['response'], false);
+      }
+      return !$error ? $resultado['response'] : false;
+    } catch (Exception $e) {
+      $resultado['error'] = $e->getMessage().'  =>  '.$e->getFile().':'.$e->getLine();
+      return false;
+    }
+  }
 
   public static function sendMail(object $config=null, &$ErrorInfo=''): bool {
     $send = false;
@@ -483,14 +620,220 @@ class BaseController extends Controller {
     ];
   }
 
-  public function getContactType() {
-    $contacTypesModel = new ContactType();
-    $contacTypes = $contacTypesModel->asObject()
-      ->where('status', '1')
+  public function getAgencyType() {
+    $agencyTypesModel = new AgencyType();
+    $agencyTypes = $agencyTypesModel->asObject()
+      ->where('status', 'ACTIVE')
       ->where('lang', $this->locale)
       ->orderBy('id', 'ASC')
       ->findAll()
     ; 
-    return $contacTypes;
+    return $agencyTypes;
+  }
+
+  public function getObjetivesWeb() {    
+    $objetivosModel = new Objetivos();
+    $objetivos = $objetivosModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $objetivosDetallesModel = new ObjetivosDetalles();
+    foreach ($objetivos as &$objetivo) {
+      $objetivo->details = $objetivosDetallesModel->asObject()
+        ->where('status', 'ACTIVE')
+        ->where('objetivo_id', $objetivo->id)
+        ->findAll()
+      ; 
+    }
+    return $objetivos;
+  }
+
+  public function getTeamWeb() {    
+    $equipos = [];
+    /**
+     * [$equipoModel description]
+     * @var Equipo
+     */
+    /*$equipoModel = new Equipo();
+    $equipos = $equipoModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('equipo_lang', $this->locale)
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ; 
+    foreach ($equipos as &$equipo) {
+      $equipo->equipo_image = base_url('files/'.strrev(str_replace('=', '', base64_encode($equipo->equipo_image))));
+    }
+    */
+   return $equipos;
+  }
+
+  public function getNewsWeb() {    
+    $newsModel = new News();
+    $news = $newsModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where("(lang = '{$this->locale}' OR lang IS NULL)")
+      //->where("updated_at >= '" . date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' - 60 days')) . "'")
+      ->orderBy('updated_at', 'DESC')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    foreach ($news as &$new) {
+      $new->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($new->photo))));
+      $new->details = strlen($new->details) > 150 ? substr($new->details, 0, 147) . '...' : trim($new->details);
+    } 
+    return $news;
+  }
+
+  public function getAgentsWeb() {        
+    $agentsModel = new Agents();
+    $agents = $agentsModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->orderBy('orden', 'ASC')
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    $agentsContactsModel = new AgentsContacts();
+    foreach ($agents as &$agent) {
+      $agent->fullname = $agent->prefix. ' ' . $agent->firstname . ' ' . $agent->lastname;
+      $agent->photo = base_url('files/'.strrev(str_replace('=', '', base64_encode($agent->photo))).'/'.strrev(str_replace('=', '', base64_encode(str_replace(['.', ' '], '_', $agent->fullname)))));
+      $agent->contacts = $agentsContactsModel->asObject()
+        ->where('status', 'ACTIVE')
+        ->where('agent_id', $agent->id)
+        ->orderBy('orden', 'ASC')
+        ->orderBy('id', 'ASC')
+        ->findAll()
+      ; 
+    }
+    return $agents;
+  }
+
+
+
+  public static function getMimeTypeFileName($filePath='') {
+    $mime = null;
+    if (($lastDotPosition = strrpos($filePath, '.')) !== false) {
+      $mime = Mimes::guessTypeFromExtension(substr($filePath, $lastDotPosition + 1));
+    }
+    if (empty($mime)) {
+      $mime = mime_content_type($filePath);
+    }
+    if (empty($mime)) {
+      $mime = 'application/octet-stream';
+    }
+    return $mime;
+  }
+
+  public static function hashBucketFilemname($arg1, $arg2=null, $arg3=null, $arg4=null) {
+    $filePath = '';
+    $cleanChars = ['.'];
+    if($arg1 && !empty($arg1)) {
+      foreach ($cleanChars as $char) {
+        $arg1 = ltrim($arg1, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg1;
+    }
+    if($arg2 && !empty($arg2)) {
+      foreach ($cleanChars as $char) {
+        $arg2 = ltrim($arg2, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg2;
+    }
+    if($arg3 && !empty($arg3)) {
+      foreach ($cleanChars as $char) {
+        $arg3 = ltrim($arg3, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg3;
+    }
+    if($arg4 && !empty($arg4)) {
+      foreach ($cleanChars as $char) {
+        $arg4 = ltrim($arg4, $char);
+      }
+      $filePath.= (!empty($filePath) ? '/' : '').$arg4;
+    }
+    return strrev(str_replace('=', '', base64_encode($filePath)));
+  }
+
+
+
+  public function getCategoriesWithOffers() {    
+    $categoriaOfertasModel = new CategoriaOfertas();
+    $categories = $categoriaOfertasModel->asObject()
+      ->where('status', 'ACTIVE')
+      ->where('categoria_lang', $this->locale)
+      ->orderBy('id', 'ASC')
+      ->findAll()
+    ;
+    if(count($categories) > 0) {
+      foreach ($categories as &$category) {
+        $category->categoria_image  = base_url('files/'.strrev(str_replace('=', '', base64_encode($category->categoria_image))).'/'.strrev(str_replace('=', '', base64_encode($category->categoria))));
+        $category->ofertas =  self::searchOffers($category->categoria_slug);
+        $category->cntOfertas = count($category->ofertas);
+      }
+    }
+    return $categories;
+  }
+
+  public function searchOffers($categoria=null, $oferta=null, $limit=null, $offset=0) {
+    $db      = \Config\Database::connect();
+    $offersQuery = $db
+      ->table('ofertas AS ot')
+      ->select('ot.id, oc.id AS id_categoria, oc.categoria_slug, ot.slug, ot.titulo, ot.subtitulo, ot.favorita, ot.resumen, ot.file, ot.file_type, ot.image, ot.orden, oc.categoria, oc.categoria_descripcion, ot.lang, oc.categoria_lang, ot.status, oc.status AS status_categoria, oc.created_at AS categoria_created_at, oc.updated_at AS categoria_updated_at, ot.created_at, ot.updated_at')
+      ->join('categoria_ofertas AS oc', 'oc.id = ot.categoria_id AND ot.lang = oc.categoria_lang', 'INNER')
+      ->where('ot.status', 'ACTIVE')
+      ->where('oc.status', 'ACTIVE')
+      ->where('ot.lang', $this->locale)
+      ->where('oc.categoria_lang', $this->locale);
+    if(!empty($categoria)) {
+      $offersQuery = $offersQuery->where('oc.categoria_slug', $categoria);
+    }
+    if(!empty($oferta)) {
+      $offersQuery = $offersQuery->where('ot.slug', $oferta);
+    }
+    if(!empty($limit) && is_int($limit) && $limit > 0) {
+      $offersQuery = $offersQuery->limit($limit);
+    }
+    if(!empty($offset) && is_int($offset) && $offset > 0) {
+      $offersQuery = $offersQuery->offset($offset);
+    }
+    $offers = $offersQuery->orderBy('ot.orden', 'ASC')
+      ->orderBy('ot.titulo', 'ASC')
+      ->orderBy('ot.id', 'ASC')
+      //->getCompiledSelect()
+      ->get()
+      ->getResult()
+    ;
+    foreach ($offers as &$offer) {
+      $offer->image = base_url('bucketC/' . $offer->image);
+      $offer->fileMimeType = self::getMimeTypeFileName($offer->image);
+      if($offer->file_type == 'local') {
+        $ext = explode('.', $offer->file);
+        $filePath = $this->basePath.$offer->file;
+        $ext = end($ext);
+        $offer->filename  = trim($offer->titulo).'.'.$ext;
+        $offer->fileextension  = $ext;
+        $offer->file  = base_url('bucketC/' . $offer->file );
+      }
+    }
+    return $offers;
+  }
+
+  public static function getParameterApp(String $locale) {
+    $paramsModel = new Parameters();
+    $parameters = $paramsModel->asObject()
+        ->where("status = 'ACTIVE' AND (parameter_lang = '{$locale}' OR parameter_lang IS NULL)")
+        ->orderBy('parameter', 'ASC')
+        //->getCompiledSelect()
+        ->findAll()
+    ;
+    foreach ($parameters as $parameter) {
+      if(in_array(strtoupper($parameter->parameter), ['ADDSCRIPTS', 'ADDSCRIPTS_ADMIN'])) continue;
+      defined(strtoupper($parameter->parameter)) || define(strtoupper($parameter->parameter), $parameter->parameter_value);
+    }
+    return $parameters;
   }
 }

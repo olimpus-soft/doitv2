@@ -2,11 +2,12 @@
 <footer id="footer" class="footer-area">
 	<div class="footer-widget pt-30 pb-30">
 		<div class="container">
-			<div class="row">
+			<div class="row" itemscope itemtype="https://schema.org/TravelAgency">
 				<div class="col-lg-3 col-md-4 col-sm-8">
 					<div class="footer-logo mt-20">
 						<a href="#">
-							<img src="<?= base_url('assets/images/logo.png');?>" alt="Logo">
+							<img itemprop="logo" src="<?= base_url('assets/images/logo.png');?>" alt="Logo">
+							<img class="d-none" itemprop="image" src="<?= base_url('assets/images/'. LOGOCOMERCIAL);?>" alt="LogoComercial">
 						</a>
 						<ul class="footer-info">
 							<li>
@@ -15,7 +16,8 @@
 										<i class="lni-whatsapp"></i>
 									</div>
 									<div class="info-content">
-										<a target="_blank" href="https://wa.me/<?= str_replace(['+','.',' '], '', CONTACT_PHONE);?>?text=<?= CONTACT_MSG_OFFERS;?>"><?= CONTACT_PHONE;?></a>
+										<a target="_blank" href="https://wa.me/<?= str_replace(['+','.',' '], '', CONTACT_PHONE);?>?text=<?= CONTACT_MSG_OFFERS;?>"><span class="" itemprop="telephone"><?= CONTACT_PHONE;?></span></a>
+										<span class="d-none" itemprop="faxNumber"><?= CONTACT_PHONE;?></span>
 									</div>
 								</div> <!-- single info -->
 							</li>
@@ -25,7 +27,7 @@
 										<i class="lni-envelope"></i>
 									</div>
 									<div class="info-content">
-										<p><a target="_blank" href="mailto:<?= CONTACT_EMAIL; ?>?subject=<?= CONTACT_MSG_OFFERS;?>" target="_blank"><?= CONTACT_EMAIL; ?></a></p>
+										<p><a target="_blank" href="mailto:<?= CONTACT_EMAIL; ?>?subject=<?= CONTACT_MSG_OFFERS;?>" target="_blank" itemprop="email"><?= CONTACT_EMAIL; ?></a></p>
 									</div>
 								</div> <!-- single info -->
 							</li>
@@ -34,8 +36,8 @@
 									<div class="info-icon">
 										<i class="lni-map"></i>
 									</div>
-									<div class="info-content">
-										<p><a target="_blank" href="https://www.google.com/maps/search/<?= COMPANY_ADDRESS;?>, <?= COMPANY_LOCALITY;?>, <?= COUNTRY_NAME;?>" target="_blank"><?= COMPANY_ADDRESS;?>, <?= COMPANY_LOCALITY;?>, <?= COUNTRY_NAME;?></a></p>
+									<div class="info-content" itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
+										<p><a target="_blank" href="https://www.google.com/maps/search/<?= COMPANY_ADDRESS;?>, <?= COMPANY_LOCALITY;?>, <?= COUNTRY_NAME;?>" target="_blank"><span itemprop="streetAddress"><?= COMPANY_ADDRESS;?></span>, <span itemprop="addressLocality"><?= COMPANY_LOCALITY;?></span>, <span itemprop="addressRegion"><?= COUNTRY_NAME;?></span>, <span itemprop="postalCode"><?= COMPANY_POSTAL_CODE;?></span></a></p>
 									</div>
 								</div> <!-- single info -->
 							</li>
@@ -46,6 +48,13 @@
 							<li><a target="_blank" href="https://www.google.com/search?q=Do+It+Viajes+y+Turismo&oq=Do+It+Viajes+y+Turismo%20site:doitviajesyturismo.com"><i class="lni-google"></i></a></li>
 							<li><a target="_blank" href="https://www.instagram.com/<?= ltrim(CONTACT_IM, '@');?>"><i class="lni-instagram"></i></a></li>
 						</ul>
+						<div itemprop="paymentAccepted" style="display: none;">cash, check, credit card, invoice, paypal</div>
+						<meta itemprop="openingHours" style="display: none;" datetime="Mo,Tu,We,Th,Fr,Sa 08:00-17:00" />
+						<div itemtype="http://schema.org/GeoCoordinates" itemscope="" itemprop="geo" style="display: none;">
+							<meta itemprop="latitude" content="<?= COMPANY_LAT;?>" />
+							<meta itemprop="longitude" content="<?= COMPANY_LON;?>" />
+
+						</div>
 					</div> <!-- footer logo -->
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
@@ -54,6 +63,7 @@
 							<h4 class="title"><?= lang('Doit.linksEscentials'); ?></h4>
 						</div>
 						<ul class="mt-15">
+							<li class="d-none"><a target="_self" href="<?= base_url();?>" itemprop="url"><?= base_url(); ?></a></li>
 							<li><a target="_self" href="<?= base_url('sobre-nosotros?utm_source=doit&utm_medium=web&utm_campaign=about-us&utm_term=about-us&utm_content=');?>"><?= lang('Doit.about_us'); ?></a></li>
 							<li><a target="_self" href="<?= base_url('todas-las-ofertas?utm_source=doit&utm_medium=web&utm_campaign=todas-las-ofertas&utm_term=all&utm_content=');?>"><?= lang('Doit.offers'); ?></a></li>
 							<?php
@@ -75,10 +85,10 @@
 				<div class="col-lg-6 col-md-4 col-sm-6">
 					<div class="footer-link mt-20">
 						<div class="f-title">
-							<h4 class="title"><?= COMERCIALNAME; ?></h4>
+							<h4 class="title" itemprop="name"><?= COMERCIALNAME; ?></h4>
 						</div>
-						<p class="mt-15 text-justify"><?= COMPANY_LEGAL_DESC; ?>
-						</p>
+						<p class="mt-15 text-justify" itemprop="description"><?= COMPANY_LEGAL_DESC; ?></p>
+						<span itemprop="priceRange" style="display: none;">$$$$$</span>
 					</div>
 				</div>
 			</div> <!-- row -->
