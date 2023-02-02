@@ -25,11 +25,11 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override(function( $message = null ) {
     $locale = AppServices::request()->getLocale() ?? 'es';
     AppServices::response()->setStatusCode(404, lang('Doit.pageNotFound'));
-    App\Controllers\BaseController::getParameterApp($locale);
+    \App\Controllers\BaseController::getParameterApp($locale);
     $destinosModel = new \App\Models\Destinos();
     $cntDestinations = $destinosModel->asObject()
-        ->where('status', '1')
-        ->where('destino_lang', $locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
     ; 
