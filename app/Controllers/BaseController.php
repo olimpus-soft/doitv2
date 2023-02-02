@@ -25,7 +25,6 @@ use App\Models\Agents;
 use App\Models\AgentsContacts;
 use App\Models\News;
 use App\Models\Geleria;
-use App\Models\Ofertas;
 use App\Models\ContactType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -95,8 +94,8 @@ class BaseController extends Controller {
 
       $offersModel = new Ofertas();
       $this->cntOffers = $offersModel->asObject()
-        ->where('status', '1')
-        ->where('oferta_lang', $this->locale)
+        ->where('status', 'ACTIVE')
+        ->where('lang', $this->locale)
         ->orderBy('id', 'ASC')
         ->countAllResults()
       ; 
