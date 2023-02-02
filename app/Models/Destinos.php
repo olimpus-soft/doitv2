@@ -14,7 +14,7 @@ class Destinos extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'destino_titulo', 'destino_subtitulo', 'destino_resumen', 'destino_lang', 'destino_image', 'status', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['id', 'titulo', 'subtitulo', 'resumen', 'lang', 'image', 'status', 'created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = false;
