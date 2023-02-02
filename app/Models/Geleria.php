@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Geleria extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'geleria';
+    protected $table            = 'galeria';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
