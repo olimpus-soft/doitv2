@@ -1,7 +1,7 @@
 
 <!--====== CONTACT PART START ======-->
 
-<section id="contacto" class="contact-area pt-125 pb-130 gray-bg">
+<section id="contacto" class="contact-area pt-20 pb-10 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">
@@ -89,9 +89,9 @@
 									<select name="tipo" placeholder="<?= lang('Doit.choiceContacType'); ?>" data-error="<?= lang('Doit.contacTypeRequired'); ?>" required="required">
 										<option><?= lang('Doit.choiceContacType'); ?></option>
 										<?php
-											foreach ($contacTypes as &$contacType) {
+											foreach ($agencyTypes as &$agencyType) {
 										?>
-											<option value="<?= $contacType->descripcion;?>"<?= $contacType->descripcion == old('tipo') ? ' selected':''; ?>><?= $contacType->descripcion;?></option>
+											<option value="<?= $agencyType->description;?>"<?= $agencyType->description == old('tipo') ? ' selected':''; ?>><?= $agencyType->description;?></option>
 										<?php
 											}
 										?>

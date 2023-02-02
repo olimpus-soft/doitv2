@@ -1,29 +1,7 @@
 <?php
 echo view('partials/header');
-?>
-	<!--====== PRELOADER PART START ======-->
-	<div class="preloader">
-		<div class="loader_34">
-			<div class="ytp-spinner">
-				<div class="ytp-spinner-container">
-					<div class="ytp-spinner-rotator">
-						<div class="ytp-spinner-left">
-							<div class="ytp-spinner-circle"></div>
-						</div>
-						<img src="<?= base_url('assets/images/favicon.png');?>" style="max-width: 80%; margin-top: 12%;" alt="Logo Loader">
-						<div class="ytp-spinner-right">
-							<div class="ytp-spinner-circle"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--====== PRELOADER ENDS START ======-->
 
-	
-
-	<?php
+	echo view('partials/preloader');
 	echo view('home/header');
 	echo view('home/about');
 	if(isset($news) && is_array($news) && count($news)) {

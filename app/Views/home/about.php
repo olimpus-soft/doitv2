@@ -1,6 +1,6 @@
 <!--====== ABOUT PART START ======-->
 
-<section id="nosotoros" class="about-area pt-50 pb-80">
+<section id="nosotoros" class="about-area pt-10 pb-10">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
@@ -17,7 +17,7 @@
 				</div> <!-- about image -->
 			</div>
 			<div class="col-lg-6">
-				<div class="about-content mt-45">
+				<div class="about-content mt-15">
 					<h4 class="about-welcome"><?= lang('Doit.about_us'); ?> </h4>
 					<h3 class="about-title mt-10">Do It! Viajes y Turismo</h3>
 					<p class="mt-25 text-justify" style="text-align: justify;"><?= ABOUT_TEXT; ?>

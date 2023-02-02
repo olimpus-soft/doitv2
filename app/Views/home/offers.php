@@ -2,7 +2,7 @@
 <?php
 	if(isset($ofertas) && is_array($ofertas) && count($ofertas) > 0) {
 ?>
-	<section id="ofertas" class="project-area pt-125 pb-130">
+	<section id="ofertas" class="project-area pt-20 pb-10">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">

@@ -1,12 +1,13 @@
-$(function() {
+//$(function() {
+$(document).ready(function(){ 
     
     "use strict";
     
     //===== Prealoder
     
-    $(window).on('load', function(event) {
-        $('.preloader').delay(100).fadeOut(200);
-    });
+    //$(window).on('load', function(event) {
+        $('.preloader').delay(500).fadeOut(300);
+    //});
     
     
     //===== Mobile Menu 
@@ -54,42 +55,8 @@ $(function() {
         }); ///grecaptcha.ready(function()
     });
     
-    //===== Sticky
-    
-    $(window).on('scroll',function(event) {    
-        var scroll = $(window).scrollTop();
-        if (scroll < 10) {
-            $(".navigation-bar").removeClass("sticky");
-        }else{
-            $(".navigation-bar").addClass("sticky");
-        }
-    });
     
     
-    //===== Section Menu Active
-    
-    var scrollLink = $('.page-scroll');
-        // Active link switching
-    $(window).scroll(function() {
-        var scrollbarLocation = $(this).scrollTop();
-        if($(this).scrollTop() > 600){
-            $('.back-to-top').fadeIn(200)
-        } else{
-            $('.back-to-top').fadeOut(200)
-        }
-        scrollLink.each(function() {
-          this.hash = this.hash.split('?');
-          this.hash = this.hash[0];
-          if($(this.hash).length > 0) {
-            var sectionOffset = $(this.hash).offset().top - 90;
-
-            if ( sectionOffset <= scrollbarLocation ) {
-              $(this).parent().addClass('active');
-              $(this).parent().siblings().removeClass('active');
-            }
-          }
-        });
-    });
     
     
     //===== wow
@@ -220,46 +187,57 @@ $(function() {
     });
     
 
-    if($('#agents .agents-slider > .agent').length > 0) {
-      $.sameHeight('#agents .agents-slider > .agent');
-      /*$('#agents-slider').slick({
+    if($('#agents #agents-slider .agent').length > 0) {
+      $.sameHeight('#agents #agents-slider .agent');
+      $('#agents-slider').slick({
         dots: true,
-        infinite: true,
-        speed: 2000,
-        slidesToShow: 2,
-        slidesToScroll: 1,
+        arrows: true,
+        infinite: false,
         autoplay: true,        
-        autoplaySpeed: 3000,
-        mobileFirst: true,
+        autoplaySpeed: 3000,        
+        speed: 2000,
         draggable: true,
+        mobileFirst: true,
         pauseOnDotsHover: true,
+        variableWidth: true,
         centerMode: true,
         centerPadding: '60px',
-        arrows: true,
-        //prevArrow: '<button class="slick-arrow slick-prev" aria-label="Anterior" type="button">Anterior</button>',
-        //nextArrow: '<button class="slick-arrow slick-next" aria-label="Siguiente" type="button">Siguiente</button>',
-        prevArrow:document.getElementById('agents-control-prev'),
-        //prevArrow:"<button type='button' class='slick-arrow slick-prev'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></button>",
-        nextArrow:document.getElementById('agents-control-next'),
-        //nextArrow:"<button type='button' class='slick-arrow slick-next'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></button>",
-        appendDots: $('#agents-customize-controls .slick-dots'),
         responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
             {
               breakpoint: 576,
               settings: {
                 slidesToShow: 1,
+                slidesToScroll: 1,
+                centerPadding: '5px',
               }
-            }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerPadding: '15px',
+              }
+            },
+            {
+              breakpoint: 1280,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
+            },
+            {
+              breakpoint: 1400,
+              settings: {
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
+            },
         ]
-      });*/
-
-      const swiperNews = new Swiper('.swiper.agents-swiper', {
+      });//*/
+      $.sameHeight('#agents #agents-slider .agent');
+      /*const swiperNews = new Swiper('.swiper.agents-swiper', {
         speed: 400,
         spaceBetween: 100,
         //slidesPerView: 1,
@@ -335,86 +313,57 @@ $(function() {
             spaceBetween: 20,
           },
         },
-      });
+      });//*/
     }
     
-    if($('#news .news-slider > .news').length > 0) {
-      const swiperNews = new Swiper('.swiper.news-swiper', {
-        speed: 400,
-        spaceBetween: 100,
-        //slidesPerView: 1,
-        centerInsufficientSlides: true,
-        centeredSlides: true,
-        //loop: true, //no se puede usar junto a rewind
-        rewind: true, //no se puede usar junto a loop
-        autoplay: {
-          delay: 2000,
-        },
-        navigation: {
-          enabled: true,
-          nextEl: '.news-swiper .swiper-button-next',
-          prevEl: '.news-swiper .swiper-button-prev',
-        },
-        scrollbar: {
-          el: '.news-swiper .swiper-scrollbar',
-          draggable: true,
-        },
-        pagination: {
-          el: '.news-swiper .swiper-pagination',
-          type: 'bullets',
-        },
-        breakpoints: {
-          // when window width is >= 320px
-          320: {
-            navigation: {
-              enabled: false,
+    if($('#news-slick-slider .news-slick-slider .card').length > 0) {
+      $.sameHeight('#news-slick-slider .news-slick-slider .card');
+      $('#news-slick-slider .news-slick-slider').slick({
+        dots: true,
+        arrows: true,
+        infinite: false,
+        autoplay: true,        
+        autoplaySpeed: 3000,        
+        speed: 2000,
+        draggable: true,
+        mobileFirst: true,
+        pauseOnDotsHover: true,
+        variableWidth: true,
+        centerMode: true,
+        centerPadding: '60px',
+        responsive: [
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerPadding: '5px',
+              }
             },
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          576: {
-            navigation: {
-              enabled: false,
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerPadding: '15px',
+              }
             },
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          768: {
-            navigation: {
-              enabled: false,
+            {
+              breakpoint: 1280,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
             },
-            slidesPerView: 2,
-            spaceBetween: 5,
-          },
-          992: {
-            navigation: {
-              enabled: true,
+            {
+              breakpoint: 1400,
+              settings: {
+                slidesToScroll: 2,
+                centerPadding: '10px',
+              }
             },
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1200: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1400: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 4,
-            spaceBetween: 50,
-          },
-          2000: {
-            navigation: {
-              enabled: true,
-            },
-            slidesPerView: 5,
-            spaceBetween: 20,
-          },
-        },
+        ]
       });
       //$.sameHeight('#news .news-slider > .news > .card');
     }
@@ -707,4 +656,7 @@ $(function() {
         }
       });
     }, 5000)
+
+
+    
 });

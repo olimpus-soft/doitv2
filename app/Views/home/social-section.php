@@ -1,7 +1,7 @@
 <?php
 ?>
 <!--====== SOCIAL PART START ======-->
-<section id="page-social-media" class="services-area pt-80 pb-40 gray-bg">
+<section id="page-social-media" class="services-area pt-20 pb-20 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">

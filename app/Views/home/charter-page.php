@@ -2,7 +2,7 @@
 
 ?>
 
-<section id="page-charter-page" class="services-area pt-125 pb-90 gray-bg">
+<section id="page-charter-page" class="services-area pt-20 pb-10 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">
