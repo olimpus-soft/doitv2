@@ -2517,3 +2517,21 @@ section:nth-of-type(even){
   float: left;
   margin: auto;
 }
+
+
+#news-slick-slider .news-slick-slider .card img.card-img-top {
+  max-width: 350px !important;
+}
+
+.twitter-timeline.twitter-timeline-rendered {
+
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+div#news-slick-slider .card {
+    max-width: 350px !important;
+    margin: 0 10px;
+}
